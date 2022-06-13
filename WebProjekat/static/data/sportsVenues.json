@@ -10,7 +10,7 @@
 			"longitude": 0.0,
 			"address": "Sutjeska 2, Novi Sad, 21000"
 		},
-		"logo": null,
+		"logoPath": "./images/spens.jpg",
 		"averageGrade": 4.1,
 		"workingHours": "06-22"
 	},
@@ -25,7 +25,7 @@
 			"longitude": 0.0,
 			"address": "Temerinska 95, Novi Sad, 21000"
 		},
-		"logo": null,
+		"logoPath": "./images/megagym.jpg",
 		"averageGrade": 4.1,
 		"workingHours": "06-00"
 	},
@@ -40,7 +40,7 @@
 			"longitude": 0.0,
 			"address": "Geri Karolja 5, Novi Sad, 21000"
 		},
-		"logo": null,
+		"logoPath": "./images/fiesta.jpg",
 		"averageGrade": 4.8,
 		"workingHours": "17-22"
 	}

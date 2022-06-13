@@ -11,7 +11,10 @@ public class SparkAppMain {
 		port(8080);
 
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
-		
+		InitializeSportsVenueController();
+	}
+	
+	public static void InitializeSportsVenueController() {
 		SportsVenueController.getSportsVenues();
 		SportsVenueController.getSportsVenue();
 		SportsVenueController.addSportsVenue();

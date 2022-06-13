@@ -23,7 +23,7 @@ public class SportsVenues {
 	
 	public void readSportVenues() throws Exception
     {
-		String json = new String(Files.readAllBytes(Paths.get("./static/sportsVenues.json")));
+		String json = new String(Files.readAllBytes(Paths.get("./static/data/sportsVenues.json")));
 		Type type = new TypeToken<HashMap<String, SportsVenue>>(){}.getType();
 		sportsVenues = new Gson().fromJson(json, type);
     }

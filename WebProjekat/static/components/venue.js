@@ -4,7 +4,7 @@ Vue.component("edit-venue", {
 		      title: "Dodaj sportski objekat",
 		      value: "Dodaj",
 		      id : -1,
-		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:null, logo:null, averageGrade:null, workingHours:null}
+		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:null, logoPath:null, averageGrade:null, workingHours:null}
 		    }
 	},
 	template: ` 
