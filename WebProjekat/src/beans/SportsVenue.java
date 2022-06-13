@@ -1,6 +1,5 @@
 package beans;
 
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 import beans.enums.VenueType;
@@ -13,7 +12,7 @@ public class SportsVenue {
 	private List<String> content;
 	private boolean isWorking;
 	private Location location;
-	private BufferedImage logo;
+	private String logoPath;
 	private double averageGrade;
 	private String workingHours;
 	
@@ -69,12 +68,12 @@ public class SportsVenue {
 		this.location = location;
 	}
 
-	public BufferedImage getLogo() {
-		return logo;
+	public String getLogoPath() {
+		return logoPath;
 	}
 
-	public void setLogo(BufferedImage logo) {
-		this.logo = logo;
+	public void setLogoPath(String logoPath) {
+		this.logoPath = logoPath;
 	}
 
 	public double getAverageGrade() {

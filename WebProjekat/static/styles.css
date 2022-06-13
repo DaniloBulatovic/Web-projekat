@@ -9,11 +9,15 @@ table {
 
 th {
 	background: lightgray;
-	border: 1px solid;
 }
 
-td {
+th, td {
 	border: 1px solid;
+	padding: 5px;
+}
+
+#searchParagraph {
+	text-align: right;
 }
 
 #error {
