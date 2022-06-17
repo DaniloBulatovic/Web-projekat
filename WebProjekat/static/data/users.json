@@ -1,0 +1,25 @@
+{
+  "1": {
+    "id": "1",
+    "username": "Petar",
+    "password": "petar",
+    "name": "Petar",
+    "surname": "Petrović",
+    "gender": "Muško",
+    "role": "Kupac",
+    "points": 0
+  },
+  "2": {
+    "id": "2",
+    "username": "Marko",
+    "password": "marko",
+    "points": 0
+  },
+  "3": {
+    "id": "3",
+    "username": "Nikola",
+    "password": "nikola",
+    "role": "Kupac",
+    "points": 0
+  }
+}

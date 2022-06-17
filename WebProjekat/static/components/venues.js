@@ -9,7 +9,7 @@ Vue.component("venues", {
     	<div>
     		<h3>Prikaz sportskih objekata</h3>
     		<p id="searchParagraph"><input type="text" v-model="search" placeholder="Pretraga objekata.."></p>
-    		<table>
+    		<table class="venues_table">
 	    		<tr>
 	    			<th>Logo</th>
 	    			<th>Naziv</th>
@@ -20,7 +20,7 @@ Vue.component("venues", {
 	    			<!--<th>Akcija</th>-->
 	    		</tr>
 	    		<tr v-for="(v, index) in filteredVenues">
-	    			<td><img v-bind:src=v.logoPath></img></td>
+	    			<td style="text-align:center"><img v-bind:src=v.logoPath width="75%"></img></td>
 	    			<td>{{v.name}}</td>
 	    			<td>{{v.venueType}}</td>
 	    			<td>{{v.location.address}}</td>

@@ -21,8 +21,8 @@ public class SportsVenueService {
 		sportsVenues.addSportsVenue(product);
 	}
 
-	public void editSportsVenue(String id, SportsVenue pd) {
-		sportsVenues.edit(id, pd);
+	public void editSportsVenue(String id, SportsVenue venue) {
+		sportsVenues.edit(id, venue);
 	}
 
 	public void deleteSportsVenue(String id) {

@@ -1,0 +1,18 @@
+{ 
+  "1": {
+	"id": "1",
+	"username": "Petar",
+	"password": "petar",
+	"name": "Petar",
+	"surname": "Petrović",
+	"gender": "Muško",
+	"dateOfBirth": null,
+	"role": "Kupac",
+	"trainingHistory": null,
+	"sportsVenue": null,
+	"membership": null,
+	"visitedVenues": null,
+	"points": 0,
+	"customerType": null
+  }
+}

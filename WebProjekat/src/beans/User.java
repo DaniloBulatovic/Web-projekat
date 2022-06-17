@@ -5,14 +5,14 @@ import java.util.List;
 
 import beans.enums.Gender;
 import beans.enums.Role;
-import javaxt.utils.string;
 
 public class User {
 	
-	private string username;
-	private string password;
-	private string name;
-	private string surname;
+	private String id;
+	private String username;
+	private String password;
+	private String name;
+	private String surname;
 	private Gender gender;
 	private LocalDate dateOfBirth;
 	private Role role;
@@ -30,35 +30,43 @@ public class User {
 	
 	}
 
-	public string getUsername() {
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(string username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public string getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(string password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public string getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(string name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public string getSurname() {
+	public String getSurname() {
 		return surname;
 	}
 
-	public void setSurname(string surname) {
+	public void setSurname(String surname) {
 		this.surname = surname;
 	}
 
