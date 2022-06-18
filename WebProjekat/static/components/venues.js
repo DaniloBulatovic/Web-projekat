@@ -7,7 +7,7 @@ Vue.component("venues", {
 	},
 	    template: ` 
     	<div>
-    		<h3>Prikaz sportskih objekata</h3>
+    		<h2>Prikaz sportskih objekata</h2>
     		<p id="searchParagraph"><input type="text" v-model="search" placeholder="Pretraga objekata.."></p>
     		<table class="venues_table">
 	    		<tr>

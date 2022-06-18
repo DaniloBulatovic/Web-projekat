@@ -7,7 +7,7 @@ Vue.component("register-login", {
 		      error: "",
 		      loggedIn: false,
 		      displayTable: true,
-		      passwordText: "password",
+		      passwordInputType: "password",
 		      user: { username: "", password: "", role: ""}
 		    }
 	},
@@ -32,7 +32,7 @@ Vue.component("register-login", {
 			</tr>
 			<tr>
 				<td><label>Lozinka</label></td>
-				<td><input v-bind:type="this.passwordText" v-model="user.password" name="password"></td>
+				<td><input v-bind:type="this.passwordInputType" v-model="user.password" name="password"></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -40,7 +40,7 @@ Vue.component("register-login", {
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="submit" v-on:click="register" v-bind:value="this.value" style="float:right">
+					<input class="submit" type="submit" v-on:click="register" v-bind:value="this.value" style="float:right">
 				</th>
 			</tr>
 			<tr>
@@ -93,10 +93,10 @@ Vue.component("register-login", {
 			});
 		},
 		togglePassword : function(){
-			if(this.passwordText === "password")
-				this.passwordText = "text";
+			if(this.passwordInputType === "password")
+				this.passwordInputType = "text";
 			else
-				this.passwordText = "password";	
+				this.passwordInputType = "password";	
 		}
 	},
 	mounted () {
