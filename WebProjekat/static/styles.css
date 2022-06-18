@@ -89,6 +89,10 @@ table.venues_table {
 	padding: 5px;
 }
 
+.venues_table tr:hover {
+	background: aliceblue;
+}
+
 #searchParagraph {
 	text-align: right;
 }

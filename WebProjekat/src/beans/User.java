@@ -26,8 +26,6 @@ public class User {
 	private int points;
 	private CustomerType customerType;
 	
-	private String cookie;
-	
 	public User() {
 	
 	}
@@ -142,13 +140,5 @@ public class User {
 
 	public void setCustomerType(CustomerType customerType) {
 		this.customerType = customerType;
-	}
-	
-	public String getCookie() {
-		return cookie;
-	}
-	
-	public void setCookie(String cookie) {
-		this.cookie = cookie;
 	}
 }

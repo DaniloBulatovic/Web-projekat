@@ -32,14 +32,12 @@ public class SportsVenues {
 	private static HashMap<String, SportsVenue> sortValues(HashMap<String, SportsVenue> map)   
 	{   
 		List<Map.Entry<String, SportsVenue>> list = new LinkedList<Map.Entry<String, SportsVenue>>(map.entrySet());  
-		//Custom Comparator  
 		Collections.sort(list, new Comparator<Map.Entry<String, SportsVenue>>() {  
 			public int compare(Map.Entry<String, SportsVenue> o1, Map.Entry<String, SportsVenue> o2)   
 			{  
 				return (-1 * Boolean.compare(((Map.Entry<String, SportsVenue>) o1).getValue().isWorking(),((Map.Entry<String, SportsVenue>) o2).getValue().isWorking()));  
 			}  
-		});  
-		//copying the sorted list in HashMap to preserve the iteration order  
+		});
 		HashMap<String, SportsVenue> sortedHashMap = new LinkedHashMap<String, SportsVenue>();  
 		for (Iterator<Entry<String, SportsVenue>> it = list.iterator(); it.hasNext();)   
 		{  
