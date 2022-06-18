@@ -34,15 +34,27 @@ Vue.component("user-profile", {
 				<td>Datum rođenja</td>
 				<td><input type = "date" v-model = "user.dateOfBirth"></td>
 			</tr>
-			<tr>
-				<td>Članstvo</td>
-				<td><select v-model="user.membership"><option>Godišnje</option><option>Mesečno</option></td>
+			<tr v-if="user.role === 'Trener'">
+				<td>Istorija treninga</td>
+				<td><input type = "text" v-model = "user.trainingHistory" readonly></td>
 			</tr>
-			<tr>
+			<tr v-if="user.role === 'Menadžer'">
+				<td>Sportski objekat</td>
+				<td><input type = "text" v-model = "user.sportsVenue.name" readonly></td>
+			</tr>
+			<tr v-if="user.role === 'Kupac'">
+				<td>Članstvo</td>
+				<td><select v-model="user.membership" readonly><option>Godišnje</option><option>Mesečno</option></select></td>
+			</tr>
+			<tr v-if="user.role === 'Kupac'">
+				<td>Posećeni objekti</td>
+				<td><input type = "text" v-model = "user.visitedVenues" readonly></td>
+			</tr>
+			<tr v-if="user.role === 'Kupac'">
 				<td>Tip kupca</td>
 				<td><input type = "text" v-model = "user.customerType" readonly></td>
 			</tr>
-			<tr>
+			<tr v-if="user.role === 'Kupac'">
 				<td>Poeni</td>
 				<td><input type = "text" v-model = "user.points" readonly></td>
 			</tr>

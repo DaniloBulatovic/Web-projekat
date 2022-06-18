@@ -54,26 +54,36 @@ body, html {
 	float: right;
 }
 
-#menu a, #userMenu a, #userMenu input, #register-login input.submit {
-     
-     background: powderblue;
-     border:1px solid steelblue;
-     -moz-border-radius:3px;
-     -webkit-border-radius:3px;
-     -khtml-border-radius:3px;
-     border-radius:3px;
-     color:#333;
-     padding:.3em .5em;
-     margin: .5em .5em;
-     text-decoration:none;
-     cursor: pointer;
-     font-weight: bold;
+#menu a, #userMenu a, #userMenu input, #register-login input.submit { 
+    background: powderblue;
+    border:1px solid steelblue;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -khtml-border-radius:3px;
+    border-radius:3px;
+    color:#333;
+    padding:.3em .5em;
+    margin: .5em .5em;
+    text-decoration:none;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 #userMenu label {
 	display: inline-block;
 	font-weight: bold;
 	margin: .5em .5em;
+	max-width: 140px;
+	word-wrap: break-word;
+	background: powderblue;
+    border:1px solid steelblue;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -khtml-border-radius:3px;
+    border-radius:3px;
+    color:#333;
+    padding:.3em .5em;
+    cursor: pointer;
 }
 
 table.venues_table {
