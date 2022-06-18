@@ -19,7 +19,7 @@
 		"name": "Mega Gym",
 		"venueType": "Teretana",
 		"content": ["teretana"],
-		"isWorking": true,
+		"isWorking": false,
 		"location": {
 			"latitude": 0.0,
 			"longitude": 0.0,
