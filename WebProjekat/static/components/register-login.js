@@ -19,7 +19,7 @@ Vue.component("register-login", {
 	</div>
 	<div id="userMenu" v-if=loggedIn>
 		<input type="submit" v-on:click="logout" value="Odjavi se" style="float:right">
-		<label style="max-width: 140px; word-wrap: break-word">{{user.username}} ({{user.role}})</label>
+		<label style="max-width: 140px; word-wrap: break-word" v-on:click="profile">{{user.username}} ({{user.role}})</label>
 	</div>
 	<form v-if=!loggedIn>
 		<table v-if=displayTable>
@@ -97,6 +97,9 @@ Vue.component("register-login", {
 				this.passwordInputType = "text";
 			else
 				this.passwordInputType = "password";	
+		},
+		profile : function(){
+			router.push('/profile/' + this.user.id);
 		}
 	},
 	mounted () {

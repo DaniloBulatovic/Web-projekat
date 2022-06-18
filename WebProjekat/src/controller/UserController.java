@@ -5,7 +5,19 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.put;
 
+import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import beans.User;
 import services.UserService;
@@ -13,7 +25,17 @@ import spark.Session;
 
 public class UserController {
 	
-	private static Gson g = new Gson();
+	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+        @Override
+        public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return LocalDate.parse(json.getAsJsonPrimitive().getAsString());
+        }
+    }).registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
+    	@Override
+    	public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
+	        return new JsonPrimitive(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+	    }
+    }).create();
 	private static UserService userService = new UserService();
 	
 	public static void initializeController() {
