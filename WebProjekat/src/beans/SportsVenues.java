@@ -28,12 +28,10 @@ public class SportsVenues {
 		sportsVenues = new Gson().fromJson(json, type);
     }
 
-	/** Vraca kolekciju proizvoda. */
 	public Collection<SportsVenue> getValues() {
 		return sportsVenues.values();
 	}
 
-	/** Vraca proizvod na osnovu njegovog id-a. */
 	public SportsVenue getSportsVenue(String id) {
 		return sportsVenues.get(id);
 	}
@@ -51,8 +49,8 @@ public class SportsVenues {
 		sportsVenues.put(sportsVenue.getId(), sportsVenue);
 	}
 
-	public void edit(String id, SportsVenue pd) {
-		sportsVenues.put(id, pd);
+	public void edit(String id, SportsVenue venue) {
+		sportsVenues.put(id, venue);
 	}
 
 	public void delete(String id) {

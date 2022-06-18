@@ -1,17 +1,90 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.leftpane {
+    width: 25%;
+    height: 100%;
+    float: left;
+    border-collapse: collapse;
+}
+
+.middlepane {
+    width: 50%;
+    height: 100%;
+    float: left;
+    border-collapse: collapse;
+}
+
+.rightpane {
+  width: 25%;
+  height: 100%;
+  position: relative;
+  float: right;
+  border-collapse: collapse;
+}
+
+.toppane {
+  width: 100%;
+  height: 70px;
+  border-collapse: collapse;
+}
+
+#register-login table {
+	margin: auto;
+	border: 1px solid gray;
+	border-collapse: collapse;
+	background: lightcyan;
+	float:right
+}
+
 #venues {
-	display: grid;
 	place-items: center;
 }
 
-table {
+#menu, #userMenu {
+	float: right;
+}
+
+#menu a, #userMenu a, #userMenu input, #register-login input.submit {
+     
+     background: powderblue;
+     border:1px solid steelblue;
+     -moz-border-radius:3px;
+     -webkit-border-radius:3px;
+     -khtml-border-radius:3px;
+     border-radius:3px;
+     color:#333;
+     padding:.3em .5em;
+     margin: .5em .5em;
+     text-decoration:none;
+     cursor: pointer;
+     font-weight: bold;
+}
+
+#userMenu label {
+	display: inline-block;
+	font-weight: bold;
+	margin: .5em .5em;
+}
+
+table.venues_table {
 	border-collapse: collapse;
 }
 
-th {
-	background: lightgray;
+.venues_table th {
+	background: powderblue;
 }
 
-th, td {
+.venues_table th, .venues_table td {
 	border: 1px solid;
 	padding: 5px;
 }
