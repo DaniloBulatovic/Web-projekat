@@ -15,6 +15,14 @@ public class SportsVenueController {
 	private static Gson g = new Gson();
 	private static SportsVenueService sportsVenueService = new SportsVenueService();
 	
+	public static void initializeController() {
+		getSportsVenues();
+		getSportsVenue();
+		addSportsVenue();
+		editSportsVenue();
+		deleteSportsVenue();
+	}
+	
 	public static void getSportsVenues() {
 		get("rest/venues/", (req, res) -> {
 			res.type("application/json");

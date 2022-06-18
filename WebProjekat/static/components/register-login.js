@@ -7,8 +7,8 @@ Vue.component("register-login", {
 		      error: "",
 		      loggedIn: false,
 		      displayTable: true,
-		      loggedUsername: "",
-		      user: { username: "", password: ""}
+		      passwordText: "password",
+		      user: { username: "", password: "", role: ""}
 		    }
 	},
 	template: ` 
@@ -19,7 +19,7 @@ Vue.component("register-login", {
 	</div>
 	<div id="userMenu" v-if=loggedIn>
 		<input type="submit" v-on:click="logout" value="Odjavi se" style="float:right">
-		<label>{{loggedUsername}}</label>
+		<label style="max-width: 140px; word-wrap: break-word">{{user.username}} ({{user.role}})</label>
 	</div>
 	<form v-if=!loggedIn>
 		<table v-if=displayTable>
@@ -32,7 +32,11 @@ Vue.component("register-login", {
 			</tr>
 			<tr>
 				<td><label>Lozinka</label></td>
-				<td><input type="text" v-model="user.password" name="password"></td>
+				<td><input v-bind:type="this.passwordText" v-model="user.password" name="password"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="checkbox" v-on:click="togglePassword">Prikaži lozinku</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -53,18 +57,18 @@ Vue.component("register-login", {
 		register : function () {
 			this.error = "";
 			event.preventDefault();
-			if (this.id == "login"){
+			if (this.action != "register"){
 				axios.post('rest/users/login', this.user).
 				then(response => { 
 					if (response.data == "ERROR"){
 						this.error = "Pogrešno korisničko ime i/ili lozinka!";
 					}else{
 						this.loggedIn = true;
-						this.loggedUsername = response.data.username;
+						this.user = response.data;
 					}
 				});
 			}
-			else{
+			else {
 				this.user.role = "Kupac";
 				axios.post('rest/users/add', this.user).
 				then(response => {
@@ -74,7 +78,7 @@ Vue.component("register-login", {
 						axios.post('rest/users/login', this.user).
 						then(response => {
 							this.loggedIn = true;
-							this.loggedUsername = response.data.username;
+							this.user = response.data;
 						});	
 					}
 				});
@@ -82,18 +86,32 @@ Vue.component("register-login", {
 		},
 		logout : function(){
 			event.preventDefault();
-			axios.get('rest/users/logout').
+			axios.post('rest/users/logout', this.user, {withCredentials: true}).
 			then(response => {
 				this.loggedIn = false;
-				this.user = { username: "", password: ""};
+				this.user = { username: "", password: "", role: ""};
 			});
+		},
+		togglePassword : function(){
+			if(this.passwordText === "password")
+				this.passwordText = "text";
+			else
+				this.passwordText = "password";	
 		}
 	},
 	mounted () {
-		this.id = this.$route.params.id;
-		if (this.id == "register"){
+		this.action = this.$route.params.id;
+		if (this.action == "register"){
 			this.title = "Registracija";
 			this.value = "Registruj se";
 		}
+		axios.post('rest/users/getlogged', this.user, {withCredentials: true}).
+					then(response => { 
+						this.user = { username: "", password: "", role: ""};
+						if (response.data != "ERROR" && response.data != null){
+							this.loggedIn = true;
+							this.user = response.data;
+						}
+			});
     }
 });

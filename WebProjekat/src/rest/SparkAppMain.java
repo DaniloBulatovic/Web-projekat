@@ -14,25 +14,11 @@ public class SparkAppMain {
 		port(8080);
 
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
-		InitializeSportsVenueController();
-		InitializeUserController();
+		initializeControllers();
 	}
 	
-	public static void InitializeSportsVenueController() {
-		SportsVenueController.getSportsVenues();
-		SportsVenueController.getSportsVenue();
-		SportsVenueController.addSportsVenue();
-		SportsVenueController.editSportsVenue();
-		SportsVenueController.deleteSportsVenue();
-	}
-	
-	public static void InitializeUserController() {
-		UserController.getUsers();
-		UserController.getUser();
-		UserController.addUser();
-		UserController.editUser();
-		UserController.deleteUser();
-		UserController.loginUser();
-		UserController.logoutUser();
+	public static void initializeControllers() {
+		SportsVenueController.initializeController();
+		UserController.initializeController();
 	}
 }

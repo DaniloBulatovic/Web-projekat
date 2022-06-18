@@ -16,6 +16,17 @@ public class UserController {
 	private static Gson g = new Gson();
 	private static UserService userService = new UserService();
 	
+	public static void initializeController() {
+		getUsers();
+		getUser();
+		addUser();
+		editUser();
+		deleteUser();
+		loginUser();
+		getLoggedUser();
+		logoutUser();
+	}
+	
 	public static void getUsers() {
 		get("rest/users/", (req, res) -> {
 			res.type("application/json");
@@ -70,24 +81,39 @@ public class UserController {
 			res.type("application/json");
 			User user = g.fromJson(req.body(), User.class);
 			Session ss = req.session(true);
-			//User sessionUser = ss.attribute("user");
-			//if (sessionUser == null) {
+			User sessionUser = ss.attribute("user");
+			if (sessionUser == null) {
 				for (User u : userService.getUsers()) {
 					if (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
-						//ss.attribute("user", u);
+						ss.attribute("user", u);
 						return g.toJson(u);
 					}
 				}
-			//}
+			}
+			else if (sessionUser != null){
+				return g.toJson(sessionUser);
+			}
 			return "ERROR";
 		});
 	}
-	public static void logoutUser() {
-		get("/rest/users/logout", (req, res) -> {
+	
+	public static void getLoggedUser() {
+		post("rest/users/getlogged", (req, res) -> {
 			res.type("application/json");
-			Session ss = req.session(true);
+			Session ss = req.session();
+			User sessionUser = ss.attribute("user");
+			if (sessionUser != null) {
+				return g.toJson(sessionUser);
+			}
+			return "ERROR";
+		});
+	}
+	
+	public static void logoutUser() {
+		post("rest/users/logout", (req, res) -> {
+			res.type("application/json");
+			Session ss = req.session();
 			User user = ss.attribute("user");
-			
 			if (user != null) {
 				ss.invalidate();
 			}
