@@ -32,7 +32,7 @@ Vue.component("venues", {
 	    			<td style="text-align:center"><img v-bind:src=v.logoPath width="75%"></img></td>
 	    			<td>{{v.name}}</td>
 	    			<td>{{v.venueType}}</td>
-	    			<td>{{v.location.address}} ({{v.location.latitude}}, {{v.location.longitude}})</td>
+	    			<td>{{v.location.address.street}} {{v.location.address.number}}, {{v.location.address.city}}, {{v.location.address.postalCode}} ({{v.location.latitude}}, {{v.location.longitude}})</td>
 	    			<td style="text-align:center">{{v.averageGrade}}</td>
 	    			<td style="text-align:center">{{v.workingHours}}</td>
 	    			<!--<td>
@@ -129,14 +129,22 @@ Vue.component("venues", {
 				return this.venues.filter(venue => {
     	     			return (venue.isWorking == true) && ((venue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
     	     			 || (venue.venueType.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.street.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.number.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.city.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.postalCode.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.country.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
     	     			 || (venue.averageGrade.toString().indexOf(this.search) > -1))})
 			}
 			else{
 				return this.venues.filter(venue => {
     	     			return (venue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
     	     			 || (venue.venueType.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.street.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.number.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.city.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.postalCode.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    	     			 || (venue.location.address.country.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
     	     			 || (venue.averageGrade.toString().indexOf(this.search) > -1)})
 			}
 		}

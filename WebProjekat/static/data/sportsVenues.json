@@ -8,7 +8,13 @@
 		"location": {
 			"latitude": 45.248468,
 			"longitude": 19.844252,
-			"address": "Sutjeska 2, Novi Sad, 21000"
+			"address":{
+				"street": "Sutjeska",
+				"number": "2",
+				"city": "Novi Sad",
+				"postalCode": "21000",
+				"country": "Srbija"
+			}
 		},
 		"logoPath": "./images/spens.jpg",
 		"averageGrade": 4.1,
@@ -23,7 +29,13 @@
 		"location": {
 			"latitude": 45.271596,
 			"longitude": 19.841131,
-			"address": "Temerinska 95, Novi Sad, 21000"
+			"address":{
+				"street": "Temerinska",
+				"number": "95",
+				"city": "Novi Sad",
+				"postalCode": "21000",
+				"country": "Srbija"
+			}
 		},
 		"logoPath": "./images/megagym.jpg",
 		"averageGrade": 4.1,
@@ -38,7 +50,13 @@
 		"location": {
 			"latitude": 45.245244,
 			"longitude": 19.817108,
-			"address": "Geri Karolja 5, Novi Sad, 21000"
+			"address":{
+				"street": "Geri Karolja",
+				"number": "5",
+				"city": "Novi Sad",
+				"postalCode": "21000",
+				"country": "Srbija"
+			}
 		},
 		"logoPath": "./images/fiesta.jpg",
 		"averageGrade": 4.8,

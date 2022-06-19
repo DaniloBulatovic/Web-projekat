@@ -4,7 +4,7 @@ public class Location {
 
 	private double latitude;
 	private double longitude;
-	private String address; // ulica i broj, mesto/grad, poštanski broj
+	private Address address; // ulica i broj, mesto/grad, poštanski broj
 	
 	public Location() {
 	
@@ -26,11 +26,11 @@ public class Location {
 		this.longitude = longitude;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 }
