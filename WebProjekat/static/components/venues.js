@@ -32,7 +32,7 @@ Vue.component("venues", {
 	    			<td style="text-align:center"><img v-bind:src=v.logoPath width="75%"></img></td>
 	    			<td>{{v.name}}</td>
 	    			<td>{{v.venueType}}</td>
-	    			<td>{{v.location.address}}</td>
+	    			<td>{{v.location.address}} ({{v.location.latitude}}, {{v.location.longitude}})</td>
 	    			<td style="text-align:center">{{v.averageGrade}}</td>
 	    			<td style="text-align:center">{{v.workingHours}}</td>
 	    			<!--<td>

@@ -54,7 +54,7 @@ body, html {
 	float: right;
 }
 
-#menu a, #userMenu a, #userMenu input, #register-login input.submit { 
+#menu a, #userMenu a, #userMenu input, input.submit { 
     background: powderblue;
     border:1px solid steelblue;
     -moz-border-radius:3px;
@@ -64,6 +64,34 @@ body, html {
     color:#333;
     padding:.3em .5em;
     margin: .5em .5em;
+    text-decoration:none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#profile_table input.confirm { 
+    background: lightgreen;
+    border:1px solid forestgreen;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -khtml-border-radius:3px;
+    border-radius:3px;
+    color:#333;
+    padding:.3em .5em;
+    text-decoration:none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#profile_table input.cancel{
+    background: lightcoral;
+    border:1px solid indianred;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -khtml-border-radius:3px;
+    border-radius:3px;
+    color:#333;
+    padding:.3em .5em;
     text-decoration:none;
     cursor: pointer;
     font-weight: bold;

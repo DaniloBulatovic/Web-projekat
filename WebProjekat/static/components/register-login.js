@@ -90,6 +90,7 @@ Vue.component("register-login", {
 			then(response => {
 				this.loggedIn = false;
 				this.user = { username: "", password: "", role: ""};
+				router.push('/');
 			});
 		},
 		togglePassword : function(){
@@ -99,7 +100,7 @@ Vue.component("register-login", {
 				this.passwordInputType = "password";	
 		},
 		profile : function(){
-			router.push('/profile/' + this.user.id);
+			router.push('/profile');
 		}
 	},
 	mounted () {

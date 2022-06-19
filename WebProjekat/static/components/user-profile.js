@@ -2,37 +2,44 @@ Vue.component("user-profile", {
 	data: function () {
 		    return {
 			  id: -1,
-		      user: null 
+		      user: null,
+		      error: ""
 		    }
 	},
 	template: ` 
-<div>
-	<h2 style="text-align:center">Profil</h2>
+<div style="width:60%; height:100%;margin:auto">
+	<h2>Profil</h2>
 	<form>
-		<table id="profile_table" style="margin:auto">
+		<table id="profile_table" style="margin-right:auto">
 			<tr>
 				<td>Korisničko ime</td>
-				<td><input type = "text" v-model = "user.username"></td>
+				<td><input type = "text" v-model = "user.username" v-on:input="validateFields()"></td>
+				<td><label v-if="this.user.username === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Lozinka</td>
-				<td><input type = "text" v-model = "user.password"></td>
+				<td><input type = "text" v-model = "user.password" v-on:input="validateFields()"></td>
+				<td><label v-if="this.user.password === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Ime</td>
-				<td><input type = "text" v-model = "user.name"></td>
+				<td><input type = "text" v-model = "user.name" v-on:input="validateFields()"></td>
+				<td><label v-if="this.user.name === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Prezime</td>
-				<td><input type = "text" v-model = "user.surname"></td>
+				<td><input type = "text" v-model = "user.surname" v-on:input="validateFields()"></td>
+				<td><label v-if="this.user.surname === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Pol</td>
-				<td><select v-model="user.gender"><option>Muško</option><option>Žensko</option></select></td>
+				<td><select v-model="user.gender" v-on:change="validateFields()"><option>Muško</option><option>Žensko</option></select></td>
+				<td><label v-if="this.user.gender === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Datum rođenja</td>
-				<td><input type = "date" v-model = "user.dateOfBirth"></td>
+				<td><input type = "date" v-model = "user.dateOfBirth" v-on:input="validateFields()"></td>
+				<td><label v-if="this.user.dateOfBirth === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr v-if="user.role === 'Trener'">
 				<td>Istorija treninga</td>
@@ -44,7 +51,7 @@ Vue.component("user-profile", {
 			</tr>
 			<tr v-if="user.role === 'Kupac'">
 				<td>Članstvo</td>
-				<td><select v-model="user.membership" readonly><option>Godišnje</option><option>Mesečno</option></select></td>
+				<td><input type = "text" v-model="user.membership" readonly></td>
 			</tr>
 			<tr v-if="user.role === 'Kupac'">
 				<td>Posećeni objekti</td>
@@ -59,7 +66,8 @@ Vue.component("user-profile", {
 				<td><input type = "text" v-model = "user.points" readonly></td>
 			</tr>
 			<tr>
-				<th colspan="2"><input type = "submit" v-on:click = "editUser" value = "Sačuvaj izmene"></th>
+				<th><input class="confirm" type = "submit" v-on:click = "editUser" value = "Sačuvaj izmene" style="text-align:center"></th>
+				<th><input class="cancel" type = "submit" v-on:click = "cancel" value = "Otkaži" style="text-align:center"></th>
 			</tr>
 		</table>
 	</form>
@@ -67,18 +75,37 @@ Vue.component("user-profile", {
 `
 	, 
 	methods : {
+		cancel : function (){
+			event.preventDefault();
+			router.push('/');
+		},
 		editUser : function () {
 			event.preventDefault();
-			axios.put('rest/users/edit/' + this.user.id, this.user).
-			then(response => (router.push(`/`)));
+			this.validateFields();
+			if (this.error === ''){
+				axios.put('rest/users/edit/' + this.user.id, this.user).
+				then(response => (router.push(`/`)));
+			}
+		},
+		validateFields : function(){
+			if (this.user.username === ''
+				|| this.user.password === ''
+				|| this.user.name === ''
+				|| this.user.surname === ''
+				|| this.user.gender === ''
+				|| this.user.dateOfBirth === '')
+				this.error = "Obavezno!";
+			else
+				this.error = "";
 		}
 	},
 	mounted () {
-		this.id = this.$route.params.id;
-		if (this.id != -1){
-	        axios
-	          .get('rest/users/' + this.id)
-	          .then(response => (this.user = response.data))
-		}
+		axios.post('rest/users/getlogged', this.user, {withCredentials: true}).
+					then(response => { 
+						this.user = { username: "", password: "", role: ""};
+						if (response.data != "ERROR" && response.data != null){
+							this.user = response.data;
+						}
+			});
     }
 });

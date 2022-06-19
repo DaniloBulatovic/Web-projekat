@@ -2,7 +2,7 @@ package beans;
 
 public class Location {
 
-	private double latutude;
+	private double latitude;
 	private double longitude;
 	private String address; // ulica i broj, mesto/grad, poštanski broj
 	
@@ -10,12 +10,12 @@ public class Location {
 	
 	}
 
-	public double getLatutude() {
-		return latutude;
+	public double getLatitude() {
+		return latitude;
 	}
 
-	public void setLatutude(double latutude) {
-		this.latutude = latutude;
+	public void setLatitude(double latutude) {
+		this.latitude = latutude;
 	}
 
 	public double getLongitude() {
