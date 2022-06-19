@@ -47,7 +47,7 @@ Vue.component("user-profile", {
 			</tr>
 			<tr v-if="user.role === 'Menadžer'">
 				<td>Sportski objekat</td>
-				<td><input type = "text" v-model = "user.sportsVenue.name" readonly></td>
+				<td><input type = "text" v-model = "user.sportsVenue" readonly></td>
 			</tr>
 			<tr v-if="user.role === 'Kupac'">
 				<td>Članstvo</td>

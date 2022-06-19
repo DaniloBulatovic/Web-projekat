@@ -7,8 +7,10 @@ Vue.component("register-login", {
 		      error: "",
 		      loggedIn: false,
 		      displayTable: true,
+		      displayAdminTable: false,
 		      passwordInputType: "password",
-		      user: { username: "", password: "", role: ""}
+		      user: { username: "", password: "", role: ""},
+		      newUser: {username: "", password: "", role: "Menadžer"}
 		    }
 	},
 	template: ` 
@@ -19,7 +21,8 @@ Vue.component("register-login", {
 	</div>
 	<div id="userMenu" v-if=loggedIn>
 		<input type="submit" v-on:click="logout" value="Odjavi se" style="float:right">
-		<label v-on:click="profile">{{user.username}} ({{user.role}})</label>
+		<label v-on:click="profile">{{user.username}}</label>
+		<input v-if="this.user.role === 'Administrator'" type="submit" @click="displayAdminTable = !displayAdminTable" value="Kreiraj menadžera / trenera" style="display:block">
 	</div>
 	<form v-if=!loggedIn>
 		<table v-if=displayTable>
@@ -50,12 +53,47 @@ Vue.component("register-login", {
 			</tr>
 		</table>
 	</form>
+	<form v-if=displayAdminTable>
+		<table>
+			<tr>
+				<th colspan="2">Kreiraj menadžera / trenera</th>
+			</tr>
+			<tr>
+				<td><label>Korisničko ime</label></td>
+				<td><input type="text" v-model="newUser.username" name="username"></td>
+			</tr>
+			<tr>
+				<td><label>Lozinka</label></td>
+				<td><input v-bind:type="this.passwordInputType" v-model="newUser.password" name="password"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="checkbox" v-on:click="togglePassword">Prikaži lozinku</td>
+			</tr>
+			<tr>
+				<td><label>Uloga</label></td>
+				<td><select v-model="newUser.role" name="role"><option selected>Menadžer</option><option>Trener</option></select></td>	
+			</tr>
+			<tr>
+				<th colspan="2">
+					<input class="submit" type="submit" v-on:click="adminRegister" value="Kreiraj" style="float:right">
+				</th>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<p style="color:red">{{error}}</p>
+				</th>
+			</tr>
+		</table>
+	</form>
 </div>		  
 `
 	, 
 	methods : {
 		register : function () {
 			this.error = "";
+			this.user.name = "";
+			this.user.surname = "";
 			event.preventDefault();
 			if (this.action != "register"){
 				axios.post('rest/users/login', this.user).
@@ -69,6 +107,8 @@ Vue.component("register-login", {
 				});
 			}
 			else {
+				this.user.name = "";
+				this.user.surname = "";
 				this.user.role = "Kupac";
 				axios.post('rest/users/add', this.user).
 				then(response => {
@@ -84,11 +124,28 @@ Vue.component("register-login", {
 				});
 			}
 		},
+		adminRegister : function(){
+			event.preventDefault();
+			this.newUser.name = "";
+			this.newUser.surname = "";
+			axios.post('rest/users/add', this.newUser).
+				then(response => {
+					if (response.data == "ERROR"){
+						this.error = "Korisničko ime je zauzeto!";
+					}else{
+						this.newUser = {username: "", password: "", role: ""};
+						alert("Uspešno registrovan novi " + response.data.role.toLowerCase());
+						this.displayAdminTable = false;
+					}
+				});
+		},
 		logout : function(){
 			event.preventDefault();
+			this.error = "";
 			axios.post('rest/users/logout', this.user, {withCredentials: true}).
 			then(response => {
 				this.loggedIn = false;
+				this.displayAdminTable = false;
 				this.user = { username: "", password: "", role: ""};
 				router.push('/');
 			});
