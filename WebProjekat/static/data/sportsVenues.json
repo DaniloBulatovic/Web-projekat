@@ -6,9 +6,15 @@
 		"content": ["košarkaški teren", "bazen"],
 		"isWorking": true,
 		"location": {
-			"latitude": 0.0,
-			"longitude": 0.0,
-			"address": "Sutjeska 2, Novi Sad, 21000"
+			"latitude": 45.248468,
+			"longitude": 19.844252,
+			"address":{
+				"street": "Sutjeska",
+				"number": "2",
+				"city": "Novi Sad",
+				"postalCode": "21000",
+				"country": "Srbija"
+			}
 		},
 		"logoPath": "./images/spens.jpg",
 		"averageGrade": 4.1,
@@ -21,9 +27,15 @@
 		"content": ["teretana"],
 		"isWorking": false,
 		"location": {
-			"latitude": 0.0,
-			"longitude": 0.0,
-			"address": "Temerinska 95, Novi Sad, 21000"
+			"latitude": 45.271596,
+			"longitude": 19.841131,
+			"address":{
+				"street": "Temerinska",
+				"number": "95",
+				"city": "Novi Sad",
+				"postalCode": "21000",
+				"country": "Srbija"
+			}
 		},
 		"logoPath": "./images/megagym.jpg",
 		"averageGrade": 4.1,
@@ -36,9 +48,15 @@
 		"content": ["plesni studio"],
 		"isWorking": true,
 		"location": {
-			"latitude": 0.0,
-			"longitude": 0.0,
-			"address": "Geri Karolja 5, Novi Sad, 21000"
+			"latitude": 45.245244,
+			"longitude": 19.817108,
+			"address":{
+				"street": "Geri Karolja",
+				"number": "5",
+				"city": "Novi Sad",
+				"postalCode": "21000",
+				"country": "Srbija"
+			}
 		},
 		"logoPath": "./images/fiesta.jpg",
 		"averageGrade": 4.8,

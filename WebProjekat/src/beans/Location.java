@@ -2,20 +2,20 @@ package beans;
 
 public class Location {
 
-	private double latutude;
+	private double latitude;
 	private double longitude;
-	private String address; // ulica i broj, mesto/grad, poštanski broj
+	private Address address; // ulica i broj, mesto/grad, poštanski broj
 	
 	public Location() {
 	
 	}
 
-	public double getLatutude() {
-		return latutude;
+	public double getLatitude() {
+		return latitude;
 	}
 
-	public void setLatutude(double latutude) {
-		this.latutude = latutude;
+	public void setLatitude(double latutude) {
+		this.latitude = latutude;
 	}
 
 	public double getLongitude() {
@@ -26,11 +26,11 @@ public class Location {
 		this.longitude = longitude;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 }

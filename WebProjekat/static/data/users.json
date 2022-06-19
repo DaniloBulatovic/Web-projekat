@@ -6,8 +6,9 @@
     "name": "Petar",
     "surname": "Petrović",
     "gender": "Muško",
+    "dateOfBirth": "2022-06-02",
     "role": "Kupac",
-    "points": 0
+    "points": 5
   },
   "2": {
     "id": "2",
