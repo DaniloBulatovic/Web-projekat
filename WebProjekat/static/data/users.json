@@ -6,29 +6,62 @@
     "name": "Petar",
     "surname": "Petrović",
     "gender": "Muško",
-    "dateOfBirth": "2022-06-02",
+    "dateOfBirth": "2000-06-02",
     "role": "Kupac",
-    "points": 5
+    "points": 15,
+	"customerType":{
+		"typeName": "Bronzani",
+		"discount": 5.0,
+		"requiredPoints": 0
+	}
   },
   "2": {
     "id": "2",
     "username": "Marko",
     "password": "marko",
+    "name": "Marko",
+    "surname": "Marković",
+	"gender": "Muško",
+	"dateOfBirth": "1995-04-12",
     "role": "Administrator",
-    "points": 0
+    "points": 0,
+	"customerType":{
+		"typeName": "",
+		"discount": 0,
+		"requiredPoints": 0
+	}
+	
   },
   "3": {
     "id": "3",
     "username": "Nikola",
     "password": "nikola",
+    "name": "Nikola",
+    "surname": "Nikolić",
+	"gender": "Muško",
+	"dateOfBirth": "1997-10-20",
     "role": "Trener",
-    "points": 0
+    "points": 0,
+	"customerType":{
+		"typeName": "",
+		"discount": 0,
+		"requiredPoints": 0
+	}
   },
   "4": {
     "id": "4",
-    "username": "Jovan",
-    "password": "jovan",
+    "username": "Jovana",
+    "password": "jovana",
+    "name": "Jovana",
+    "surname": "Jovanović",
+	"gender": "Žensko",
+	"dateOfBirth": "2001-09-12",
     "role": "Kupac",
-    "points": 0
+    "points": 65,
+	"customerType":{
+		"typeName": "Srebrni",
+		"discount": 15.0,
+		"requiredPoints": 50
+	}
   }
 }

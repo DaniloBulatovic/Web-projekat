@@ -23,6 +23,8 @@ Vue.component("register-login", {
 		<input type="submit" v-on:click="logout" value="Odjavi se" style="float:right">
 		<label v-on:click="profile">{{user.username}}</label>
 		<input v-if="this.user.role === 'Administrator'" type="submit" @click="displayAdminTable = !displayAdminTable" value="Kreiraj menadžera / trenera" style="display:block">
+		<input v-if="this.user.role === 'Administrator'" type="submit" @click="showVenuesTable" value="Prikaz objekata" style="display:block">
+		<input v-if="this.user.role === 'Administrator'" type="submit" @click="showUsersTable" value="Prikaz korisnika" style="display:block">
 	</div>
 	<form v-if=!loggedIn>
 		<table v-if=displayTable>
@@ -158,6 +160,12 @@ Vue.component("register-login", {
 		},
 		profile : function(){
 			router.push('/profile');
+		},
+		showUsersTable : function(){
+			router.push('/users');
+		},
+		showVenuesTable : function(){
+			router.push('/');
 		}
 	},
 	mounted () {
