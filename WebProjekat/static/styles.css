@@ -114,20 +114,20 @@ body, html {
     cursor: pointer;
 }
 
-table.venues_table {
+table.venues_table, table.users_table {
 	border-collapse: collapse;
 }
 
-.venues_table th {
+.venues_table th, .users_table th {
 	background: powderblue;
 }
 
-.venues_table th, .venues_table td {
+.venues_table th, .venues_table td, .users_table th, .users_table td {
 	border: 1px solid;
 	padding: 5px;
 }
 
-.venues_table tr:hover {
+.venues_table tr:hover, .users_table tr:hover {
 	background: aliceblue;
 }
 

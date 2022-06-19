@@ -4,7 +4,7 @@ import javaxt.utils.string;
 
 public class CustomerType {
 
-	private string typeName;
+	private String typeName;
 	private double discount;
 	private int requiredPoints;
 	
@@ -12,11 +12,11 @@ public class CustomerType {
 	
 	}
 
-	public string getTypeName() {
+	public String getTypeName() {
 		return typeName;
 	}
 
-	public void setTypeName(string typeName) {
+	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
 
