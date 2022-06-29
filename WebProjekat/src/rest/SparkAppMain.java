@@ -11,7 +11,7 @@ import controller.UserController;
 public class SparkAppMain {
 	
 	public static void main(String[] args) throws Exception {
-		port(8080);
+		port(8081);
 
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
 		initializeControllers();

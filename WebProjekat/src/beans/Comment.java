@@ -1,12 +1,10 @@
 package beans;
 
-import javaxt.utils.string;
-
 public class Comment {
 	
 	private User customer;
 	private SportsVenue sportsVenue;
-	private string text;
+	private String text;
 	private int grade;
 	
 	public Comment() {
@@ -29,11 +27,11 @@ public class Comment {
 		this.sportsVenue = sportsVenue;
 	}
 
-	public string getText() {
+	public String getText() {
 		return text;
 	}
 
-	public void setText(string text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 

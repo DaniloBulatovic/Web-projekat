@@ -1,19 +1,46 @@
-Vue.component("edit-venue", {
+Vue.component("venue", {
+	props: ['value'],
 	data: function () {
 		    return {
-		      title: "Dodaj sportski objekat",
-		      value: "Dodaj",
-		      id : -1,
+		      id : 0,
+			  visible : false,
 		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:null, logoPath:null, averageGrade:null, workingHours:null}
 		    }
 	},
 	template: ` 
 <div>
-	{{title}}
-	<form>
-		<label>Ime</label>
-		<input type = "text" v-model = "venue.name" name = "name">
-		<input type = "submit" v-on:click = "editVenue" v-bind:value = "this.value">
+	<form v-if=visible>
+	<h2>Prikaz sportskog objekta</h2>
+		<table>
+			<tr>
+				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Ime</td>
+				<td><input type = "text" v-model = "venue.name" readonly></td>
+			</tr>
+			<tr>
+				<td>Tip</td>
+				<td><input type = "text" v-model = "venue.venueType" readonly></td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td><input type = "text" v-model = "venue.isWorking ? 'Radi' : 'Ne radi'" readonly></td>
+			</tr>
+			<tr>
+				<td>Lokacija</td>
+				<td><input type = "text" v-model = "venue.location.address.street + ' '
+													+ venue.location.address.number + ', '
+													+ venue.location.address.city + ', ' 
+													+ venue.location.address.postalCode" readonly></td>
+			</tr
+			</tr>
+			<tr>
+				<td>Prosečna ocena</td>
+				<td><input type = "text" v-model = "venue.averageGrade" readonly></td>
+			</tr>
+		</table>
 	</form>
 </div>		  
 `
@@ -32,13 +59,14 @@ Vue.component("edit-venue", {
 		}
 	},
 	mounted () {
-		this.id = this.$route.params.id;
-		if (this.id != -1){
-			this.title = "Izmeni sportski objekat";
-			this.value = "Izmeni";
+		this.id = this.value;
+		if (this.id > 0){
+			this.visible = true;
 	        axios
 	          .get('rest/venues/' + this.id)
 	          .then(response => (this.venue = response.data))
+		}else{
+			this.visible = false;
 		}
     }
 });

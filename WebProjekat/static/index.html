@@ -17,14 +17,15 @@
 	<div class="toppane">
 			
 	</div>
-	<div class="leftpane">
-    </div>
-  	<div class="middlepane">
-		<div id="venues" style="margin:auto">
-			<router-view :key="$route.fullPath" class="venues-view"></router-view>	
+	<div>
+		<div class="leftpane">
+	    </div>
+	  	<div class="middlepane">
+			<div id="venues" style="margin:auto">
+			</div>
 		</div>
-	</div>
-  	
+		<router-view :key="$route.fullPath" class="venues-view"></router-view>	
+  	</div>
 </div>
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>

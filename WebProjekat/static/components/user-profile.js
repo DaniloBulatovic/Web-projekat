@@ -7,7 +7,7 @@ Vue.component("user-profile", {
 		    }
 	},
 	template: ` 
-<div style="width:60%; height:100%;margin:auto">
+<div class="middlepane" style="float:right; height:100%;margin:auto">
 	<h2>Profil</h2>
 	<form>
 		<table id="profile_table" style="margin-right:auto">
@@ -59,7 +59,7 @@ Vue.component("user-profile", {
 			</tr>
 			<tr v-if="user.role === 'Kupac'">
 				<td>Tip kupca</td>
-				<td><input type = "text" v-model = "user.customerType" readonly></td>
+				<td><input type = "text" v-model = "user.customerType.typeName" readonly></td>
 			</tr>
 			<tr v-if="user.role === 'Kupac'">
 				<td>Poeni</td>
