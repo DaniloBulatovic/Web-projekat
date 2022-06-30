@@ -2,6 +2,7 @@ package beans;
 
 public class Comment {
 	
+	private String id;
 	private User customer;
 	private SportsVenue sportsVenue;
 	private String text;
@@ -10,7 +11,15 @@ public class Comment {
 	public Comment() {
 	
 	}
-
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public User getCustomer() {
 		return customer;
 	}

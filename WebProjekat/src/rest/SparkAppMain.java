@@ -5,6 +5,7 @@ import static spark.Spark.staticFiles;
 
 import java.io.File;
 
+import controller.CommentController;
 import controller.SportsVenueController;
 import controller.TrainingController;
 import controller.UserController;
@@ -22,5 +23,6 @@ public class SparkAppMain {
 		SportsVenueController.initializeController();
 		UserController.initializeController();
 		TrainingController.initializeController();
+		CommentController.initializeController();
 	}
 }

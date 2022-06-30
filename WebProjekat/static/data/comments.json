@@ -1,8 +1,22 @@
 {
 	"1":{
 		"id": "1",
-		"name": "Početni trening",
-		"trainingType": "Grupni",
+		"customer": {
+			"id": "1",
+			"username": "Petar",
+			"password": "petar",
+			"name": "Petar",
+			"surname": "Petrović",
+			"gender": "Muško",
+			"dateOfBirth": "2000-06-02",
+			"role": "Kupac",
+			"points": 15,
+			"customerType":{
+				"typeName": "Bronzani",
+				"discount": 5.0,
+				"requiredPoints": 0
+			}
+		},
 		"sportsVenue": {
 			"id": "1",
 			"name": "SPENS",
@@ -24,25 +38,7 @@
 			"averageGrade": 4.1,
 			"workingHours": "06-22"
 		},
-		"duration": 60,
-		"trainer": {
-			"id": "3",
-			"username": "Nikola",
-			"password": "nikola",
-			"name": "Nikola",
-			"surname": "Nikolić",
-			"gender": "Muško",
-			"dateOfBirth": "1997-10-20",
-			"role": "Trener",
-			"points": 0,
-			"customerType":{
-				"typeName": "",
-				"discount": 0,
-				"requiredPoints": 0
-			}
-		},
-		"description": "Opis treninga",
-		"image": "./images/trainings/training.png",
-		"price": 1200
+		"text": "Odličan sportski centar. Dobro opremljen, ljubazni treneri.",
+		"grade": 5
 	}
 }

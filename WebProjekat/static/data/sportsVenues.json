@@ -16,7 +16,7 @@
 				"country": "Srbija"
 			}
 		},
-		"logoPath": "./images/spens.jpg",
+		"logoPath": "./images/venues/spens.jpg",
 		"averageGrade": 4.1,
 		"workingHours": "06-22"
 	},
@@ -37,7 +37,7 @@
 				"country": "Srbija"
 			}
 		},
-		"logoPath": "./images/megagym.jpg",
+		"logoPath": "./images/venues/megagym.jpg",
 		"averageGrade": 4.1,
 		"workingHours": "06-00"
 	},
@@ -58,7 +58,7 @@
 				"country": "Srbija"
 			}
 		},
-		"logoPath": "./images/fiesta.jpg",
+		"logoPath": "./images/venues/fiesta.jpg",
 		"averageGrade": 4.8,
 		"workingHours": "17-22"
 	}

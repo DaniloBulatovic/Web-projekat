@@ -19,9 +19,9 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
-public class Trainings {
+public class Comments {
 	
-	private HashMap<String, Training> trainings = new HashMap<String, Training>();
+	private HashMap<String, Comment> comments = new HashMap<String, Comment>();
 	
 	private Gson g = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
 		@Override
@@ -35,47 +35,47 @@ public class Trainings {
 	    }
     }).setPrettyPrinting().create();
 	
-	public Trainings(){
+	public Comments(){
 		try {
-			readTrainings();
+			readComments();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void readTrainings() throws Exception
+	public void readComments() throws Exception
     {
-		String json = new String(Files.readAllBytes(Paths.get("./static/data/trainings.json")));
-		Type type = new TypeToken<HashMap<String, Training>>(){}.getType();
-		trainings = g.fromJson(json, type);
+		String json = new String(Files.readAllBytes(Paths.get("./static/data/comments.json")));
+		Type type = new TypeToken<HashMap<String, Comment>>(){}.getType();
+		comments = g.fromJson(json, type);
     }
 
-	public Collection<Training> getValues() {
-		return trainings.values();
+	public Collection<Comment> getValues() {
+		return comments.values();
 	}
 
-	public Training getTraining(String id) {
-		return trainings.get(id);
+	public Comment getComment(String id) {
+		return comments.get(id);
 	}
 
-	public void addTraining(Training training) {
+	public void addComment(Comment comment) {
 		Integer maxId = -1;
-		for (String id : trainings.keySet()) {
+		for (String id : comments.keySet()) {
 			int idNum = Integer.parseInt(id);
 			if (idNum > maxId) {
 				maxId = idNum;
 			}
 		}
 		maxId++;
-		training.setId(maxId.toString());
-		trainings.put(training.getId(), training);
+		comment.setId(maxId.toString());
+		comments.put(comment.getId(), comment);
 	}
 
-	public void edit(String id, Training training) {
-		trainings.put(id, training);
+	public void edit(String id, Comment comment) {
+		comments.put(id, comment);
 	}
 
 	public void delete(String id) {
-		trainings.remove(id);
+		comments.remove(id);
 	}
 }

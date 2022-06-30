@@ -5,7 +5,8 @@ Vue.component("venue", {
 		      id : 0,
 			  visible : false,
 		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:null, averageGrade:null, workingHours:null},
-			  trainings: []
+			  trainings: [],
+			  comments: []
 		    }
 	},
 	template: ` 
@@ -76,7 +77,27 @@ Vue.component("venue", {
 							<td>{{t.trainingType}}</td>
 							<td>{{t.description}}</td>
 							<td>{{t.trainer.name}} {{t.trainer.surname}}</td>
-							<td>{{t.price}}</td>
+							<td style="text-align:center">{{t.price}}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr v-if=comments.length>
+				<td>Komentari</td>
+				<td></td>
+			</tr>
+			<tr v-if=comments.length>
+				<td colspan=2>
+					<table class="venue_trainings">
+						<tr>
+							<th>Kupac</th>
+							<th>Komentar</th>
+							<th>Ocena</th>
+						</tr>
+						<tr v-for="(c, index) in comments">
+							<td>{{c.customer.name}} {{c.customer.surname}}</td>
+							<td>{{c.text}}</td>
+							<td style="text-align:center">{{c.grade}}</td>
 						</tr>
 					</table>
 				</td>
@@ -142,6 +163,10 @@ Vue.component("venue", {
 			axios.get('rest/trainings/venue/' + this.id)
 			.then(response => {
 				this.trainings = response.data;
+			})
+			axios.get('rest/comments/venue/' + this.id)
+			.then(response => {
+				this.comments = response.data;
 			})
 		}else{
 			this.visible = false;
