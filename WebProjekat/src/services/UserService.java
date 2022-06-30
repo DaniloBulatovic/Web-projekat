@@ -17,8 +17,8 @@ public class UserService {
 		return users.getUser(id);
 	}
 	
-	public void addUser(User product) {
-		users.addUser(product);
+	public void addUser(User user) {
+		users.addUser(user);
 	}
 
 	public void editUser(String id, User user) {

@@ -4,6 +4,7 @@ import beans.enums.TrainingType;
 
 public class Training {
 
+	private String id;
 	private String name;
 	private TrainingType trainingType;
 	private SportsVenue sportsVenue;
@@ -11,9 +12,18 @@ public class Training {
 	private User trainer;
 	private String description;
 	private String image;
+	private double price;
 	
 	public Training() {
 	
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -70,5 +80,13 @@ public class Training {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }

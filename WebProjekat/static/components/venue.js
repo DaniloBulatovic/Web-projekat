@@ -4,14 +4,15 @@ Vue.component("venue", {
 		    return {
 		      id : 0,
 			  visible : false,
-		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:null, averageGrade:null, workingHours:null}
+		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:null, averageGrade:null, workingHours:null},
+			  trainings: []
 		    }
 	},
 	template: ` 
 <div>
 	<form v-if=visible>
 	<h2>Prikaz sportskog objekta</h2>
-		<table>
+		<table style="width:100%; background:aliceblue">
 			<tr>
 				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
 				<td></td>
@@ -36,11 +37,49 @@ Vue.component("venue", {
 													+ venue.location.address.postalCode" readonly></td>
 			</tr>
 			<tr>
-				<th colspan=2><div ref="map-root" id="map" class="map" style="height:200px; width:100%"></div></th>
+				<th colspan=2><div ref="map-root" id="map" class="map" style="height:300px"></div></th>
 			</tr>
 			<tr>
 				<td>Prosečna ocena</td>
 				<td><input type = "text" v-model = "venue.averageGrade" readonly></td>
+			</tr>
+			<tr>
+				<td>Radno vreme</td>
+				<td><input type = "text" v-model = "venue.workingHours" readonly></td>
+			</tr>
+			<tr>
+				<td>Sadržaj</td>
+				<td></td>
+			</tr>
+			<tr v-for="(s, index) in venue.content">
+				<td></td>
+				<li>{{s}}</li>
+			</tr>
+			<tr v-if=trainings.length>
+				<td>Treninzi</td>
+				<td></td>
+			</tr>
+			<tr v-if=trainings.length>
+				<td colspan=2>
+					<table class="venue_trainings">
+						<tr>
+							<th>Slika</th>
+							<th>Naziv</th>
+							<th>Tip</th>
+							<th>Opis</th>
+							<th>Trener</th>
+							<th>Cena</th>
+						</tr>
+						<tr v-for="(t, index) in trainings">
+							<td style="text-align:center"><img v-bind:src=t.image width="50%"></img></td>
+							<td>{{t.name}}</td>
+							<td>{{t.trainingType}}</td>
+							<td>{{t.description}}</td>
+							<td>{{t.trainer.name}} {{t.trainer.surname}}</td>
+							<td>{{t.price}}</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -99,7 +138,11 @@ Vue.component("venue", {
 				  }),
 				  target: this.$refs['map-root']
 				});
-		})
+		});
+			axios.get('rest/trainings/venue/' + this.id)
+			.then(response => {
+				this.trainings = response.data;
+			})
 		}else{
 			this.visible = false;
 		}
