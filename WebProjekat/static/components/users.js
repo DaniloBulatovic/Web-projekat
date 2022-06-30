@@ -7,7 +7,7 @@ Vue.component("users", {
 	    }
 	},
 	    template: ` 
-    	<div>
+    	<div class="middlepane" style="float:right">
     		<h2>Prikaz svih korisnika</h2>
     		<p id="searchParagraph">
     			<label>Uloga</label>
@@ -55,11 +55,12 @@ Vue.component("users", {
 						this.user = { username: "", password: "", role: ""};
 						if (response.data != "ERROR" && response.data != null){
 							this.user = response.data;
+							if (this.user.role !== "Administrator"){
+								console.log(this.user.role);
+								router.push('/');
+							}
 						}
 			});
-		if (this.user.role !== "Administrator"){
-			router.push('/');
-		}
 			
         axios
           .get('rest/users/')

@@ -1,7 +1,5 @@
 package beans;
 
-import javaxt.utils.string;
-
 public class CustomerType {
 
 	private String typeName;

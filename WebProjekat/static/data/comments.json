@@ -1,0 +1,44 @@
+{
+	"1":{
+		"id": "1",
+		"customer": {
+			"id": "1",
+			"username": "Petar",
+			"password": "petar",
+			"name": "Petar",
+			"surname": "Petrović",
+			"gender": "Muško",
+			"dateOfBirth": "2000-06-02",
+			"role": "Kupac",
+			"points": 15,
+			"customerType":{
+				"typeName": "Bronzani",
+				"discount": 5.0,
+				"requiredPoints": 0
+			}
+		},
+		"sportsVenue": {
+			"id": "1",
+			"name": "SPENS",
+			"venueType": "Sportski centar",
+			"content": ["košarkaški teren", "bazen"],
+			"isWorking": true,
+			"location": {
+				"latitude": 45.248468,
+				"longitude": 19.844252,
+				"address":{
+					"street": "Sutjeska",
+					"number": "2",
+					"city": "Novi Sad",
+					"postalCode": "21000",
+					"country": "Srbija"
+				}
+			},
+			"logoPath": "./images/venues/spens.jpg",
+			"averageGrade": 4.1,
+			"workingHours": "06-22"
+		},
+		"text": "Odličan sportski centar. Dobro opremljen, ljubazni treneri.",
+		"grade": 5
+	}
+}

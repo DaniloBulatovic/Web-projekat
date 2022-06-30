@@ -5,13 +5,15 @@ import static spark.Spark.staticFiles;
 
 import java.io.File;
 
+import controller.CommentController;
 import controller.SportsVenueController;
+import controller.TrainingController;
 import controller.UserController;
 
 public class SparkAppMain {
 	
 	public static void main(String[] args) throws Exception {
-		port(8080);
+		port(8081);
 
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
 		initializeControllers();
@@ -20,5 +22,7 @@ public class SparkAppMain {
 	public static void initializeControllers() {
 		SportsVenueController.initializeController();
 		UserController.initializeController();
+		TrainingController.initializeController();
+		CommentController.initializeController();
 	}
 }
