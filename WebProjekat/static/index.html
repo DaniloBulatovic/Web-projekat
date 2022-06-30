@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="styles.css" />
+<link rel="stylesheet" type="text/css" href="js/ol.css" />
 	<title>Sportski objekti</title>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/toast.js"></script>
@@ -14,8 +15,7 @@
     		<router-view :key="$route.fullPath" class="register-login-view" name="RegisterLogin"></router-view>
     	</div>
     </div>
-	<div class="toppane">
-			
+	<div class="toppane">		
 	</div>
 	<div>
 		<div class="leftpane">
@@ -27,9 +27,11 @@
 		<router-view :key="$route.fullPath" class="venues-view"></router-view>	
   	</div>
 </div>
+<div id="map" class="map"></div>
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
+	<script src="js/ol.js"></script>
 	<script src="components/venue.js"></script>
 	<script src="components/venues.js"></script>
 	<script src="components/register-login.js"></script>

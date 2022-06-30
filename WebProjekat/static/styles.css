@@ -137,6 +137,11 @@ table.venues_table, table.users_table {
 	background: aliceblue;
 }
 
+.map {
+    height: 100%;
+    width: 100%;
+}
+
 #searchParagraph {
 	text-align: right;
 }
