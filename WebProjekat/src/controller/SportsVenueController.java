@@ -5,6 +5,14 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.put;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
+
 import com.google.gson.Gson;
 
 import beans.SportsVenue;
@@ -21,6 +29,7 @@ public class SportsVenueController {
 		addSportsVenue();
 		editSportsVenue();
 		deleteSportsVenue();
+		uploadLogo();
 	}
 	
 	public static void getSportsVenues() {
@@ -63,6 +72,30 @@ public class SportsVenueController {
 			String id = req.params("id");
 			sportsVenueService.deleteSportsVenue(id);
 			return "SUCCESS";
+		});
+	}
+	
+	public static void uploadLogo() {
+		post("rest/venue/upload", "multipart/form-data", (request, response) -> {
+			String location = "./static/images";  // the directory location where files will be stored
+			long maxFileSize = 100000000;  // the maximum size allowed for uploaded files
+			long maxRequestSize = 100000000;  // the maximum size allowed for multipart/form-data requests
+			int fileSizeThreshold = 1024;  // the size threshold after which files will be written to disk
+			MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location, maxFileSize, maxRequestSize, fileSizeThreshold);
+			request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+			
+			String fName = request.raw().getPart("uploaded_file").getSubmittedFileName();
+			
+			Part uploadedFile = request.raw().getPart("uploaded_file");
+			Path out = Paths.get("./static/images/venues/"+fName);
+			try (final InputStream in = uploadedFile.getInputStream()) {
+				Files.copy(in, out);
+				uploadedFile.delete();
+			}
+			multipartConfigElement = null;
+			uploadedFile = null;
+			
+			return "./images/venues/" + fName;
 		});
 	}
 }

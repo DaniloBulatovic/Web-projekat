@@ -5,6 +5,7 @@ Vue.component("new-venue", {
 		      id : 0,
 			  visible : false,
 		      venue: {id: ' ', name:'', venueType:'', content:null, isWorking:true, location: { latitude:0, longitude:0, address:{ street:'', number:'', city:'', country:'', postalCode:''}}, logoPath:null, averageGrade:null, workingHours:null},
+			  selectedFile: null,
 			  managers: [],
 			  selectedIndex: null,
 			  selectedManager: null,
@@ -18,10 +19,17 @@ Vue.component("new-venue", {
 <div>
 	<form v-if=visible>
 	<h3>Dodavanje novog sportskog objekta</h3>
-		<table style="width:100%; background:aliceblue">
+		<table style="width:100%; background:aliceblue; table-layout: fixed">
 			<tr>
 				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
-				<td></td>
+			</tr>
+			<tr>
+				<td>
+					<form method='post' enctype='multipart/form-data'>
+						<input type= "file" @change="onFileSelected" name="uploaded_file" accept="image/png, image/jpeg">
+						<button @click="onUpload">Otpremi</button>
+					</form>
+				</td>
 			</tr>
 			<tr>
 				<td>Ime</td>
@@ -103,7 +111,26 @@ Vue.component("new-venue", {
 `
 	, 
 	methods : {
-		switchView: function(event, selectedIndex) {
+		onFileSelected : function(event){
+			this.selectedFile = event.target.files[0];
+		},
+		onUpload : function(){
+			event.preventDefault();
+			let data = new FormData();
+			data.append('uploaded_file', this.selectedFile, this.selectedFile.name);
+		
+			axios.post('rest/venue/upload', data, {
+			  headers: {
+			    'accept': '*/*',
+			    'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+			  }
+			})
+			.then(response =>{
+				console.log(response.data);
+				this.venue.logoPath = response.data;
+			});
+		},
+		switchView : function(event, selectedIndex) {
       		this.selectedManager = this.managers[selectedIndex];
     	},
 		addNewManager : function(){
