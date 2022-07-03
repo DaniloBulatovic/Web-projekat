@@ -43,7 +43,8 @@ Vue.component("users", {
 	    			<td>{{u.username}}</td>
 	    			<td style="text-align:center">{{u.dateOfBirth}}</td>
 	    			<td>{{u.role}}</td>
-	    			<td>{{u.customerType.typeName}}</td>
+	    			<td v-if="u.customerType != null">{{u.customerType.typeName}}</td>
+					<td v-if="u.customerType == null"> </td>	
 	    			<td style="text-align:center">{{u.points}}</td>
 	    		</tr>
 	    	</table>
@@ -56,7 +57,6 @@ Vue.component("users", {
 						if (response.data != "ERROR" && response.data != null){
 							this.user = response.data;
 							if (this.user.role !== "Administrator"){
-								console.log(this.user.role);
 								router.push('/');
 							}
 						}

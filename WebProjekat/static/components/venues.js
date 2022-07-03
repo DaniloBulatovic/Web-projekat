@@ -4,8 +4,10 @@ Vue.component("venues", {
 		  search: "",
 		  selectedId: 0,
 		  reloadVenue: false,
+		  reloadNewVenue: 1,
 		  filterWorking: false,
-	      venues: null
+	      venues: null,
+		  user: { username: "", password: "", role: ""},
 	    }
 	},
 	    template: ` 
@@ -13,6 +15,7 @@ Vue.component("venues", {
 			<div class="leftpane">
 				<div id="left-pane" style="margin:auto">
 					<venue v-bind:value = this.selectedId :key="this.reloadVenue"></venue>
+					<new-venue v-bind:value = this.selectedId :key="this.reloadNewVenue"></new-venue>
 		    	</div>
 	    	</div>
 			<div class="middlepane" style="float:right">
@@ -26,6 +29,7 @@ Vue.component("venues", {
 					<input type="checkbox" v-model="filterWorking">Prikaži samo otvorene
 	    			<input type="text" v-model="search" placeholder="Pretraga objekata..">
 	    		</p>
+				<button v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
 	    		<table id="venues_table" class="venues_table">
 		    		<tr>
 		    			<th>Logo</th>
@@ -49,18 +53,26 @@ Vue.component("venues", {
 		    			</td>-->
 		    		</tr>
 		    	</table>
-	    		<!--<button v-on:click = "addVenue">Dodaj novi objekat</button>-->
 			</div>
     	</div>		  
     	`,
     mounted () {
         axios
           .get('rest/venues/')
-          .then(response => (this.venues = response.data))
+          .then(response => (this.venues = response.data));
+		axios.post('rest/users/getlogged', this.user, {withCredentials: true}).
+					then(response => { 
+						this.user = { username: "", password: "", role: ""};
+						if (response.data != "ERROR" && response.data != null){
+							this.user = response.data;
+						}
+			});
     },
     methods: {
     	addVenue : function() {
-    		router.push(`/venues/-1`);
+    		this.selectedId = -1;
+			this.reloadVenue = !this.reloadVenue;
+			this.reloadNewVenue += this.reloadNewVenue;
     	},
     	editVenue : function(id) {
     		router.push(`/venues/${id}`);
@@ -130,6 +142,7 @@ Vue.component("venues", {
 		selectedVenue : function(id){
 			this.selectedId = id;
 			this.reloadVenue = !this.reloadVenue;
+			this.reloadNewVenue += this.reloadNewVenue;
 		}
     },
     computed: {

@@ -41,6 +41,7 @@ public class UserController {
 	public static void initializeController() {
 		getUsers();
 		getUser();
+		getAvailableManagers();
 		addUser();
 		editUser();
 		deleteUser();
@@ -61,6 +62,13 @@ public class UserController {
 			res.type("application/json");
 			String id = req.params("id");
 			return g.toJson(userService.getUser(id));
+		});
+	}
+	
+	public static void getAvailableManagers() {
+		get("rest/managers/", (req, res) -> {
+			res.type("application/json");
+			return g.toJson(userService.getAvailableManagers());
 		});
 	}
 	

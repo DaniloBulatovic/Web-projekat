@@ -105,6 +105,7 @@ Vue.component("register-login", {
 					}else{
 						this.loggedIn = true;
 						this.user = response.data;
+						this.$router.go();
 					}
 				});
 			}
@@ -150,6 +151,7 @@ Vue.component("register-login", {
 				this.displayAdminTable = false;
 				this.user = { username: "", password: "", role: ""};
 				router.push('/');
+				this.$router.go();
 			});
 		},
 		togglePassword : function(){

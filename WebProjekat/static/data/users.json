@@ -9,11 +9,11 @@
     "dateOfBirth": "2000-06-02",
     "role": "Kupac",
     "points": 15,
-	"customerType":{
-		"typeName": "Bronzani",
-		"discount": 5.0,
-		"requiredPoints": 0
-	}
+    "customerType": {
+      "typeName": "Bronzani",
+      "discount": 5.0,
+      "requiredPoints": 0
+    }
   },
   "2": {
     "id": "2",
@@ -21,16 +21,15 @@
     "password": "marko",
     "name": "Marko",
     "surname": "Marković",
-	"gender": "Muško",
-	"dateOfBirth": "1995-04-12",
+    "gender": "Muško",
+    "dateOfBirth": "1995-04-12",
     "role": "Administrator",
     "points": 0,
-	"customerType":{
-		"typeName": "",
-		"discount": 0,
-		"requiredPoints": 0
-	}
-	
+    "customerType": {
+      "typeName": "",
+      "discount": 0.0,
+      "requiredPoints": 0
+    }
   },
   "3": {
     "id": "3",
@@ -38,15 +37,15 @@
     "password": "nikola",
     "name": "Nikola",
     "surname": "Nikolić",
-	"gender": "Muško",
-	"dateOfBirth": "1997-10-20",
+    "gender": "Muško",
+    "dateOfBirth": "1997-10-20",
     "role": "Trener",
     "points": 0,
-	"customerType":{
-		"typeName": "",
-		"discount": 0,
-		"requiredPoints": 0
-	}
+    "customerType": {
+      "typeName": "",
+      "discount": 0.0,
+      "requiredPoints": 0
+    }
   },
   "4": {
     "id": "4",
@@ -54,14 +53,23 @@
     "password": "jovana",
     "name": "Jovana",
     "surname": "Jovanović",
-	"gender": "Žensko",
-	"dateOfBirth": "2001-09-12",
+    "gender": "Žensko",
+    "dateOfBirth": "2001-09-12",
     "role": "Kupac",
     "points": 65,
-	"customerType":{
-		"typeName": "Srebrni",
-		"discount": 15.0,
-		"requiredPoints": 50
-	}
+    "customerType": {
+      "typeName": "Srebrni",
+      "discount": 15.0,
+      "requiredPoints": 50
+    }
+  },
+  "5": {
+    "id": "5",
+    "username": "Ivan",
+    "password": "ivan",
+    "name": "Ivan",
+    "surname": "Ivanović",
+    "role": "Menadžer",
+    "points": 0
   }
 }

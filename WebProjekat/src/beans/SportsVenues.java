@@ -1,8 +1,11 @@
 package beans;
 
+import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,11 +18,31 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 public class SportsVenues {
 	
 	private HashMap<String, SportsVenue> sportsVenues = new HashMap<String, SportsVenue>();
+	
+	private Gson g = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+		@Override
+        public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return LocalDate.parse(json.getAsJsonPrimitive().getAsString());
+        }
+    }).registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
+    	@Override
+    	public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
+	        return new JsonPrimitive(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+	    }
+    }).setPrettyPrinting().create();
 	
 	public SportsVenues(){
 		try {
@@ -51,10 +74,18 @@ public class SportsVenues {
     {
 		String json = new String(Files.readAllBytes(Paths.get("./static/data/sportsVenues.json")));
 		Type type = new TypeToken<HashMap<String, SportsVenue>>(){}.getType();
-		sportsVenues = new Gson().fromJson(json, type);
+		sportsVenues = g.fromJson(json, type);
 		sportsVenues = sortValues(sportsVenues);
     }
 
+	public void writeSportVenues(HashMap<String, SportsVenue> venues) throws Exception
+    {
+		FileWriter writer = new FileWriter("./static/data/sportsVenues.json");
+		g.toJson(venues, writer);
+		writer.flush();
+		writer.close();
+    }
+	
 	public Collection<SportsVenue> getValues() {
 		return sportsVenues.values();
 	}
@@ -74,13 +105,28 @@ public class SportsVenues {
 		maxId++;
 		sportsVenue.setId(maxId.toString());
 		sportsVenues.put(sportsVenue.getId(), sportsVenue);
+		try {
+			writeSportVenues(sportsVenues);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void edit(String id, SportsVenue venue) {
 		sportsVenues.put(id, venue);
+		try {
+			writeSportVenues(sportsVenues);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void delete(String id) {
 		sportsVenues.remove(id);
+		try {
+			writeSportVenues(sportsVenues);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

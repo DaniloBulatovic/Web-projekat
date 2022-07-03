@@ -12,7 +12,7 @@ Vue.component("venue", {
 	template: ` 
 <div>
 	<form v-if=visible>
-	<h2>Prikaz sportskog objekta</h2>
+	<h3>Prikaz sportskog objekta</h3>
 		<table style="width:100%; background:aliceblue">
 			<tr>
 				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
@@ -36,6 +36,10 @@ Vue.component("venue", {
 													+ venue.location.address.number + ', '
 													+ venue.location.address.city + ', ' 
 													+ venue.location.address.postalCode" readonly></td>
+			</tr>
+			<tr>
+				<td><input type = "text" v-model = "'Lat: ' + venue.location.latitude"></td>
+				<td><input type = "text" v-model = "'Lon: ' + venue.location.longitude"></td>
 			</tr>
 			<tr>
 				<th colspan=2><div ref="map-root" id="map" class="map" style="height:300px"></div></th>
