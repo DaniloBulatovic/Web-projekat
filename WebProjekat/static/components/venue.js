@@ -4,7 +4,7 @@ Vue.component("venue", {
 		    return {
 		      id : 0,
 			  visible : false,
-		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:null, averageGrade:null, workingHours:null},
+		      venue: {id: '', name:null, venueType:0, content:[], isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:'./images/icons/no-image.png', averageGrade:null, workingHours:null},
 			  trainings: [],
 			  comments: []
 		    }
@@ -12,7 +12,7 @@ Vue.component("venue", {
 	template: ` 
 <div>
 	<form v-if=visible>
-	<h2>Prikaz sportskog objekta</h2>
+	<h3>Prikaz sportskog objekta</h3>
 		<table style="width:100%; background:aliceblue">
 			<tr>
 				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
@@ -38,6 +38,10 @@ Vue.component("venue", {
 													+ venue.location.address.postalCode" readonly></td>
 			</tr>
 			<tr>
+				<td><input type = "text" v-model = "'Lat: ' + venue.location.latitude"></td>
+				<td><input type = "text" v-model = "'Lon: ' + venue.location.longitude"></td>
+			</tr>
+			<tr>
 				<th colspan=2><div ref="map-root" id="map" class="map" style="height:300px"></div></th>
 			</tr>
 			<tr>
@@ -48,7 +52,7 @@ Vue.component("venue", {
 				<td>Radno vreme</td>
 				<td><input type = "text" v-model = "venue.workingHours" readonly></td>
 			</tr>
-			<tr>
+			<tr v-if=venue.content>
 				<td>Sadržaj</td>
 				<td></td>
 			</tr>

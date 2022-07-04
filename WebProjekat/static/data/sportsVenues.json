@@ -1,65 +1,72 @@
 {
-	"1":{
-		"id": "1",
-		"name": "SPENS",
-		"venueType": "Sportski centar",
-		"content": ["košarkaški teren", "bazen"],
-		"isWorking": true,
-		"location": {
-			"latitude": 45.248468,
-			"longitude": 19.844252,
-			"address":{
-				"street": "Sutjeska",
-				"number": "2",
-				"city": "Novi Sad",
-				"postalCode": "21000",
-				"country": "Srbija"
-			}
-		},
-		"logoPath": "./images/venues/spens.jpg",
-		"averageGrade": 4.1,
-		"workingHours": "06-22"
-	},
-	"2":{
-		"id": "2",
-		"name": "Mega Gym",
-		"venueType": "Teretana",
-		"content": ["teretana"],
-		"isWorking": false,
-		"location": {
-			"latitude": 45.271596,
-			"longitude": 19.841131,
-			"address":{
-				"street": "Temerinska",
-				"number": "95",
-				"city": "Novi Sad",
-				"postalCode": "21000",
-				"country": "Srbija"
-			}
-		},
-		"logoPath": "./images/venues/megagym.jpg",
-		"averageGrade": 4.1,
-		"workingHours": "06-00"
-	},
-	"3":{
-		"id": "3",
-		"name": "Plesni klub Fiesta",
-		"venueType": "Plesni studio",
-		"content": ["plesni studio"],
-		"isWorking": true,
-		"location": {
-			"latitude": 45.245244,
-			"longitude": 19.817108,
-			"address":{
-				"street": "Geri Karolja",
-				"number": "5",
-				"city": "Novi Sad",
-				"postalCode": "21000",
-				"country": "Srbija"
-			}
-		},
-		"logoPath": "./images/venues/fiesta.jpg",
-		"averageGrade": 4.8,
-		"workingHours": "17-22"
-	}
+  "1": {
+    "id": "1",
+    "name": "SPENS",
+    "venueType": "Sportski centar",
+    "content": [
+      "košarkaški teren",
+      "bazen"
+    ],
+    "isWorking": true,
+    "location": {
+      "latitude": 45.248468,
+      "longitude": 19.844252,
+      "address": {
+        "street": "Sutjeska",
+        "number": "2",
+        "city": "Novi Sad",
+        "postalCode": "21000",
+        "country": "Srbija"
+      }
+    },
+    "logoPath": "./images/venues/spens.jpg",
+    "averageGrade": 4.1,
+    "workingHours": "06-22"
+  },
+  "3": {
+    "id": "3",
+    "name": "Plesni klub Fiesta",
+    "venueType": "Plesni studio",
+    "content": [
+      "plesni studio"
+    ],
+    "isWorking": true,
+    "location": {
+      "latitude": 45.245244,
+      "longitude": 19.817108,
+      "address": {
+        "street": "Geri Karolja",
+        "number": "5",
+        "city": "Novi Sad",
+        "postalCode": "21000",
+        "country": "Srbija"
+      }
+    },
+    "logoPath": "./images/venues/fiesta.jpg",
+    "averageGrade": 4.8,
+    "workingHours": "17-22"
+  },
+  "2": {
+    "id": "2",
+    "name": "Mega Gym",
+    "venueType": "Teretana",
+    "content": [
+      "teretana"
+    ],
+    "isWorking": false,
+    "location": {
+      "latitude": 45.271596,
+      "longitude": 19.841131,
+      "address": {
+        "street": "Temerinska",
+        "number": "95",
+        "city": "Novi Sad",
+        "postalCode": "21000",
+        "country": "Srbija"
+      }
+    },
+    "logoPath": "./images/venues/megagym.jpg",
+    "averageGrade": 4.1,
+    "workingHours": "06-00"
+  }
 }
