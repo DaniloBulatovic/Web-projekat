@@ -86,8 +86,16 @@ public class SportsVenueController {
 			
 			String fName = request.raw().getPart("uploaded_file").getSubmittedFileName();
 			
+			
 			Part uploadedFile = request.raw().getPart("uploaded_file");
 			Path out = Paths.get("./static/images/venues/"+fName);
+			
+			int i = 0;
+			String[] fname = fName.split("\\.");
+			while(out.toFile().exists()) {
+				i++;
+				out = Paths.get("./static/images/venues/"+fname[0]+i+"."+fname[1]);
+			}
 			try (final InputStream in = uploadedFile.getInputStream()) {
 				Files.copy(in, out);
 				uploadedFile.delete();
@@ -95,6 +103,7 @@ public class SportsVenueController {
 			multipartConfigElement = null;
 			uploadedFile = null;
 			
+			fName = fname[0]+i+"."+fname[1];
 			return "./images/venues/" + fName;
 		});
 	}

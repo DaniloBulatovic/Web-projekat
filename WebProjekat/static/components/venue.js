@@ -4,7 +4,7 @@ Vue.component("venue", {
 		    return {
 		      id : 0,
 			  visible : false,
-		      venue: {id: '', name:null, venueType:0, content:null, isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:null, averageGrade:null, workingHours:null},
+		      venue: {id: '', name:null, venueType:0, content:[], isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:'./images/icons/no-image.png', averageGrade:null, workingHours:null},
 			  trainings: [],
 			  comments: []
 		    }
@@ -52,7 +52,7 @@ Vue.component("venue", {
 				<td>Radno vreme</td>
 				<td><input type = "text" v-model = "venue.workingHours" readonly></td>
 			</tr>
-			<tr>
+			<tr v-if=venue.content>
 				<td>Sadržaj</td>
 				<td></td>
 			</tr>

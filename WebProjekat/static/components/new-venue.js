@@ -4,13 +4,14 @@ Vue.component("new-venue", {
 		    return {
 		      id : 0,
 			  visible : false,
-		      venue: {id: ' ', name:'', venueType:'', content:null, isWorking:true, location: { latitude:0, longitude:0, address:{ street:'', number:'', city:'', country:'', postalCode:''}}, logoPath:null, averageGrade:null, workingHours:null},
+		      venue: {id: ' ', name:'', venueType:'', content:null, isWorking:true, location: { latitude:0, longitude:0, address:{ street:'', number:'', city:'', country:'', postalCode:''}}, logoPath:'./images/icons/no-image.png', averageGrade:null, workingHours:null},
 			  selectedFile: null,
 			  managers: [],
 			  selectedIndex: null,
 			  selectedManager: null,
 			  selectedAddress: null,
 			  newManager: {username: null, password: null, role: "Menadžer"},
+			  map: null,
 			  managerError: '',
 			  error: ''
 			}
@@ -126,7 +127,6 @@ Vue.component("new-venue", {
 			  }
 			})
 			.then(response =>{
-				console.log(response.data);
 				this.venue.logoPath = response.data;
 			});
 		},
@@ -160,7 +160,7 @@ Vue.component("new-venue", {
 				axios.post('rest/venues/add', this.venue)
 				.then(response => {
 					this.visible = false;
-					router.push(`/`);
+					this.$router.go();
 				});
 			}
 		},
@@ -188,6 +188,35 @@ Vue.component("new-venue", {
 				this.venue.location.address.city = response.address.city;
 				this.venue.location.address.country = response.address.country;
 				this.venue.location.address.postalCode = response.address.postcode;
+				
+				const iconFeature = new ol.Feature({
+				  geometry: new ol.geom.Point(ol.proj.fromLonLat([this.venue.location.longitude, this.venue.location.latitude])),
+				  name: this.venue.name
+				});
+				
+				let layer = new ol.layer.Vector({
+						  name: 'Marker',
+					      source: new ol.source.Vector({
+					        features: [iconFeature]
+					      }),
+					      style: new ol.style.Style({
+					        image: new ol.style.Icon({
+							  scale: 0.05,
+					          anchor: [0.5, 460],
+					          anchorXUnits: 'fraction',
+					          anchorYUnits: 'pixels',
+					          src: './images/icons/location.png'
+					        })
+					      })
+					    });
+	
+				this.map.getLayers().forEach(layer => {
+				  if (layer && layer.get('name') === 'Marker') {
+				    this.map.removeLayer(layer);
+				  }
+				});
+				
+				this.map.addLayer(layer);
 			});
 		},
 		reverseGeocode : async function(coords) {
@@ -202,7 +231,8 @@ Vue.component("new-venue", {
 			axios.get('rest/managers/')
 			.then(response => {
 				this.managers = response.data;
-				var map = new ol.Map({
+				
+				this.map = new ol.Map({
 				  layers: [
 				    new ol.layer.Tile({source: new ol.source.OSM()}),
 				  ],
@@ -213,7 +243,7 @@ Vue.component("new-venue", {
 				  }),
 				  target: this.$refs['map-root']
 				});
-				map.on('click', this.mapClick);
+				this.map.on('click', this.mapClick);
 			});
 		}else{
 			this.visible = false;
