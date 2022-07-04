@@ -155,12 +155,13 @@ Vue.component("new-venue", {
 			event.preventDefault();
 			this.validateFields();
 			if (this.error === ''){
-				this.selectedManager.sportsVenue = this.venue;
-				axios.put('rest/users/edit/' + this.selectedManager.id, this.selectedManager);
 				axios.post('rest/venues/add', this.venue)
 				.then(response => {
-					this.visible = false;
-					this.$router.go();
+					this.selectedManager.sportsVenue = response.data;
+					axios.put('rest/users/edit/' + this.selectedManager.id, this.selectedManager).then(function(){
+						this.visible = false;
+						this.$router.go();
+					});
 				});
 			}
 		},

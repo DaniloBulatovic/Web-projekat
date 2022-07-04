@@ -51,8 +51,7 @@ public class SportsVenueController {
 		post("rest/venues/add", (req, res) -> {
 			res.type("application/json");
 			SportsVenue sv = g.fromJson(req.body(), SportsVenue.class);
-			sportsVenueService.addSportsVenue(sv);
-			return "SUCCESS";
+			return g.toJson(sportsVenueService.addSportsVenue(sv));
 		});
 	}
 	
@@ -103,7 +102,8 @@ public class SportsVenueController {
 			multipartConfigElement = null;
 			uploadedFile = null;
 			
-			fName = fname[0]+i+"."+fname[1];
+			if(i != 0)
+				fName = fname[0]+i+"."+fname[1];
 			return "./images/venues/" + fName;
 		});
 	}

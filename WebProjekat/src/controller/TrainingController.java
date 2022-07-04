@@ -5,9 +5,16 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.put;
 
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,6 +51,7 @@ public class TrainingController {
 		addTraining();
 		editTraining();
 		deleteTraining();
+		uploadLogo();
 	}
 	
 	public static void getTrainings() {
@@ -94,6 +102,41 @@ public class TrainingController {
 			String id = req.params("id");
 			trainingService.deleteTraining(id);
 			return "SUCCESS";
+		});
+	}
+	
+	public static void uploadLogo() {
+		post("rest/trainings/upload", "multipart/form-data", (request, response) -> {
+			String location = "./static/images";  // the directory location where files will be stored
+			long maxFileSize = 100000000;  // the maximum size allowed for uploaded files
+			long maxRequestSize = 100000000;  // the maximum size allowed for multipart/form-data requests
+			int fileSizeThreshold = 1024;  // the size threshold after which files will be written to disk
+			MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location, maxFileSize, maxRequestSize, fileSizeThreshold);
+			request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+			
+			String fName = request.raw().getPart("uploaded_file").getSubmittedFileName();
+			
+			
+			Part uploadedFile = request.raw().getPart("uploaded_file");
+			Path out = Paths.get("./static/images/trainings/"+fName);
+			
+			int i = 0;
+			String[] fname = fName.split("\\.");
+			while(out.toFile().exists()) {
+				i++;
+				out = Paths.get("./static/images/trainings/"+fname[0]+i+"."+fname[1]);
+			}
+			try (final InputStream in = uploadedFile.getInputStream()) {
+				Files.copy(in, out);
+				uploadedFile.delete();
+			}
+			multipartConfigElement = null;
+			uploadedFile = null;
+			
+			if (i != 0)
+				fName = fname[0]+i+"."+fname[1];
+			
+			return "./images/trainings/" + fName;
 		});
 	}
 }
