@@ -1,5 +1,5 @@
 Vue.component("venue", {
-	props: ['value'],
+	props: ['value', 'user'],
 	data: function () {
 		    return {
 		      id : 0,
@@ -106,6 +106,9 @@ Vue.component("venue", {
 					</table>
 				</td>
 			</tr>
+			<tr v-if="this.user.role === 'Administrator'">
+				<th colspan=2><button v-on:click="deleteVenue" id="delete-venue">Obriši objekat</button></th>
+			</tr>
 		</table>
 	</form>
 </div>		  
@@ -122,7 +125,14 @@ Vue.component("venue", {
 				axios.post('rest/venues/add', this.venue).
 				then(response => (router.push(`/`)));
 			}
-		}
+		},
+		deleteVenue : function() {
+    		r = confirm("Da li ste sigurni?")
+    		if (r){
+	    		axios
+	            .delete('rest/venues/delete/' + this.id).then(response => (this.$router.go()));
+    		}
+    	},
 	},
 	mounted () {
 		this.id = this.value;

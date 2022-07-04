@@ -14,8 +14,8 @@ Vue.component("venues", {
     	<div>
 			<div class="leftpane">
 				<div id="left-pane" style="margin:auto">
-					<venue v-bind:value = this.selectedId :key="this.reloadVenue"></venue>
-					<new-venue v-bind:value = this.selectedId :key="this.reloadNewVenue"></new-venue>
+					<venue :value = this.selectedId :user = this.user :key="this.reloadVenue"></venue>
+					<new-venue :value = this.selectedId :key="this.reloadNewVenue"></new-venue>
 		    	</div>
 	    	</div>
 			<div class="middlepane" style="float:right">
@@ -29,7 +29,7 @@ Vue.component("venues", {
 					<input type="checkbox" v-model="filterWorking">Prikaži samo otvorene
 	    			<input type="text" v-model="search" placeholder="Pretraga objekata..">
 	    		</p>
-				<button v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
+				<button id="create-venue" v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
 	    		<table id="venues_table" class="venues_table">
 		    		<tr>
 		    			<th>Logo</th>
@@ -76,14 +76,6 @@ Vue.component("venues", {
     	},
     	editVenue : function(id) {
     		router.push(`/venues/${id}`);
-    	},
-    	deleteVenue : function(id, index) {
-    		r = confirm("Are you sure?")
-    		if (r){
-	    		axios
-	            .delete('rest/venues/delete/' + id)
-	            .then(response => (this.venues.splice(index, 1)))
-    		}
     	},
     	sortTable(n) {
 			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

@@ -20,7 +20,7 @@ Vue.component("new-venue", {
 <div>
 	<form v-if=visible>
 	<h3>Dodavanje novog sportskog objekta</h3>
-		<table style="width:100%; background:aliceblue; table-layout: fixed">
+		<table id="create-venue-table">
 			<tr>
 				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
 			</tr>
@@ -28,7 +28,7 @@ Vue.component("new-venue", {
 				<td>
 					<form method='post' enctype='multipart/form-data'>
 						<input type= "file" @change="onFileSelected" name="uploaded_file" accept="image/png, image/jpeg">
-						<button @click="onUpload">Otpremi</button>
+						<button class="button" @click="onUpload">Otpremi</button>
 					</form>
 				</td>
 			</tr>
@@ -98,13 +98,13 @@ Vue.component("new-venue", {
 				<td><input type= "password" v-model="newManager.password"></td>
 			</tr>
 			<tr v-if="managers.length == 0">
-				<th colspan=2><input type="submit" v-on:click="addNewManager" value="Kreiraj novog menadžera"></th>
+				<th colspan=2><input class="button" type="submit" v-on:click="addNewManager" value="Kreiraj novog menadžera"></th>
 			</tr>
 			<tr v-if="managers.length == 0">
 				<th colspan=2 style="color:red">{{managerError}}</th>
 			</tr>
 			<tr>
-				<th colspan=2><input type="submit" v-on:click="addVenue" value="Kreiraj sportski objekat"></th>
+				<th colspan=2><input type="submit" id="create-venue" v-on:click="addVenue" value="Kreiraj sportski objekat"></th>
 			</tr>
 		</table>
 	</form>

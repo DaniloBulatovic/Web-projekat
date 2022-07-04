@@ -15,6 +15,7 @@ public class SportsVenue {
 	private String logoPath;
 	private double averageGrade;
 	private String workingHours;
+	private boolean isDeleted;
 	
 	public SportsVenue() {
 	
@@ -90,5 +91,13 @@ public class SportsVenue {
 
 	public void setWorkingHours(String workingHours) {
 		this.workingHours = workingHours;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

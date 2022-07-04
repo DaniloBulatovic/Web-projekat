@@ -60,7 +60,7 @@ body, html {
 	float: right;
 }
 
-#menu a, #userMenu a, #userMenu input, input.submit { 
+#menu a, #userMenu a, #userMenu input, input.submit, #create-venue-table .button { 
     background: powderblue;
     border:1px solid steelblue;
     -moz-border-radius:3px;
@@ -75,7 +75,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.confirm { 
+#profile_table input.confirm, #create-venue { 
     background: lightgreen;
     border:1px solid forestgreen;
     -moz-border-radius:3px;
@@ -89,7 +89,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.cancel{
+#profile_table input.cancel, #delete-venue{
     background: lightcoral;
     border:1px solid indianred;
     -moz-border-radius:3px;
@@ -118,6 +118,12 @@ body, html {
     color:#333;
     padding:.3em .5em;
     cursor: pointer;
+}
+
+#create-venue-table {
+	width:100%;
+	background:aliceblue;
+	table-layout: fixed;
 }
 
 table.venues_table, table.users_table, .venue_trainings {

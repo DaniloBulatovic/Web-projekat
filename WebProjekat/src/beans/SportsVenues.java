@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -87,7 +88,9 @@ public class SportsVenues {
     }
 	
 	public Collection<SportsVenue> getValues() {
-		return sportsVenues.values();
+		HashMap<String, SportsVenue> filtered = new HashMap<String, SportsVenue>(sportsVenues);
+		filtered.keySet().removeAll(sportsVenues.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+		return filtered.values();
 	}
 
 	public SportsVenue getSportsVenue(String id) {
@@ -122,7 +125,7 @@ public class SportsVenues {
 	}
 
 	public void delete(String id) {
-		sportsVenues.remove(id);
+		sportsVenues.get(id).setDeleted(true);
 		try {
 			writeSportVenues(sportsVenues);
 		} catch (Exception e) {
