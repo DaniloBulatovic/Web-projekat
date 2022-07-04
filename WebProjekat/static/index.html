@@ -15,7 +15,8 @@
     		<router-view :key="$route.fullPath" class="register-login-view" name="RegisterLogin"></router-view>
     	</div>
     </div>
-	<div class="toppane">		
+	<div class="toppane">
+		<router-view :key="$route.fullPath" class="menu-view" name="Menu"></router-view>
 	</div>
 	<div>
 		<div class="leftpane">
@@ -32,6 +33,10 @@
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="js/ol.js"></script>
+	<script src="components/menu-bar.js"></script>
+	<script src="components/manager-venue.js"></script>
+	<script src="components/training.js"></script>
+	<script src="components/new-training.js"></script>
 	<script src="components/venue.js"></script>
 	<script src="components/new-venue.js"></script>
 	<script src="components/venues.js"></script>

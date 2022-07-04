@@ -17,8 +17,8 @@ public class SportsVenueService {
 		return sportsVenues.getSportsVenue(id);
 	}
 	
-	public void addSportsVenue(SportsVenue venue) {
-		sportsVenues.addSportsVenue(venue);
+	public SportsVenue addSportsVenue(SportsVenue venue) {
+		return sportsVenues.addSportsVenue(venue);
 	}
 
 	public void editSportsVenue(String id, SportsVenue venue) {

@@ -97,7 +97,7 @@ public class SportsVenues {
 		return sportsVenues.get(id);
 	}
 
-	public void addSportsVenue(SportsVenue sportsVenue) {
+	public SportsVenue addSportsVenue(SportsVenue sportsVenue) {
 		Integer maxId = -1;
 		for (String id : sportsVenues.keySet()) {
 			int idNum = Integer.parseInt(id);
@@ -113,6 +113,7 @@ public class SportsVenues {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return sportsVenue;
 	}
 
 	public void edit(String id, SportsVenue venue) {

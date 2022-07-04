@@ -71,5 +71,25 @@
     "averageGrade": 4.1,
     "workingHours": "06-00",
     "isDeleted": false
+  },
+  "4": {
+    "id": "4",
+    "name": "Test",
+    "venueType": "Sportski centar",
+    "isWorking": true,
+    "location": {
+      "latitude": 45.244807,
+      "longitude": 19.839894,
+      "address": {
+        "street": "Владимира Николића",
+        "number": "1",
+        "city": "Град Нови Сад",
+        "postalCode": "21102",
+        "country": "Србија"
+      }
+    },
+    "logoPath": "./images/icons/no-image.png",
+    "averageGrade": 0.0,
+    "isDeleted": false
   }
 }

@@ -1,5 +1,6 @@
 package beans;
 
+import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -49,6 +50,14 @@ public class Trainings {
 		Type type = new TypeToken<HashMap<String, Training>>(){}.getType();
 		trainings = g.fromJson(json, type);
     }
+	
+	public void writeTrainings(HashMap<String, Training> trainings) throws Exception
+    {
+		FileWriter writer = new FileWriter("./static/data/trainings.json");
+		g.toJson(trainings, writer);
+		writer.flush();
+		writer.close();
+    }
 
 	public Collection<Training> getValues() {
 		return trainings.values();
@@ -69,13 +78,28 @@ public class Trainings {
 		maxId++;
 		training.setId(maxId.toString());
 		trainings.put(training.getId(), training);
+		try {
+			writeTrainings(trainings);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void edit(String id, Training training) {
 		trainings.put(id, training);
+		try {
+			writeTrainings(trainings);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void delete(String id) {
 		trainings.remove(id);
+		try {
+			writeTrainings(trainings);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

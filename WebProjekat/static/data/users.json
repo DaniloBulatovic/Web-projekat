@@ -13,7 +13,29 @@
       "typeName": "Bronzani",
       "discount": 5.0,
       "requiredPoints": 0
-    }
+    },
+	"visitedVenues": [
+		{
+		"id": "4",
+		"name": "Test",
+		"venueType": "Sportski centar",
+		"isWorking": true,
+		"location": {
+		  "latitude": 45.244807,
+		  "longitude": 19.839894,
+		  "address": {
+			"street": "Владимира Николића",
+			"number": "1",
+			"city": "Град Нови Сад",
+			"postalCode": "21102",
+			"country": "Србија"
+		  }
+		},
+		"logoPath": "./images/icons/no-image.png",
+		"averageGrade": 0.0,
+		"isDeleted": false
+	  }
+	]
   },
   "2": {
     "id": "2",
@@ -70,6 +92,26 @@
     "name": "Ivan",
     "surname": "Ivanović",
     "role": "Menadžer",
+    "sportsVenue": {
+      "id": "4",
+      "name": "Test",
+      "venueType": "Sportski centar",
+      "isWorking": true,
+      "location": {
+        "latitude": 45.244807,
+        "longitude": 19.839894,
+        "address": {
+          "street": "Владимира Николића",
+          "number": "1",
+          "city": "Град Нови Сад",
+          "postalCode": "21102",
+          "country": "Србија"
+        }
+      },
+      "logoPath": "./images/icons/no-image.png",
+      "averageGrade": 0.0,
+      "isDeleted": false
+    },
     "points": 0
   }
 }

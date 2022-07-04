@@ -42,6 +42,8 @@ public class UserController {
 		getUsers();
 		getUser();
 		getAvailableManagers();
+		getTrainers();
+		getUsersByVenue();
 		addUser();
 		editUser();
 		deleteUser();
@@ -69,6 +71,21 @@ public class UserController {
 		get("rest/managers/", (req, res) -> {
 			res.type("application/json");
 			return g.toJson(userService.getAvailableManagers());
+		});
+	}
+	
+	public static void getTrainers() {
+		get("rest/trainers/", (req, res) -> {
+			res.type("application/json");
+			return g.toJson(userService.getTrainers());
+		});
+	}
+	
+	public static void getUsersByVenue() {
+		get("rest/users/venue/:id", (req, res) -> {
+			res.type("application/json");
+			String id = req.params("id");
+			return g.toJson(userService.getUsersByVenue(id));
 		});
 	}
 	
