@@ -191,41 +191,30 @@
 			}
 		},
 		"training": {
-			"id": "1",
-			"name": "Početni trening",
-			"trainingType": "Grupni",
+			"id": "2",
+			"name": "Treninig 1",
+			"trainingType": "Personalni",
 			"sportsVenue": {
-			  "id": "1",
-			  "name": "SPENS",
+			  "id": "4",
+			  "name": "Test",
 			  "venueType": "Sportski centar",
-			  "content": [
-				{
-				  "id": "1",
-				  "name": "Bazen",
-				  "type": "Bazen",
-				  "description": "Opis",
-				  "duration": 0,
-				  "image": "./images/icons/no-image.png"
-				}
-			  ],
 			  "isWorking": true,
 			  "location": {
-				"latitude": 45.248468,
-				"longitude": 19.844252,
+				"latitude": 45.244807,
+				"longitude": 19.839894,
 				"address": {
-				  "street": "Sutjeska",
-				  "number": "2",
-				  "city": "Novi Sad",
-				  "postalCode": "21000",
-				  "country": "Srbija"
+				  "street": "Владимира Николића",
+				  "number": "1",
+				  "city": "Град Нови Сад",
+				  "postalCode": "21102",
+				  "country": "Србија"
 				}
 			  },
-			  "logoPath": "./images/venues/spens.jpg",
-			  "averageGrade": 4.1,
-			  "workingHours": "06-22",
+			  "logoPath": "./images/icons/no-image.png",
+			  "averageGrade": 0.0,
 			  "isDeleted": false
 			},
-			"duration": 60,
+			"duration": 120,
 			"trainer": {
 			  "id": "3",
 			  "username": "Nikola",
@@ -244,8 +233,8 @@
 			},
 			"description": "Opis treninga",
 			"image": "./images/trainings/training.png",
-			"price": 700.0
-		  },
+			"price": 500.0
+		 },
 		"trainer": {
 		  "id": "3",
 		  "username": "Nikola",

@@ -23,6 +23,10 @@ public class TrainingHistoryService {
 		return trainingsHistory.getValues().stream().filter(trainingHistory -> trainingHistory.getTrainer().getId().equals(id)).collect(Collectors.toCollection(HashSet::new));
 	}
 	
+	public Collection<TrainingHistory> getTrainingsHistoryByVenue(String id){
+		return trainingsHistory.getValues().stream().filter(trainingHistory -> trainingHistory.getTraining().getSportsVenue().getId().equals(id)).collect(Collectors.toCollection(HashSet::new));
+	}
+	
 	public TrainingHistory getTrainingHistory(String id) {
 		return trainingsHistory.getTrainingHistory(id);
 	}

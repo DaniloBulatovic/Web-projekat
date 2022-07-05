@@ -53,6 +53,7 @@ public class TrainingHistoryController {
 		getTrainingHistory();
 		getTrainingsHistoryByCustomer();
 		getTrainingsHistoryByTrainer();
+		getTrainingsHistoryByVenue();
 		addTrainingHistory();
 		editTrainingHistory();
 		deleteTrainingHistory();
@@ -86,6 +87,14 @@ public class TrainingHistoryController {
 			res.type("application/json");
 			String id = req.params("id");
 			return g.toJson(trainingHistoryService.getTrainingsHistoryByTrainer(id));
+		});
+	}
+	
+	public static void getTrainingsHistoryByVenue() {
+		get("rest/trainingsHistory/venue/:id", (req, res) -> {
+			res.type("application/json");
+			String id = req.params("id");
+			return g.toJson(trainingHistoryService.getTrainingsHistoryByVenue(id));
 		});
 	}
 	

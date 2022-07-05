@@ -21,15 +21,15 @@ Vue.component("trainings", {
 				    <option>Grupni</option>
 					<option>Teretana</option>
 				</select>
-				<label>Tip objekta</label>
-    			<select id="venueTypeDropdown" v-on:change="filterTableByVenueType()">
+				<label v-if="user.role !== 'Menadžer'">Tip objekta</label>
+    			<select v-if="user.role !== 'Menadžer'" id="venueTypeDropdown" v-on:change="filterTableByVenueType()">
     			 	<option>Sve</option>
 				    <option>Teretana</option>
 				    <option>Bazen</option>
 				    <option>Sportski centar</option>
 					<option>Plesni studio</option>
 				</select>
-    			<input type="text" v-model="search" placeholder="Pretraga treninga..">
+    			<input v-if="user.role !== 'Menadžer'" type="text" v-model="search" placeholder="Pretraga treninga..">
     		</p>
 			<p id="searchParagraph">
 				<label>Cena</label>
@@ -47,16 +47,16 @@ Vue.component("trainings", {
 	    		<tr>
 	    			<th>Trening</th>
 					<th>Tip treninga</th>
-	    			<th v-on:click="sortTable(2, false, false)" style="cursor:pointer">Sportski objekat</th>
-					<th>Tip objekta</th>
+	    			<th v-if="user.role !== 'Menadžer'" v-on:click="sortTable(2, false, false)" style="cursor:pointer">Sportski objekat</th>
+					<th v-if="user.role !== 'Menadžer'">Tip objekta</th>
 	    			<th v-on:click="sortTable(4, false, true)" style="cursor:pointer">Datum treniranja</th>
 					<th v-on:click="sortTable(5, true, false)" style="cursor:pointer">Cena</th>
 	    		</tr>
 	    		<tr v-for="(t, index) in filteredTrainings">
 	    			<td>{{t.training.name}}</td>
 					<td>{{t.training.trainingType}}</td>
-	    			<td>{{t.training.sportsVenue.name}}</td>
-					<td>{{t.training.sportsVenue.venueType}}</td>
+	    			<td v-if="user.role !== 'Menadžer'">{{t.training.sportsVenue.name}}</td>
+					<td v-if="user.role !== 'Menadžer'">{{t.training.sportsVenue.venueType}}</td>
 	    			<td>{{formatDateTime(t.dateTimeOfRegistration)}}</td>
 					<td style="text-align:right">{{t.training.price}}</td>
 	    		</tr>
@@ -73,12 +73,15 @@ Vue.component("trainings", {
 								axios.get('rest/trainingsHistory/trainer/' + this.user.id).then(response => (this.trainings = response.data));
 							else if (this.user.role === 'Kupac')
 								axios.get('rest/trainingsHistory/customer/' + this.user.id).then(response => (this.trainings = response.data));
+							else if (this.user.role === 'Menadžer')
+								axios.get('rest/trainingsHistory/venue/' + this.user.sportsVenue.id).then(response => (this.trainings = response.data));
+						}else{
+							router.push("/");
 						}
 			});
     },
     methods: {
 		formatDate(date) {
-			console.log(date);
     		return new Intl.DateTimeFormat('en-US', { dateStyle: 'short'}).format(new Date(date))
   		},
 		formatDateTime(date) {
@@ -93,17 +96,20 @@ Vue.component("trainings", {
           return true;
         },
     	sortTable(n, isNumber, isDate) {
-	    	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	    	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, managerOffset = 0;
 			table = document.getElementById("trainings_table");
 			switching = true;
 			dir = "asc";
+			if(this.user.role === 'Menadžer'){
+				managerOffset = 2;
+			}
 			while (switching) {
 				switching = false;
 			    rows = table.rows;
 			    for (i = 1; i < (rows.length - 1); i++) {
 			    	shouldSwitch = false;
-			      	x = rows[i].getElementsByTagName("TD")[n];
-			      	y = rows[i + 1].getElementsByTagName("TD")[n];
+			      	x = rows[i].getElementsByTagName("TD")[n - managerOffset];
+			      	y = rows[i + 1].getElementsByTagName("TD")[n - managerOffset];
 				  	if(isNumber){
 						let a = x.innerHTML;
 						let b = y.innerHTML;
@@ -133,7 +139,7 @@ Vue.component("trainings", {
 					          	shouldSwitch = true;
 					          	break;
 					        }
-				      }
+				    	}
 				  	}else{
 				    	if (dir == "asc") {
 				        	if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
@@ -204,7 +210,8 @@ Vue.component("trainings", {
 					axios.get('rest/trainingsHistory/trainer/' + this.user.id).then(response => (this.trainings = response.data));
 				else if (this.user.role === 'Kupac')
 					axios.get('rest/trainingsHistory/customer/' + this.user.id).then(response => (this.trainings = response.data));
-					
+				else if (this.user.role === 'Menadžer')
+					axios.get('rest/trainingsHistory/venue/' + this.user.sportsVenue.id).then(response => (this.trainings = response.data));
 				return this.trainings;
 			}
 			else{
