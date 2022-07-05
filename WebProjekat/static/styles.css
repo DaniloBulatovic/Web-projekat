@@ -60,7 +60,7 @@ body, html {
 	float: right;
 }
 
-#menu a, #userMenu a, #userMenu input, input.submit, #create-venue-table .button, .menu-bar button, .edit-training, #training .button { 
+#menu a, #userMenu a, #userMenu input, input.submit, #create-venue-table .button, .menu-bar button, .edit-training, #training .button, .edit-content, #content .button { 
     background: powderblue;
     border:1px solid steelblue;
     -moz-border-radius:3px;
@@ -75,7 +75,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.confirm, #create-venue, #edit-training-confirm, #add-training { 
+#profile_table input.confirm, #create-venue, #edit-training-confirm, #add-training, #add-content, #edit-content-confirm { 
     background: lightgreen;
     border:1px solid forestgreen;
     -moz-border-radius:3px;
@@ -89,7 +89,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.cancel, #delete-venue, #edit-training-cancel{
+#profile_table input.cancel, #delete-venue, #edit-training-cancel, #edit-content-cancel{
     background: lightcoral;
     border:1px solid indianred;
     -moz-border-radius:3px;
@@ -126,15 +126,15 @@ body, html {
 	table-layout: fixed;
 }
 
-table.venues_table, table.users_table, .venue_trainings {
+table.venues_table, table.users_table, .venue_trainings, .venue_content {
 	border-collapse: collapse;
 }
 
-.venues_table th, .users_table th, .venue_trainings th {
+.venues_table th, .users_table th, .venue_trainings th, .venue_content th {
 	background: powderblue;
 }
 
-.venues_table th, .venues_table td, .users_table th, .users_table td, .venue_trainings th, .venue_trainings td {
+.venues_table th, .venues_table td, .users_table th, .users_table td, .venue_trainings th, .venue_trainings td, .venue_content th, .venue_content td {
 	border: 1px solid;
 	padding: 5px;
 }

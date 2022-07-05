@@ -21,7 +21,16 @@
 			"id": "1",
 			"name": "SPENS",
 			"venueType": "Sportski centar",
-			"content": ["košarkaški teren", "bazen"],
+			"content": [
+			  {
+				"id": "1",
+				"name": "Bazen",
+				"type": "Bazen",
+				"description": "Opis",
+				"duration": null,
+				"image": "./images/icons/no-image.png"
+			  }
+			],
 			"isWorking": true,
 			"location": {
 				"latitude": 45.248468,
