@@ -29,13 +29,13 @@ Vue.component("users", {
     		</p>
     		<table id="users_table" class="users_table">
 	    		<tr>
-	    			<th v-on:click="sortTable(0)" style="cursor:pointer">Ime</th>
-	    			<th v-on:click="sortTable(1)" style="cursor:pointer">Prezime</th>
-	    			<th v-on:click="sortTable(2)" style="cursor:pointer">Korisničko ime</th>
+	    			<th v-on:click="sortTable(0, false)" style="cursor:pointer">Ime</th>
+	    			<th v-on:click="sortTable(1, false)" style="cursor:pointer">Prezime</th>
+	    			<th v-on:click="sortTable(2, false)" style="cursor:pointer">Korisničko ime</th>
 	    			<th>Datum rođenja</th>
 	    			<th>Uloga</th>
 	    			<th>Tip korisnika</th>
-	    			<th v-on:click="sortTable(5)" style="cursor:pointer">Broj sakupljenih bodova</th>
+	    			<th v-on:click="sortTable(6, true)" style="cursor:pointer">Broj sakupljenih bodova</th>
 	    		</tr>
 	    		<tr v-for="(u, index) in filteredUsers">
 	    			<td>{{u.name}}</td>
@@ -75,7 +75,7 @@ Vue.component("users", {
           }
           return true;
         },
-    	sortTable(n) {
+    	sortTable(n, isNumber) {
 			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 			  table = document.getElementById("users_table");
 			  switching = true;
@@ -87,17 +87,33 @@ Vue.component("users", {
 			      shouldSwitch = false;
 			      x = rows[i].getElementsByTagName("TD")[n];
 			      y = rows[i + 1].getElementsByTagName("TD")[n];
-			      if (dir == "asc") {
-			        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-			          shouldSwitch = true;
-			          break;
-			        }
-			      } else if (dir == "desc") {
-			        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-			          shouldSwitch = true;
-			          break;
-			        }
-			      }
+			      if(isNumber){
+					let a = x.innerHTML;
+					let b = y.innerHTML;
+					if (dir == "asc") {
+				        if (Number(a) > Number(b)) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				    } else if (dir == "desc") {
+				        if (Number(a) < Number(b)) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				    }
+				  }else{
+				      if (dir == "asc") {
+				        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				      } else if (dir == "desc") {
+				        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				      }
+				  }
 			    }
 			    if (shouldSwitch) {
 			      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);

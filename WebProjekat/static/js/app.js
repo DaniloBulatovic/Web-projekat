@@ -10,15 +10,17 @@ const Training = { template: '<training></training>'}
 const NewTraining = { template: '<new-training></new-training>'}
 const Content = { template: '<venue-content></venue-content>'}
 const NewContent = { template: '<new-content></new-content>'}
+const Trainings = { template: '<trainings></trainings>'}
 
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
-		{ path: '/', name:'home', components: { default: Venues, RegisterLogin: RegisterLogin, LeftPane: Venue, Menu: MenuBar}},
-	    { path: '/users/:id', components: { default: Venues, RegisterLogin: RegisterLogin, LeftPane: Venue, Menu: MenuBar}},
-	    { path: '/profile', components: { default: UserProfile, RegisterLogin: RegisterLogin, Menu: MenuBar}},
-	    { path: '/users', components: { default: Users, RegisterLogin: RegisterLogin, Menu: MenuBar}},
-		{ path: '/venue', components: { default: ManagerVenue, RegisterLogin: RegisterLogin, Menu: MenuBar}}
+		{ path: '/', name:'home', components: { default: Venues, RegisterLogin: RegisterLogin, LeftPane: Venue, Menu: MenuBar }},
+	    { path: '/users/:id', components: { default: Venues, RegisterLogin: RegisterLogin, LeftPane: Venue, Menu: MenuBar }},
+	    { path: '/profile', components: { default: UserProfile, RegisterLogin: RegisterLogin, Menu: MenuBar }},
+	    { path: '/users', components: { default: Users, RegisterLogin: RegisterLogin, Menu: MenuBar }},
+		{ path: '/venue', components: { default: ManagerVenue, RegisterLogin: RegisterLogin, Menu: MenuBar }},
+		{ path: '/trainings', components: {default: Trainings, RegisterLogin: RegisterLogin, Menu: MenuBar }}
 	  ]
 });
 

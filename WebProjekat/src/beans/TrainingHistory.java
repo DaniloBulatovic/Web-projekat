@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class TrainingHistory {
 
+	private String id;
 	private LocalDateTime dateTimeOfRegistration;
 	private Training training;
 	private User customer;
@@ -11,6 +12,14 @@ public class TrainingHistory {
 	
 	public TrainingHistory() {
 	
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public LocalDateTime getDateTimeOfRegistration() {
