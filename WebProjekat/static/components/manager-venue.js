@@ -10,7 +10,10 @@ Vue.component("manager-venue", {
 			  user: {username: null, password: null, role: null},
 			  reloadTraining: false,
 			  reloadNewTraining: 1,
+		      reloadContent: 2,
+			  reloadNewTraining: 3,
 			  trainingId: 0,
+			  contentId: 0,
 			  trainers: []
 		    }
 	},
@@ -20,6 +23,8 @@ Vue.component("manager-venue", {
 		<div style="width:40%; height:100%; display: inline-block">
 			<training :value = this.trainingId :key="this.reloadTraining"></training>
 			<new-training :value = this.trainingId :venue = this.venue :key="this.reloadNewTraining"></new-training>
+			<venue-content :contentId = this.contentId :venueId = this.venue.id :key="this.reloadContent"></venue-content>
+			<!--<new-content :value = this.contentId :venue = this.venue :key="this.reloadNewContent"></new-content>-->
 		</div>
 		<div style="width:60%; height: 100%; display: inline-block; float:right">
 		<form v-if=visible>
@@ -63,15 +68,36 @@ Vue.component("manager-venue", {
 					<td>Radno vreme</td>
 					<td><input type = "text" v-model = "venue.workingHours" readonly></td>
 				</tr>
-				<tr v-if=venue.content>
+				<tr>
 					<td>Sadržaj</td>
 					<td></td>
 				</tr>
-				<tr v-for="(s, index) in venue.content">
-					<td></td>
-					<li>{{s}}</li>
+				<tr>
+					<td><button id="add-content" @click="addContent">Dodaj sadržaj</button></td>
 				</tr>
-				<tr v-if=trainings.length>
+				<tr v-if=venue.content>
+					<td colspan=2>
+						<table class="venue_content" style="margin:auto; width:100%; text-align:center">
+							<tr>
+								<th>Slika</th>
+								<th>Naziv</th>
+								<th>Tip</th>
+								<th>Opis</th>
+								<th>Trajanje</th>
+								<th>Akcija</th>
+							</tr>
+							<tr v-for="(c, index) in venue.content">
+								<td style="text-align:center"><img v-bind:src=c.image width="50%"></img></td>
+								<td>{{c.name}}</td>
+								<td>{{c.type}}</td>
+								<td>{{c.description}}</td>
+								<td>{{c.duration}}</td>
+								<td><button class="edit-content" v-on:click="editContent(c.id)">Izmeni</button></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
 					<td>Treninzi</td>
 				<tr>
 				<tr>
@@ -86,6 +112,7 @@ Vue.component("manager-venue", {
 								<th>Tip</th>
 								<th>Opis</th>
 								<th>Trener</th>
+								<th>Trajanje</th>
 								<th>Cena</th>
 								<th>Akcija</th>
 							</tr>
@@ -95,6 +122,7 @@ Vue.component("manager-venue", {
 								<td>{{t.trainingType}}</td>
 								<td>{{t.description}}</td>
 								<td>{{t.trainer.name}} {{t.trainer.surname}}</td>
+								<td>{{t.duration}}</td>
 								<td style="text-align:center">{{t.price}}</td>
 								<td><button class="edit-training" v-on:click="editTraining(t.id)">Izmeni</button></td>
 							</tr>
@@ -164,15 +192,32 @@ Vue.component("manager-venue", {
 	methods : {
 		addTraining : function() {
     		this.trainingId = -1;
-			this.reloadTraining = !this.reloadTraining;
-			this.reloadNewTraining += this.reloadNewTraining;
+			this.contentId = 0;
+			this.reloadComponents();
     	},
 		editTraining : function(id) {
     		event.preventDefault();
 			this.trainingId = id;
+			this.contentId = 0;
+			this.reloadComponents();
+    	},
+		addContent : function() {
+			this.trainingId = 0;
+    		this.contentId = -1;
+			this.reloadComponents();
+    	},
+		editContent : function(id) {
+    		event.preventDefault();
+			this.trainingId = 0;
+			this.contentId = id;
+			this.reloadComponents();
+    	},
+		reloadComponents : function(){
 			this.reloadTraining = !this.reloadTraining;
 			this.reloadNewTraining += this.reloadNewTraining;
-    	}
+			this.reloadContent += this.reloadContent;
+			this.reloadNewContent += this.reloadNewContent;
+		}
 	},
 	mounted () {
 		axios.post('rest/users/getlogged', this.user, {withCredentials: true}).

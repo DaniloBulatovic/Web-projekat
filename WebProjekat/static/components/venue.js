@@ -56,9 +56,25 @@ Vue.component("venue", {
 				<td>Sadržaj</td>
 				<td></td>
 			</tr>
-			<tr v-for="(s, index) in venue.content">
-				<td></td>
-				<li>{{s}}</li>
+			<tr v-if=venue.content>
+				<td colspan=2>
+					<table class="venue_content" style="width:100%">
+						<tr>
+							<th>Slika</th>
+							<th>Naziv</th>
+							<th>Tip</th>
+							<th>Opis</th>
+							<th>Trajanje</th>
+						</tr>
+						<tr v-for="(c, index) in venue.content">
+							<td style="text-align:center"><img v-bind:src=c.image width="50%"></img></td>
+							<td>{{c.name}}</td>
+							<td>{{c.type}}</td>
+							<td>{{c.description}}</td>
+							<td style="text-align:center">{{c.duration}}</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr v-if=trainings.length>
 				<td>Treninzi</td>
@@ -66,7 +82,7 @@ Vue.component("venue", {
 			</tr>
 			<tr v-if=trainings.length>
 				<td colspan=2>
-					<table class="venue_trainings">
+					<table class="venue_trainings" style="width:100%">
 						<tr>
 							<th>Slika</th>
 							<th>Naziv</th>

@@ -127,7 +127,7 @@ Vue.component("new-training", {
 				this.error = "Obavezno!";
 			else
 				this.error = "";
-		},
+		}
 	},
 	mounted () {
 		this.id = this.value;

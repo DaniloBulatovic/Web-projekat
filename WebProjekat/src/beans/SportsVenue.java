@@ -9,7 +9,7 @@ public class SportsVenue {
 	private String id;
 	private String name;
 	private VenueType venueType;
-	private List<String> content;
+	private List<Content> content;
 	private boolean isWorking;
 	private Location location;
 	private String logoPath;
@@ -45,11 +45,11 @@ public class SportsVenue {
 		this.venueType = venueType;
 	}
 
-	public List<String> getContent() {
+	public List<Content> getContent() {
 		return content;
 	}
 
-	public void setContent(List<String> content) {
+	public void setContent(List<Content> content) {
 		this.content = content;
 	}
 

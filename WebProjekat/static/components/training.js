@@ -8,13 +8,15 @@ Vue.component("training", {
 			  oldTraining: null,
 			  trainers: [],
 			  selectedIndex: null,
-			  selectedTrainer: null
+			  selectedTrainer: null,
+			  isImageSelected: false,
+			  error: ''
 		    }
 	},
 	template: ` 
 <div>
 	<form v-if=visible>
-	<h3>Prikaz treninga</h3>
+	<h3>Izmena treninga</h3>
 		<table id="training" style="width:100%; background:aliceblue; table-layout: fixed; border: 1px solid gray">
 			<tr>
 				<td><img v-bind:src=training.image width="75%"></img></td>
@@ -29,8 +31,16 @@ Vue.component("training", {
 				</td>
 			</tr>
 			<tr>
+				<td><label v-if="isImageSelected === false" style="color:red">{{error}}</label></td>
+				<td></td>
+			</tr>
+			<tr>
 				<td>Naziv</td>
 				<td><input type = "text" v-model = "training.name"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><label v-if="training.name === ''" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Tip</td>
@@ -43,6 +53,10 @@ Vue.component("training", {
 				</td>
 			</tr>
 			<tr>
+				<td></td>
+				<td><label v-if="training.trainingType === ''" style="color:red">{{error}}</label></td>
+			</tr>
+			<tr>
 				<td>Opis</td>
 				<td><input type = "text" v-model = "training.description"></td>
 			</tr>
@@ -53,6 +67,10 @@ Vue.component("training", {
 			<tr>
 				<td>Trener</td>
 				<td><select v-model="this.training.trainer.name + ' ' + this.training.trainer.surname" @change="switchView($event, $event.target.selectedIndex)"><option v-for="(t, index) in trainers">{{t.name}} {{t.surname}}</option></select></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><label v-if="training.trainer.name === ' ' || training.trainer.surname === ' '" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Cena</td>
@@ -84,6 +102,7 @@ Vue.component("training", {
 			})
 			.then(response =>{
 				this.training.image = response.data;
+				this.isImageSelected = true;
 			});
 		},
 		switchView : function(event, selectedIndex) {
@@ -91,11 +110,24 @@ Vue.component("training", {
     	},
 		editTraining : function () {
 			event.preventDefault();
-			axios.put('rest/trainings/edit/' + this.training.id, this.training).
-			then(response => {
-				this.visible = false;
-				this.$router.go();
-			});
+			this.validateFields();
+			if (this.error === ''){
+				axios.put('rest/trainings/edit/' + this.training.id, this.training).
+				then(response => {
+					this.visible = false;
+					this.$router.go();
+				});
+			}
+		},
+		validateFields : function(){
+			if (this.isImageSelected === false
+				|| this.training.name === ''
+				|| this.training.trainingType === ''
+				|| this.training.trainer.name === ' '
+				|| this.training.trainer.surname === ' ')
+				this.error = "Obavezno!";
+			else
+				this.error = "";
 		},
 		cancelTrainingEdit : function() {
     		event.preventDefault();
@@ -113,6 +145,9 @@ Vue.component("training", {
 	          .then(response => {
 				this.training = response.data;
 				this.oldTraining = this.training;
+				if (this.training.image !== './images/icons/no-image.png'){
+					this.isImageSelected = true;
+				}
 				}).then(response =>{
 					axios.get('rest/trainers/').then(response => {
 						this.trainers = response.data;

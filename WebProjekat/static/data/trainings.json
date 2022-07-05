@@ -8,8 +8,14 @@
       "name": "SPENS",
       "venueType": "Sportski centar",
       "content": [
-        "košarkaški teren",
-        "bazen"
+        {
+          "id": "1",
+          "name": "Bazen",
+          "type": "Bazen",
+          "description": "Opis",
+          "duration": 0,
+          "image": "./images/icons/no-image.png"
+        }
       ],
       "isWorking": true,
       "location": {
@@ -51,7 +57,7 @@
   },
   "2": {
     "id": "2",
-    "name": "Trening 1",
+    "name": "Treninig 1",
     "trainingType": "Personalni",
     "sportsVenue": {
       "id": "4",
