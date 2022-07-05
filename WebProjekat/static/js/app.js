@@ -9,6 +9,7 @@ const ManagerVenue = { template: '<manager-venue></manager-venue>'}
 const Training = { template: '<training></training>'}
 const NewTraining = { template: '<new-training></new-training>'}
 const Content = { template: '<venue-content></venue-content>'}
+const NewContent = { template: '<new-content></new-content>'}
 
 const router = new VueRouter({
 	mode: 'hash',

@@ -24,7 +24,7 @@ Vue.component("manager-venue", {
 			<training :value = this.trainingId :key="this.reloadTraining"></training>
 			<new-training :value = this.trainingId :venue = this.venue :key="this.reloadNewTraining"></new-training>
 			<venue-content :contentId = this.contentId :venueId = this.venue.id :key="this.reloadContent"></venue-content>
-			<!--<new-content :value = this.contentId :venue = this.venue :key="this.reloadNewContent"></new-content>-->
+			<new-content :contentId = this.contentId :venueId = this.venue.id :key="this.reloadNewContent"></new-content>
 		</div>
 		<div style="width:60%; height: 100%; display: inline-block; float:right">
 		<form v-if=visible>

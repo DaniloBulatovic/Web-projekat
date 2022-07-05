@@ -1,20 +1,18 @@
-Vue.component("venue-content", {
+Vue.component("new-content", {
 	props: ['contentId', 'venueId'],
 	data: function () {
 		    return {
 		      id : 0,
 			  visible : false,
-			  venue: null,
-		      content: {id: '', name:null, type:0, description:null, duration:0, image:'./images/icons/no-image.png'},
-			  oldContent: null,
-			  isImageSelected: false,
+		      content: {id: '', name:'', type:'', description:null, duration:0, image:'./images/icons/no-image.png'},
+	 		  isImageSelected: false,
 			  error: ''
 		    }
 	},
 	template: ` 
 <div>
 	<form v-if=visible>
-	<h3>Izmena sadržaja</h3>
+	<h3>Dodaj novi sadržaj</h3>
 		<table id="content" style="width:100%; background:aliceblue; table-layout: fixed; border: 1px solid gray">
 			<tr>
 				<td><img v-bind:src=content.image width="75%"></img></td>
@@ -62,8 +60,7 @@ Vue.component("venue-content", {
 				<td><input type = "number" v-model = "content.duration"></td>
 			</tr>
 			<tr>
-				<td><button v-on:click="editContent" id="edit-content-confirm">Sačuvaj izmene</button></td>
-				<td><button v-on:click="cancelContentEdit" id="edit-content-cancel">Otkaži</button></td>
+				<th colspan=2><button v-on:click="addContent" id="add-content">Kreiraj sadržaj</button></th>
 			</tr>
 		</table>
 	</form>
@@ -87,14 +84,15 @@ Vue.component("venue-content", {
 			})
 			.then(response =>{
 				this.content.image = response.data;
+				this.isImageSelected = true;
 			});
 		},
-		editContent : function () {
+		addContent: function () {
 			event.preventDefault();
 			this.validateFields();
-			if(this.error === ''){
-				let index = this.venue.content.indexOf(this.venue.content.filter(function(elem, index){if(elem.id == this.id) return elem}, this)[0])
-				this.venue.content[index] = this.content;
+			if (this.error === ''){
+				this.content.id = this.venue.content.length + 1;
+				this.venue.content.push(this.content);
 				
 				axios.put('rest/venues/edit/' + this.venue.id, this.venue).
 				then(response => {
@@ -110,28 +108,17 @@ Vue.component("venue-content", {
 				this.error = "Obavezno!";
 			else
 				this.error = "";
-		},
-		cancelContentEdit : function() {
-    		event.preventDefault();
-			this.content = this.oldContent;
-			this.visible = false;
-			this.$router.go();
-    	},
+		}
 	},
 	mounted () {
 		this.id = this.contentId;
-		if (this.id > 0){
+		if (this.id == -1){
 			this.visible = true;
-	        axios
+			axios
 	          .get('rest/venues/' + this.venueId)
 	          .then(response => {
 				this.venue = response.data;
-				this.content = this.venue.content.filter(function(elem){if(elem.id == this.id) return elem;}, this)[0];
-				this.oldContent = this.content;
-				if (this.content.image !== './images/icons/no-image.png'){
-					this.isImageSelected = true;
-				}
-				});
+			});
 		}else{
 			this.visible = false;
 		}
