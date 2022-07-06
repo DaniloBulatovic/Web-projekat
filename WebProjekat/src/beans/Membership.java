@@ -1,29 +1,30 @@
 package beans;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import beans.enums.MembershipType;
 
 public class Membership {
 	
-	private int id;
+	private String id;
 	private MembershipType type;
-	private LocalDate dateOfPaying;
-	private LocalDate expirationDate;
+	private LocalDateTime dateOfPaying;
+	private LocalDateTime expirationDate;
 	private double price;
 	private User customer;
 	private boolean isActive;
 	private int numberOfAppointments;
+	private boolean isDeleted;
 	
 	public Membership() {
 	
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -35,19 +36,19 @@ public class Membership {
 		this.type = type;
 	}
 
-	public LocalDate getDateOfPaying() {
+	public LocalDateTime getDateOfPaying() {
 		return dateOfPaying;
 	}
 
-	public void setDateOfPaying(LocalDate dateOfPaying) {
+	public void setDateOfPaying(LocalDateTime dateOfPaying) {
 		this.dateOfPaying = dateOfPaying;
 	}
 
-	public LocalDate getExpirationDate() {
+	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(LocalDate expirationDate) {
+	public void setExpirationDate(LocalDateTime expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 
@@ -81,5 +82,13 @@ public class Membership {
 
 	public void setNumberOfAppointments(int numberOfAppointments) {
 		this.numberOfAppointments = numberOfAppointments;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

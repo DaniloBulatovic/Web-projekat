@@ -6,6 +6,8 @@ import static spark.Spark.staticFiles;
 import java.io.File;
 
 import controller.CommentController;
+import controller.MembershipController;
+import controller.PromoCodeController;
 import controller.SportsVenueController;
 import controller.TrainingController;
 import controller.TrainingHistoryController;
@@ -26,5 +28,7 @@ public class SparkAppMain {
 		TrainingController.initializeController();
 		CommentController.initializeController();
 		TrainingHistoryController.initializeController();
+		MembershipController.initializeController();
+		PromoCodeController.initializeController();
 	}
 }

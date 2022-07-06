@@ -19,11 +19,10 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import beans.Comment;
-import beans.User;
-import services.CommentService;
+import beans.Membership;
+import services.MembershipService;
 
-public class CommentController {
+public class MembershipController {
 	
 	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -36,65 +35,55 @@ public class CommentController {
 	        return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 	    }
     }).setPrettyPrinting().create();
-	private static CommentService commentService = new CommentService();
+	private static MembershipService membershipService = new MembershipService();
 	
 	public static void initializeController() {
-		getComments();
-		getComment();
-		getCommentsByVenue();
-		addComment();
-		editComment();
-		deleteComment();
+		getMemberships();
+		getMembership();
+		addMembership();
+		editMembership();
+		deleteMembership();
 	}
 	
-	public static void getComments() {
-		get("rest/comments/", (req, res) -> {
+	public static void getMemberships() {
+		get("rest/memberships/", (req, res) -> {
 			res.type("application/json");
-			return g.toJson(commentService.getComments());
+			return g.toJson(membershipService.getMemberships());
 		});
 	}
 	
-	public static void getComment() {
-		get("rest/comments/:id", (req, res) -> {
+	public static void getMembership() {
+		get("rest/memberships/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			return g.toJson(commentService.getComment(id));
+			return g.toJson(membershipService.getMembership(id));
 		});
 	}
 	
-	public static void getCommentsByVenue() {
-		post("rest/comments/venue/:id", (req, res) -> {
+	public static void addMembership() {
+		post("rest/memberships/add", (req, res) -> {
 			res.type("application/json");
-			String id = req.params("id");
-			User user = g.fromJson(req.body(), User.class);
-			return g.toJson(commentService.getCommentsByVenue(id, user));
-		});
-	}
-	
-	public static void addComment() {
-		post("rest/comments/add", (req, res) -> {
-			res.type("application/json");
-			Comment comment = g.fromJson(req.body(), Comment.class);
-			commentService.addComment(comment);
+			Membership membership = g.fromJson(req.body(), Membership.class);
+			membershipService.addMembership(membership);
 			return "SUCCESS";
 		});
 	}
 	
-	public static void editComment() {
-		put("rest/comments/edit/:id", (req, res) -> {
+	public static void editMembership() {
+		put("rest/memberships/edit/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			Comment comment = g.fromJson(req.body(), Comment.class);
-			commentService.editComment(id, comment);
+			Membership membership = g.fromJson(req.body(), Membership.class);
+			membershipService.editMembership(id, membership);
 			return "SUCCESS";
 		});
 	}
 	
-	public static void deleteComment() {
-		delete("rest/comments/delete/:id", (req, res) -> {
+	public static void deleteMembership() {
+		delete("rest/memberships/delete/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			commentService.deleteComment(id);
+			membershipService.deleteMembership(id);
 			return "SUCCESS";
 		});
 	}

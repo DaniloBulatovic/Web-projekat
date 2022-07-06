@@ -19,11 +19,10 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import beans.Comment;
-import beans.User;
-import services.CommentService;
+import beans.PromoCode;
+import services.PromoCodeService;
 
-public class CommentController {
+public class PromoCodeController {
 	
 	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -36,65 +35,64 @@ public class CommentController {
 	        return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 	    }
     }).setPrettyPrinting().create();
-	private static CommentService commentService = new CommentService();
+	private static PromoCodeService promoCodeService = new PromoCodeService();
 	
 	public static void initializeController() {
-		getComments();
-		getComment();
-		getCommentsByVenue();
-		addComment();
-		editComment();
-		deleteComment();
+		getPromoCodes();
+		getPromoCode();
+		getPromoCodeByCode();
+		addPromoCode();
+		editPromoCode();
+		deletePromoCode();
 	}
 	
-	public static void getComments() {
-		get("rest/comments/", (req, res) -> {
+	public static void getPromoCodes() {
+		get("rest/promoCodes/", (req, res) -> {
 			res.type("application/json");
-			return g.toJson(commentService.getComments());
+			return g.toJson(promoCodeService.getPromoCodes());
 		});
 	}
 	
-	public static void getComment() {
-		get("rest/comments/:id", (req, res) -> {
+	public static void getPromoCode() {
+		get("rest/promoCodes/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			return g.toJson(commentService.getComment(id));
+			return g.toJson(promoCodeService.getPromoCode(id));
 		});
 	}
 	
-	public static void getCommentsByVenue() {
-		post("rest/comments/venue/:id", (req, res) -> {
+	public static void getPromoCodeByCode() {
+		get("rest/promoCodes/code/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			User user = g.fromJson(req.body(), User.class);
-			return g.toJson(commentService.getCommentsByVenue(id, user));
+			return g.toJson(promoCodeService.getPromoCodeByCode(id));
 		});
 	}
 	
-	public static void addComment() {
-		post("rest/comments/add", (req, res) -> {
+	public static void addPromoCode() {
+		post("rest/promoCodes/add", (req, res) -> {
 			res.type("application/json");
-			Comment comment = g.fromJson(req.body(), Comment.class);
-			commentService.addComment(comment);
+			PromoCode promoCode = g.fromJson(req.body(), PromoCode.class);
+			promoCodeService.addPromoCode(promoCode);
 			return "SUCCESS";
 		});
 	}
 	
-	public static void editComment() {
-		put("rest/comments/edit/:id", (req, res) -> {
+	public static void editPromoCode() {
+		put("rest/promoCodes/edit/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			Comment comment = g.fromJson(req.body(), Comment.class);
-			commentService.editComment(id, comment);
+			PromoCode promoCode = g.fromJson(req.body(), PromoCode.class);
+			promoCodeService.editPromoCode(id, promoCode);
 			return "SUCCESS";
 		});
 	}
 	
-	public static void deleteComment() {
-		delete("rest/comments/delete/:id", (req, res) -> {
+	public static void deletePromoCode() {
+		delete("rest/promoCodes/delete/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			commentService.deleteComment(id);
+			promoCodeService.deletePromoCode(id);
 			return "SUCCESS";
 		});
 	}

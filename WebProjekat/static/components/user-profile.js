@@ -83,8 +83,11 @@ Vue.component("user-profile", {
 			event.preventDefault();
 			this.validateFields();
 			if (this.error === ''){
+				this.user.dateOfBirth = this.user.dateOfBirth + 'T12:00:00';
 				axios.put('rest/users/edit/' + this.user.id, this.user).
-				then(response => (router.push(`/`)));
+				then(response => {
+					router.push(`/`);
+				});
 			}
 		},
 		validateFields : function(){
@@ -97,7 +100,10 @@ Vue.component("user-profile", {
 				this.error = "Obavezno!";
 			else
 				this.error = "";
-		}
+		},
+		formatDate(date) {
+    		return new Intl.DateTimeFormat('en-US').format(new Date(date))
+  		}
 	},
 	mounted () {
 		axios.post('rest/users/getlogged', this.user, {withCredentials: true}).
@@ -105,6 +111,10 @@ Vue.component("user-profile", {
 						this.user = { username: "", password: "", role: ""};
 						if (response.data != "ERROR" && response.data != null){
 							this.user = response.data;
+							axios.get('rest/users/' + this.user.id).then(response => {
+								this.user = response.data;
+								this.user.dateOfBirth = new Date(this.user.dateOfBirth).toISOString().slice(0, -14);
+							})
 						}
 			});
     }

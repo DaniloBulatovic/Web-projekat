@@ -1,0 +1,18 @@
+{
+  "jrkdob547r": {
+    "id": "jrkdob547r",
+    "type": "Godišnje",
+    "price": 4000.0,
+    "isActive": false,
+    "numberOfAppointments": 0,
+    "isDeleted": false
+  },
+  "izldo54hpb": {
+    "id": "izldo54hpb",
+    "type": "Mesečno",
+    "price": 900.0,
+    "isActive": false,
+    "numberOfAppointments": 100,
+    "isDeleted": false
+  }
+}

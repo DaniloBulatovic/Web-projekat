@@ -60,7 +60,7 @@ body, html {
 	float: right;
 }
 
-#menu a, #userMenu a, #userMenu input, input.submit, #create-venue-table .button, .menu-bar button, .edit-training, #training .button, .edit-content, #content .button { 
+#menu a, #userMenu a, #userMenu input, input.submit, #create-venue-table .button, .menu-bar button, .edit-training, #training .button, .edit-content, #content .button, .button { 
     background: powderblue;
     border:1px solid steelblue;
     -moz-border-radius:3px;

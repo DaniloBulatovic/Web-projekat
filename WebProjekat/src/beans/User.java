@@ -1,6 +1,6 @@
 package beans;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import beans.enums.Gender;
@@ -14,7 +14,7 @@ public class User {
 	private String name;
 	private String surname;
 	private Gender gender;
-	private LocalDate dateOfBirth;
+	private LocalDateTime dateOfBirth;
 	private Role role;
 	//Trainer
 	private List<TrainingHistory> trainingHistory;
@@ -79,11 +79,11 @@ public class User {
 		this.gender = gender;
 	}
 
-	public LocalDate getDateOfBirth() {
+	public LocalDateTime getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(LocalDateTime dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

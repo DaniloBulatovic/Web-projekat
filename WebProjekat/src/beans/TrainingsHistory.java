@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
@@ -26,8 +25,8 @@ public class TrainingsHistory {
 	
 	private HashMap<String, TrainingHistory> trainingsHistory = new HashMap<String, TrainingHistory>();
 	
-	private Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
-		@Override
+	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
+        @Override
         public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
             return LocalDateTime.parse(json.getAsJsonPrimitive().getAsString());
         }
@@ -35,16 +34,6 @@ public class TrainingsHistory {
     	@Override
     	public JsonElement serialize(LocalDateTime date, Type typeOfSrc, JsonSerializationContext context) {
 	        return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-	    }
-    }).registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
-        @Override
-        public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-            return LocalDate.parse(json.getAsJsonPrimitive().getAsString());
-        }
-    }).registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
-    	@Override
-    	public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
-	        return new JsonPrimitive(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 	    }
     }).setPrettyPrinting().create();
 	
