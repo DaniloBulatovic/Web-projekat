@@ -7,6 +7,8 @@ public class Comment {
 	private SportsVenue sportsVenue;
 	private String text;
 	private int grade;
+	private boolean isApproved;
+	private boolean isDeleted;
 	
 	public Comment() {
 	
@@ -51,5 +53,21 @@ public class Comment {
 	public void setGrade(int grade) {
 		if (grade >= 1 && grade <= 5)
 			this.grade = grade;
+	}
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

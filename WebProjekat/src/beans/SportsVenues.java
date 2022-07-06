@@ -90,6 +90,7 @@ public class SportsVenues {
 	public Collection<SportsVenue> getValues() {
 		HashMap<String, SportsVenue> filtered = new HashMap<String, SportsVenue>(sportsVenues);
 		filtered.keySet().removeAll(sportsVenues.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+		filtered = sortValues(filtered);
 		return filtered.values();
 	}
 

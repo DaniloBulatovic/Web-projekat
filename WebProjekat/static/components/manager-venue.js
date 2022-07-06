@@ -274,7 +274,7 @@ Vue.component("manager-venue", {
 											  }, []);
 										this.trainers = uniqueElementsBy(this.trainings,(a, b) => a.trainer.id === b.trainer.id);
 									})
-									axios.get('rest/comments/venue/' + this.id)
+									axios.post('rest/comments/venue/' + this.id, this.user)
 									.then(response => {
 										this.comments = response.data;
 									})

@@ -15,10 +15,12 @@ Vue.component("menu-bar", {
 		<div class="center">
 			<button v-if="user.role === 'Administrator'" @click="showUsersTable">Korisnici</button>
 			<button v-if="user.role === 'Menadžer'" @click="showManagersVenue">Moj sportski objekat</button>
+			<button v-if="user.role === 'Trener' || user.role === 'Kupac'" @click="showTrainings">Moji treninzi</button>
 		</div>
 	</div>
 	<div class="third" style="width:25%; height:100%; display: table-cell">
 		<div class="center">
+			<button v-if="user.role === 'Menadžer' || user.role === 'Administrator'" @click="showTrainings">Treninzi</button>
 		</div>
 	</div>
 	<div class="fourth" style="width:25%; height:100%; display: table-cell">
@@ -37,6 +39,9 @@ Vue.component("menu-bar", {
 		},
 		showManagersVenue : function(){
 			router.push('/venue');
+		},
+		showTrainings : function(){
+			router.push('/trainings');
 		}
 	},
 	mounted () {

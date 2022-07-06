@@ -8,6 +8,7 @@ import java.io.File;
 import controller.CommentController;
 import controller.SportsVenueController;
 import controller.TrainingController;
+import controller.TrainingHistoryController;
 import controller.UserController;
 
 public class SparkAppMain {
@@ -24,5 +25,6 @@ public class SparkAppMain {
 		UserController.initializeController();
 		TrainingController.initializeController();
 		CommentController.initializeController();
+		TrainingHistoryController.initializeController();
 	}
 }

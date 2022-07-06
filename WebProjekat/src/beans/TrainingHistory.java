@@ -4,13 +4,23 @@ import java.time.LocalDateTime;
 
 public class TrainingHistory {
 
+	private String id;
 	private LocalDateTime dateTimeOfRegistration;
 	private Training training;
 	private User customer;
 	private User trainer;
+	private boolean isDeleted;
 	
 	public TrainingHistory() {
 	
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public LocalDateTime getDateTimeOfRegistration() {
@@ -43,5 +53,13 @@ public class TrainingHistory {
 
 	public void setTrainer(User trainer) {
 		this.trainer = trainer;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

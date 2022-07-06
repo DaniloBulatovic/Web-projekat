@@ -33,10 +33,10 @@ Vue.component("venues", {
 	    		<table id="venues_table" class="venues_table">
 		    		<tr>
 		    			<th>Logo</th>
-		    			<th v-on:click="sortTable(1)" style="cursor:pointer">Naziv</th>
+		    			<th v-on:click="sortTable(1, false)" style="cursor:pointer">Naziv</th>
 		    			<th>Tip</th>
-		    			<th v-on:click="sortTable(3)" style="cursor:pointer">Lokacija</th>
-		    			<th v-on:click="sortTable(4)" style="cursor:pointer">Prosečna ocena</th>
+		    			<th v-on:click="sortTable(3, false)" style="cursor:pointer">Lokacija</th>
+		    			<th v-on:click="sortTable(4, true)" style="cursor:pointer">Prosečna ocena</th>
 		    			<th>Radno vreme</th>
 		    			<!--<th>Akcija</th>-->
 		    		</tr>
@@ -77,7 +77,7 @@ Vue.component("venues", {
     	editVenue : function(id) {
     		router.push(`/venues/${id}`);
     	},
-    	sortTable(n) {
+    	sortTable(n, isNumber) {
 			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 			  table = document.getElementById("venues_table");
 			  switching = true;
@@ -89,17 +89,33 @@ Vue.component("venues", {
 			      shouldSwitch = false;
 			      x = rows[i].getElementsByTagName("TD")[n];
 			      y = rows[i + 1].getElementsByTagName("TD")[n];
-			      if (dir == "asc") {
-			        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-			          shouldSwitch = true;
-			          break;
-			        }
-			      } else if (dir == "desc") {
-			        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-			          shouldSwitch = true;
-			          break;
-			        }
-			      }
+				  if(isNumber){
+					let a = x.innerHTML;
+					let b = y.innerHTML;
+					if (dir == "asc") {
+				        if (Number(a) > Number(b)) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				      } else if (dir == "desc") {
+				        if (Number(a) < Number(b)) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				      }
+				  }else{
+				      if (dir == "asc") {
+				        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				      } else if (dir == "desc") {
+				        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+				          shouldSwitch = true;
+				          break;
+				        }
+				      }
+				  }
 			    }
 			    if (shouldSwitch) {
 			      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
