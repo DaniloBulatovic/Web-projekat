@@ -6,8 +6,18 @@
     "name": "Petar",
     "surname": "Petrović",
     "gender": "Muško",
-    "dateOfBirth": "2000-06-02",
+    "dateOfBirth": "2000-06-02T12:00:00",
     "role": "Kupac",
+    "membership": {
+      "id": "izldo54hpb",
+      "type": "Mesečno",
+      "dateOfPaying": "2022-07-06T16:47:29",
+      "expirationDate": "2022-08-06T16:47:29",
+      "price": 900.0,
+      "isActive": true,
+      "numberOfAppointments": 100,
+      "isDeleted": false
+    },
     "visitedVenues": [
       {
         "id": "4",
@@ -45,7 +55,7 @@
     "name": "Marko",
     "surname": "Marković",
     "gender": "Muško",
-    "dateOfBirth": "1995-04-12",
+    "dateOfBirth": "1995-04-12T12:00:00",
     "role": "Administrator",
     "points": 0,
     "customerType": {
@@ -62,7 +72,7 @@
     "name": "Nikola",
     "surname": "Nikolić",
     "gender": "Muško",
-    "dateOfBirth": "1997-10-20",
+    "dateOfBirth": "1997-10-20T12:00:00",
     "role": "Trener",
     "points": 0,
     "customerType": {
@@ -79,7 +89,7 @@
     "name": "Jovana",
     "surname": "Jovanović",
     "gender": "Žensko",
-    "dateOfBirth": "2001-09-12",
+    "dateOfBirth": "2001-09-12T12:00:00",
     "role": "Kupac",
     "points": 65,
     "customerType": {

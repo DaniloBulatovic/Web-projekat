@@ -11,6 +11,8 @@ const NewTraining = { template: '<new-training></new-training>'}
 const Content = { template: '<venue-content></venue-content>'}
 const NewContent = { template: '<new-content></new-content>'}
 const Trainings = { template: '<trainings></trainings>'}
+const Memberships = { template: '<memberships></memberships>'}
+const Membership = { template: '<membership></membership>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -20,7 +22,8 @@ const router = new VueRouter({
 	    { path: '/profile', components: { default: UserProfile, RegisterLogin: RegisterLogin, Menu: MenuBar }},
 	    { path: '/users', components: { default: Users, RegisterLogin: RegisterLogin, Menu: MenuBar }},
 		{ path: '/venue', components: { default: ManagerVenue, RegisterLogin: RegisterLogin, Menu: MenuBar }},
-		{ path: '/trainings', components: {default: Trainings, RegisterLogin: RegisterLogin, Menu: MenuBar }}
+		{ path: '/trainings', components: {default: Trainings, RegisterLogin: RegisterLogin, Menu: MenuBar }},
+		{ path: '/memberships', components: {default: Memberships, RegisterLogin: RegisterLogin, Menu: MenuBar }}
 	  ]
 });
 

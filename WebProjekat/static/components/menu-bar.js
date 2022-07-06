@@ -21,10 +21,12 @@ Vue.component("menu-bar", {
 	<div class="third" style="width:25%; height:100%; display: table-cell">
 		<div class="center">
 			<button v-if="user.role === 'Menadžer' || user.role === 'Administrator'" @click="showTrainings">Treninzi</button>
+			<button v-if="user.role === 'Kupac'" @click="showMemberships">Članarine</button>
 		</div>
 	</div>
 	<div class="fourth" style="width:25%; height:100%; display: table-cell">
 		<div class="center">
+			<button v-if="user.role === 'Administrator'" @click="showMemberships">Članarine</button>
 		</div>
 	</div>
 </div>		  
@@ -42,6 +44,9 @@ Vue.component("menu-bar", {
 		},
 		showTrainings : function(){
 			router.push('/trainings');
+		},
+		showMemberships : function(){
+			router.push('/memberships');
 		}
 	},
 	mounted () {

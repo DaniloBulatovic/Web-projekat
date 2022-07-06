@@ -7,7 +7,9 @@ import static spark.Spark.put;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,17 +27,17 @@ import spark.Session;
 
 public class UserController {
 	
-	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
-        public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-            return LocalDate.parse(json.getAsJsonPrimitive().getAsString());
+        public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return LocalDateTime.parse(json.getAsJsonPrimitive().getAsString());
         }
-    }).registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
+    }).registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
     	@Override
-    	public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
-	        return new JsonPrimitive(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    	public JsonElement serialize(LocalDateTime date, Type typeOfSrc, JsonSerializationContext context) {
+	        return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 	    }
-    }).create();
+    }).setPrettyPrinting().create();
 	private static UserService userService = new UserService();
 	
 	public static void initializeController() {

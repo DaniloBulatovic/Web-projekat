@@ -42,7 +42,7 @@
       "name": "Nikola",
       "surname": "Nikolić",
       "gender": "Muško",
-      "dateOfBirth": "1997-10-20",
+      "dateOfBirth": "1997-10-20T12:00:00",
       "role": "Trener",
       "points": 0,
       "customerType": {
@@ -87,7 +87,7 @@
       "name": "Nikola",
       "surname": "Nikolić",
       "gender": "Muško",
-      "dateOfBirth": "1997-10-20",
+      "dateOfBirth": "1997-10-20T12:00:00",
       "role": "Trener",
       "points": 0,
       "customerType": {
