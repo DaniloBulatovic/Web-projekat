@@ -29,6 +29,11 @@ Vue.component("menu-bar", {
 			<button v-if="user.role === 'Administrator'" @click="showMemberships">Članarine</button>
 		</div>
 	</div>
+	<div class="fifth" style="width:25%; height:100%; display: table-cell">
+		<div class="center">
+			<button v-if="user.role === 'Administrator'" @click="showPromoCodes">Promo kodovi</button>
+		</div>
+	</div>
 </div>		  
 `
 	, 
@@ -47,6 +52,9 @@ Vue.component("menu-bar", {
 		},
 		showMemberships : function(){
 			router.push('/memberships');
+		},
+		showPromoCodes : function(){
+			router.push('/promocodes');
 		}
 	},
 	mounted () {

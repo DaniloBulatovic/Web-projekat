@@ -1,0 +1,26 @@
+{
+  "1": {
+    "id": "1",
+    "code": "POPUST5",
+    "expirationDate": "2022-08-01T12:00:00",
+    "discount": 5.0,
+    "amount": 100,
+    "isDeleted": false
+  },
+  "2": {
+    "id": "2",
+    "code": "POPUST10",
+    "expirationDate": "2022-07-15T12:00:00",
+    "discount": 10.0,
+    "amount": 50,
+    "isDeleted": false
+  },
+  "3": {
+    "id": "3",
+    "code": "POPUST20",
+    "expirationDate": "2022-07-08T00:00:00",
+    "discount": 20.0,
+    "amount": 25,
+    "isDeleted": false
+  }
+}

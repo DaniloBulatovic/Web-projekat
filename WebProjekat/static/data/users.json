@@ -9,13 +9,13 @@
     "dateOfBirth": "2000-06-02T12:00:00",
     "role": "Kupac",
     "membership": {
-      "id": "izldo54hpb",
-      "type": "Mesečno",
-      "dateOfPaying": "2022-07-06T16:47:29",
-      "expirationDate": "2022-08-06T16:47:29",
-      "price": 900.0,
+      "id": "jrkdob547r",
+      "type": "Godišnje",
+      "dateOfPaying": "2022-07-06T18:45:52",
+      "expirationDate": "2023-07-06T18:45:52",
+      "price": 3200.0,
       "isActive": true,
-      "numberOfAppointments": 100,
+      "numberOfAppointments": 0,
       "isDeleted": false
     },
     "visitedVenues": [

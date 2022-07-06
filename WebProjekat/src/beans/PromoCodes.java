@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,9 +21,9 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
-public class Trainings {
+public class PromoCodes {
 	
-	private HashMap<String, Training> trainings = new HashMap<String, Training>();
+	private HashMap<String, PromoCode> promoCodes = new HashMap<String, PromoCode>();
 	
 	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -36,68 +37,70 @@ public class Trainings {
 	    }
     }).setPrettyPrinting().create();
 	
-	public Trainings(){
+	public PromoCodes(){
 		try {
-			readTrainings();
+			readPromoCodes();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void readTrainings() throws Exception
+	public void readPromoCodes() throws Exception
     {
-		String json = new String(Files.readAllBytes(Paths.get("./static/data/trainings.json")));
-		Type type = new TypeToken<HashMap<String, Training>>(){}.getType();
-		trainings = g.fromJson(json, type);
+		String json = new String(Files.readAllBytes(Paths.get("./static/data/promoCodes.json")));
+		Type type = new TypeToken<HashMap<String, PromoCode>>(){}.getType();
+		promoCodes = g.fromJson(json, type);
     }
 	
-	public void writeTrainings(HashMap<String, Training> trainings) throws Exception
+	public void writePromoCodes(HashMap<String, PromoCode> promoCodes) throws Exception
     {
-		FileWriter writer = new FileWriter("./static/data/trainings.json");
-		g.toJson(trainings, writer);
+		FileWriter writer = new FileWriter("./static/data/promoCodes.json");
+		g.toJson(promoCodes, writer);
 		writer.flush();
 		writer.close();
     }
 
-	public Collection<Training> getValues() {
-		return trainings.values();
+	public Collection<PromoCode> getValues() {
+		HashMap<String, PromoCode> filtered = new HashMap<String, PromoCode>(promoCodes);
+		filtered.keySet().removeAll(promoCodes.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+		return filtered.values();
 	}
 
-	public Training getTraining(String id) {
-		return trainings.get(id);
+	public PromoCode getPromoCode(String id) {
+		return promoCodes.get(id);
 	}
 
-	public void addTraining(Training training) {
+	public void addPromoCode(PromoCode promoCode) {
 		Integer maxId = -1;
-		for (String id : trainings.keySet()) {
+		for (String id : promoCodes.keySet()) {
 			int idNum = Integer.parseInt(id);
 			if (idNum > maxId) {
 				maxId = idNum;
 			}
 		}
 		maxId++;
-		training.setId(maxId.toString());
-		trainings.put(training.getId(), training);
+		promoCode.setId(maxId.toString());
+		promoCodes.put(promoCode.getId(), promoCode);
 		try {
-			writeTrainings(trainings);
+			writePromoCodes(promoCodes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void edit(String id, Training training) {
-		trainings.put(id, training);
+	public void edit(String id, PromoCode promoCode) {
+		promoCodes.put(id, promoCode);
 		try {
-			writeTrainings(trainings);
+			writePromoCodes(promoCodes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void delete(String id) {
-		trainings.remove(id);
+		promoCodes.get(id).setDeleted(true);
 		try {
-			writeTrainings(trainings);
+			writePromoCodes(promoCodes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

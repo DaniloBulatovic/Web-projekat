@@ -19,10 +19,10 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import beans.Membership;
-import services.MembershipService;
+import beans.PromoCode;
+import services.PromoCodeService;
 
-public class MembershipController {
+public class PromoCodeController {
 	
 	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -35,55 +35,64 @@ public class MembershipController {
 	        return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 	    }
     }).setPrettyPrinting().create();
-	private static MembershipService membershipService = new MembershipService();
+	private static PromoCodeService promoCodeService = new PromoCodeService();
 	
 	public static void initializeController() {
-		getMemberships();
-		getMembership();
-		addMembership();
-		editMembership();
-		deleteMembership();
+		getPromoCodes();
+		getPromoCode();
+		getPromoCodeByCode();
+		addPromoCode();
+		editPromoCode();
+		deletePromoCode();
 	}
 	
-	public static void getMemberships() {
-		get("rest/memberships/", (req, res) -> {
+	public static void getPromoCodes() {
+		get("rest/promoCodes/", (req, res) -> {
 			res.type("application/json");
-			return g.toJson(membershipService.getMemberships());
+			return g.toJson(promoCodeService.getPromoCodes());
 		});
 	}
 	
-	public static void getMembership() {
-		get("rest/memberships/:id", (req, res) -> {
+	public static void getPromoCode() {
+		get("rest/promoCodes/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			return g.toJson(membershipService.getMembership(id));
+			return g.toJson(promoCodeService.getPromoCode(id));
 		});
 	}
 	
-	public static void addMembership() {
-		post("rest/memberships/add", (req, res) -> {
+	public static void getPromoCodeByCode() {
+		get("rest/promoCodes/code/:id", (req, res) -> {
 			res.type("application/json");
-			Membership membership = g.fromJson(req.body(), Membership.class);
-			membershipService.addMembership(membership);
+			String id = req.params("id");
+			return g.toJson(promoCodeService.getPromoCodeByCode(id));
+		});
+	}
+	
+	public static void addPromoCode() {
+		post("rest/promoCodes/add", (req, res) -> {
+			res.type("application/json");
+			PromoCode promoCode = g.fromJson(req.body(), PromoCode.class);
+			promoCodeService.addPromoCode(promoCode);
 			return "SUCCESS";
 		});
 	}
 	
-	public static void editMembership() {
-		put("rest/memberships/edit/:id", (req, res) -> {
+	public static void editPromoCode() {
+		put("rest/promoCodes/edit/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			Membership membership = g.fromJson(req.body(), Membership.class);
-			membershipService.editMembership(id, membership);
+			PromoCode promoCode = g.fromJson(req.body(), PromoCode.class);
+			promoCodeService.editPromoCode(id, promoCode);
 			return "SUCCESS";
 		});
 	}
 	
-	public static void deleteMembership() {
-		delete("rest/memberships/delete/:id", (req, res) -> {
+	public static void deletePromoCode() {
+		delete("rest/promoCodes/delete/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			membershipService.deleteMembership(id);
+			promoCodeService.deletePromoCode(id);
 			return "SUCCESS";
 		});
 	}

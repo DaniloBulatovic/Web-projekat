@@ -73,14 +73,18 @@ Vue.component("memberships", {
 						this.user = { username: "", password: "", role: ""};
 						if (response.data != "ERROR" && response.data != null){
 							this.user = response.data;
-							if(this.user.role === 'Kupac'){
-								this.activeMembership = this.user.membership;
-								axios.get('rest/memberships/').then(response => (this.memberships = response.data));
-							}else if(this.user.role === 'Administrator'){
-								axios.get('rest/memberships/').then(response => (this.memberships = response.data));
-							}else{
-								router.push("/");
-							}
+							axios.get('rest/users/' + this.user.id).then(response => {
+								this.user = response.data;
+							}).then(response =>{
+								if(this.user.role === 'Kupac'){
+									this.activeMembership = this.user.membership;
+									axios.get('rest/memberships/').then(response => (this.memberships = response.data));
+								}else if(this.user.role === 'Administrator'){
+									axios.get('rest/memberships/').then(response => (this.memberships = response.data));
+								}else{
+									router.push("/");
+								}
+							});
 						}else{
 							router.push("/");
 						}
