@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -71,7 +72,9 @@ public class TrainingsHistory {
     }
 
 	public Collection<TrainingHistory> getValues() {
-		return trainingsHistory.values();
+		HashMap<String, TrainingHistory> filtered = new HashMap<String, TrainingHistory>(trainingsHistory);
+		filtered.keySet().removeAll(trainingsHistory.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+		return filtered.values();
 	}
 
 	public TrainingHistory getTrainingHistory(String id) {
@@ -106,7 +109,7 @@ public class TrainingsHistory {
 	}
 
 	public void delete(String id) {
-		trainingsHistory.remove(id);
+		trainingsHistory.get(id).setDeleted(true);
 		try {
 			writeTrainingsHistory(trainingsHistory);
 		} catch (Exception e) {

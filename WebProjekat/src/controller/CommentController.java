@@ -20,6 +20,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import beans.Comment;
+import beans.User;
 import services.CommentService;
 
 public class CommentController {
@@ -62,10 +63,11 @@ public class CommentController {
 	}
 	
 	public static void getCommentsByVenue() {
-		get("rest/comments/venue/:id", (req, res) -> {
+		post("rest/comments/venue/:id", (req, res) -> {
 			res.type("application/json");
 			String id = req.params("id");
-			return g.toJson(commentService.getCommentsByVenue(id));
+			User user = g.fromJson(req.body(), User.class);
+			return g.toJson(commentService.getCommentsByVenue(id, user));
 		});
 	}
 	

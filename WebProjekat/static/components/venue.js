@@ -113,16 +113,21 @@ Vue.component("venue", {
 							<th>Kupac</th>
 							<th>Komentar</th>
 							<th>Ocena</th>
+							<th v-if="user.role === 'Administrator'">Status</th>
+							<th v-if="user.role === 'Administrator'">Akcija</th>
 						</tr>
 						<tr v-for="(c, index) in comments">
 							<td>{{c.customer.name}} {{c.customer.surname}}</td>
 							<td>{{c.text}}</td>
 							<td style="text-align:center">{{c.grade}}</td>
+							<td v-if="user.role === 'Administrator' && c.isApproved">Odobren</td>
+							<td v-if="user.role === 'Administrator' && !c.isApproved">Nije odobren</td>
+							<td v-if="user.role === 'Administrator'" style="text-align:center"><button v-if="!c.isApproved" class="confirm" @click="approveComment(c.id, c)">Odobri</button><button class="cancel" @click="deleteComment(c.id, index)">Obriši</button></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
-			<tr v-if="this.user.role === 'Administrator'">
+			<tr v-if="user.role === 'Administrator'">
 				<th colspan=2><button v-on:click="deleteVenue" id="delete-venue">Obriši objekat</button></th>
 			</tr>
 		</table>
@@ -149,6 +154,17 @@ Vue.component("venue", {
 	            .delete('rest/venues/delete/' + this.id).then(response => (this.$router.go()));
     		}
     	},
+		approveComment : function(id, comment){
+			comment.isApproved = true;
+			axios.put('rest/comments/edit/' + id, comment);
+		},
+		deleteComment : function(id, index){
+			r = confirm("Da li ste sigurni?")
+    		if (r){
+	    		axios
+	            .delete('rest/comments/delete/' + id).then(response => (this.comments.splice(index, 1)));
+    		}
+		}
 	},
 	mounted () {
 		this.id = this.value;
@@ -194,7 +210,7 @@ Vue.component("venue", {
 			.then(response => {
 				this.trainings = response.data;
 			})
-			axios.get('rest/comments/venue/' + this.id)
+			axios.post('rest/comments/venue/' + this.id, this.user)
 			.then(response => {
 				this.comments = response.data;
 			})

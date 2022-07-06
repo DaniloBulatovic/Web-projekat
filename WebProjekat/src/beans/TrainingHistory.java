@@ -9,6 +9,7 @@ public class TrainingHistory {
 	private Training training;
 	private User customer;
 	private User trainer;
+	private boolean isDeleted;
 	
 	public TrainingHistory() {
 	
@@ -52,5 +53,13 @@ public class TrainingHistory {
 
 	public void setTrainer(User trainer) {
 		this.trainer = trainer;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import beans.Comment;
 import beans.Comments;
+import beans.User;
+import beans.enums.Role;
 
 public class CommentService {
 	
@@ -15,8 +17,12 @@ public class CommentService {
 		return comments.getValues();
 	}
 	
-	public Collection<Comment> getCommentsByVenue(String id){
-		return comments.getValues().stream().filter(comment -> comment.getSportsVenue().getId().equals(id)).collect(Collectors.toCollection(HashSet::new));
+	public Collection<Comment> getCommentsByVenue(String id, User user){
+		if (user.getRole() != null) {
+			if (user.getRole().equals(Role.Administrator) || user.getRole().equals(Role.Manager))
+				return comments.getValues().stream().filter(comment -> comment.getSportsVenue().getId().equals(id)).collect(Collectors.toCollection(HashSet::new));
+		}
+		return comments.getValues().stream().filter(comment -> comment.getSportsVenue().getId().equals(id) && comment.isApproved()).collect(Collectors.toCollection(HashSet::new));
 	}
 	
 	public Comment getComment(String id) {

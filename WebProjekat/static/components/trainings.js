@@ -51,6 +51,9 @@ Vue.component("trainings", {
 					<th v-if="user.role !== 'Menadžer'">Tip objekta</th>
 	    			<th v-on:click="sortTable(4, false, true)" style="cursor:pointer">Datum treniranja</th>
 					<th v-on:click="sortTable(5, true, false)" style="cursor:pointer">Cena</th>
+					<th v-if="user.role === 'Administrator'">Trener</th>
+					<th v-if="user.role === 'Administrator'">Kupac</th>
+					<th v-if="user.role === 'Administrator' || user.role === 'Trener'">Akcija</th>
 	    		</tr>
 	    		<tr v-for="(t, index) in filteredTrainings">
 	    			<td>{{t.training.name}}</td>
@@ -59,7 +62,11 @@ Vue.component("trainings", {
 					<td v-if="user.role !== 'Menadžer'">{{t.training.sportsVenue.venueType}}</td>
 	    			<td>{{formatDateTime(t.dateTimeOfRegistration)}}</td>
 					<td style="text-align:right">{{t.training.price}}</td>
-	    		</tr>
+					<td v-if="user.role === 'Administrator'">{{t.trainer.name}} {{t.trainer.surname}}</td>
+					<td v-if="user.role === 'Administrator'">{{t.customer.name}} {{t.customer.surname}}</td> 
+					<td v-if="user.role === 'Administrator'"><button class="cancel" @click="deleteTraining(t.id, index)">Obriši</button></td>
+					<td v-if="user.role === 'Trener'"><button class="cancel" @click="cancelTraining(t, index)">Otkaži</button></td>
+				</tr>
 	    	</table>
     	</div>		  
     	`,
@@ -75,12 +82,33 @@ Vue.component("trainings", {
 								axios.get('rest/trainingsHistory/customer/' + this.user.id).then(response => (this.trainings = response.data));
 							else if (this.user.role === 'Menadžer')
 								axios.get('rest/trainingsHistory/venue/' + this.user.sportsVenue.id).then(response => (this.trainings = response.data));
+							else if (this.user.role === 'Administrator')
+								axios.get('rest/trainingsHistory/').then(response => (this.trainings = response.data));
 						}else{
 							router.push("/");
 						}
 			});
     },
     methods: {
+		cancelTraining : function(training, index) {
+			let todaysDate = new Date();
+			if (new Date(training.dateTimeOfRegistration) > todaysDate.setDate(todaysDate.getDate() + 2)){
+	    		r = confirm("Da li ste sigurni?")
+	    		if (r){
+		    		axios
+		            .delete('rest/trainingsHistory/delete/' + training.id).then(response => (this.trainings.splice(index, 1)));
+	    		}
+			}else{
+				alert("Možete otkazati trening najkasnije 2 dana unapred!");
+			}
+    	},
+		deleteTraining : function(id, index) {
+    		r = confirm("Da li ste sigurni?")
+    		if (r){
+	    		axios
+	            .delete('rest/trainingsHistory/delete/' + id).then(response => (this.trainings.splice(index, 1)));
+    		}
+    	},
 		formatDate(date) {
     		return new Intl.DateTimeFormat('en-US', { dateStyle: 'short'}).format(new Date(date))
   		},
@@ -212,6 +240,8 @@ Vue.component("trainings", {
 					axios.get('rest/trainingsHistory/customer/' + this.user.id).then(response => (this.trainings = response.data));
 				else if (this.user.role === 'Menadžer')
 					axios.get('rest/trainingsHistory/venue/' + this.user.sportsVenue.id).then(response => (this.trainings = response.data));
+				else if (this.user.role === 'Administrator')
+					axios.get('rest/trainingsHistory/').then(response => (this.trainings = response.data));
 				return this.trainings;
 			}
 			else{

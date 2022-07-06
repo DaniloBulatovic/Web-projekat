@@ -20,7 +20,7 @@ Vue.component("menu-bar", {
 	</div>
 	<div class="third" style="width:25%; height:100%; display: table-cell">
 		<div class="center">
-			<button v-if="user.role === 'Menadžer'" @click="showTrainings">Treninzi</button>
+			<button v-if="user.role === 'Menadžer' || user.role === 'Administrator'" @click="showTrainings">Treninzi</button>
 		</div>
 	</div>
 	<div class="fourth" style="width:25%; height:100%; display: table-cell">

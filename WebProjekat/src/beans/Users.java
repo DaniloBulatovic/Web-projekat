@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -60,7 +61,9 @@ public class Users {
     }
 
 	public Collection<User> getValues() {
-		return users.values();
+		HashMap<String, User> filtered = new HashMap<String, User>(users);
+		filtered.keySet().removeAll(users.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+		return filtered.values();
 	}
 
 	public User getUser(String id) {
@@ -95,7 +98,7 @@ public class Users {
 	}
 
 	public void delete(String id) {
-		users.remove(id);
+		users.get(id).setDeleted(true);
 		try {
 			writeUsers(users);
 		} catch (Exception e) {

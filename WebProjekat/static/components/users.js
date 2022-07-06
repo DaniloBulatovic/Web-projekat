@@ -36,16 +36,18 @@ Vue.component("users", {
 	    			<th>Uloga</th>
 	    			<th>Tip korisnika</th>
 	    			<th v-on:click="sortTable(6, true)" style="cursor:pointer">Broj sakupljenih bodova</th>
+					<th>Akcija</th>
 	    		</tr>
 	    		<tr v-for="(u, index) in filteredUsers">
 	    			<td>{{u.name}}</td>
 	    			<td>{{u.surname}}</td>
 	    			<td>{{u.username}}</td>
-	    			<td style="text-align:center">{{u.dateOfBirth}}</td>
+	    			<td style="text-align:center">{{formatDate(u.dateOfBirth)}}</td>
 	    			<td>{{u.role}}</td>
 	    			<td v-if="u.customerType != null">{{u.customerType.typeName}}</td>
 					<td v-if="u.customerType == null"> </td>	
 	    			<td style="text-align:center">{{u.points}}</td>
+					<td><button class="cancel" @click="deleteUser(u.id, index)">Obriši</button></td>
 	    		</tr>
 	    	</table>
     	</div>		  
@@ -67,6 +69,17 @@ Vue.component("users", {
           .then(response => (this.users = response.data))
     },
     methods: {
+		deleteUser : function(id, index) {
+    		r = confirm("Da li ste sigurni?")
+    		if (r){
+	    		axios
+	            .delete('rest/users/delete/' + id).then(response => (this.users.splice(index, 1)));
+    		}
+    	},
+		formatDate(date) {
+			if (date)
+    		return new Intl.DateTimeFormat('rs-SR', { dateStyle: 'medium'}).format(new Date(date))
+  		},
 		filteredRoles: function (val, idx, arr) {
           for(var i = 0; i < idx; i++) {
             if(arr[i].role === val.role) {

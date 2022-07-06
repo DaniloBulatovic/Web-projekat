@@ -75,7 +75,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.confirm, #create-venue, #edit-training-confirm, #add-training, #add-content, #edit-content-confirm { 
+#profile_table input.confirm, #create-venue, #edit-training-confirm, #add-training, #add-content, #edit-content-confirm, .confirm { 
     background: lightgreen;
     border:1px solid forestgreen;
     -moz-border-radius:3px;
@@ -89,7 +89,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.cancel, #delete-venue, #edit-training-cancel, #edit-content-cancel{
+#profile_table input.cancel, #delete-venue, #edit-training-cancel, #edit-content-cancel, .cancel{
     background: lightcoral;
     border:1px solid indianred;
     -moz-border-radius:3px;
