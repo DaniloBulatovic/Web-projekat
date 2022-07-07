@@ -9,13 +9,13 @@
     "dateOfBirth": "2000-06-02T12:00:00",
     "role": "Kupac",
     "membership": {
-      "id": "jrkdob547r",
-      "type": "Godišnje",
-      "dateOfPaying": "2022-07-06T18:45:52",
-      "expirationDate": "2023-07-06T18:45:52",
-      "price": 3200.0,
+      "id": "izldo54hpb",
+      "type": "Mesečno",
+      "dateOfPaying": "2022-07-07T15:09:03",
+      "expirationDate": "2022-08-07T15:09:03",
+      "price": 785.7,
       "isActive": true,
-      "numberOfAppointments": 0,
+      "numberOfAppointments": 100,
       "isDeleted": false
     },
     "visitedVenues": [
@@ -40,11 +40,11 @@
         "isDeleted": false
       }
     ],
-    "points": 15,
+    "points": 2500,
     "customerType": {
       "typeName": "Bronzani",
-      "discount": 5.0,
-      "requiredPoints": 0
+      "discount": 0.0,
+      "requiredPoints": 3000
     },
     "isDeleted": false
   },
@@ -91,11 +91,43 @@
     "gender": "Žensko",
     "dateOfBirth": "2001-09-12T12:00:00",
     "role": "Kupac",
+    "visitedVenues": [
+      {
+        "id": "4",
+        "name": "Test",
+        "venueType": "Sportski centar",
+        "content": [
+          {
+            "id": "1",
+            "name": "Bazen",
+            "type": "Bazen",
+            "description": "Opis 1",
+            "duration": 0,
+            "image": "./images/icons/no-image.png"
+          }
+        ],
+        "isWorking": true,
+        "location": {
+          "latitude": 45.244807,
+          "longitude": 19.839894,
+          "address": {
+            "street": "Владимира Николића",
+            "number": "1",
+            "city": "Град Нови Сад",
+            "postalCode": "21102",
+            "country": "Србија"
+          }
+        },
+        "logoPath": "./images/icons/no-image.png",
+        "averageGrade": 0.0,
+        "isDeleted": false
+      }
+    ],
     "points": 65,
     "customerType": {
       "typeName": "Srebrni",
-      "discount": 15.0,
-      "requiredPoints": 50
+      "discount": 3.0,
+      "requiredPoints": 4000
     },
     "isDeleted": false
   },

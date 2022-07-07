@@ -17,7 +17,7 @@ public class TrainingHistoryService {
 	}
 	
 	public Collection<TrainingHistory> getTrainingsHistoryByCustomer(String id){
-		return trainingsHistory.getValues().stream().filter(trainingHistory -> trainingHistory.getCustomer().getId().equals(id) && (trainingHistory.getDateTimeOfRegistration().plusMonths(1).plusDays(1).isAfter(LocalDateTime.now()))).collect(Collectors.toCollection(HashSet::new));
+		return trainingsHistory.getValues().stream().filter(trainingHistory -> trainingHistory.getCustomer().getId().equals(id) && (trainingHistory.getDateTimeOfTraining().plusMonths(1).plusDays(1).isAfter(LocalDateTime.now()))).collect(Collectors.toCollection(HashSet::new));
 	}
 	
 	public Collection<TrainingHistory> getTrainingsHistoryByTrainer(String id){

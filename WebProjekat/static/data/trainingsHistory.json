@@ -2,6 +2,7 @@
   "1": {
     "id": "1",
     "dateTimeOfRegistration": "2022-07-02T12:30:00",
+    "dateTimeOfTraining": "2022-07-07T14:30:00",
     "training": {
       "id": "1",
       "name": "Početni trening",
@@ -98,6 +99,7 @@
   "2": {
     "id": "2",
     "dateTimeOfRegistration": "2022-06-02T12:00:00",
+    "dateTimeOfTraining": "2022-06-09T10:15:00",
     "training": {
       "id": "2",
       "name": "Treninig 1",
@@ -182,7 +184,8 @@
   },
   "3": {
     "id": "3",
-    "dateTimeOfRegistration": "2022-07-14T12:30:00",
+    "dateTimeOfRegistration": "2022-07-10T12:30:00",
+    "dateTimeOfTraining": "2022-07-14T12:30:00",
     "training": {
       "id": "2",
       "name": "Treninig 1",

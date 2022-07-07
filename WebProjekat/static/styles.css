@@ -126,20 +126,20 @@ body, html {
 	table-layout: fixed;
 }
 
-table.venues_table, table.users_table, .trainings_table, .venue_trainings, .venue_content {
+table.venues_table, table.users_table, .trainings_table, .venue_trainings, .venue_content, .default-table {
 	border-collapse: collapse;
 }
 
-.venues_table th, .users_table th, .trainings_table th, .venue_trainings th, .venue_content th {
+.venues_table th, .users_table th, .trainings_table th, .venue_trainings th, .venue_content th, .default-table th {
 	background: powderblue;
 }
 
-.venues_table th, .venues_table td, .users_table th, .users_table td, .venue_trainings th, .venue_trainings td, .venue_content th, .venue_content td, .trainings_table th, .trainings_table td {
+.venues_table th, .venues_table td, .users_table th, .users_table td, .venue_trainings th, .venue_trainings td, .venue_content th, .venue_content td, .trainings_table th, .trainings_table td, .default-table th, .default-table td {
 	border: 1px solid;
 	padding: 5px;
 }
 
-.venues_table tr:hover, .users_table tr:hover, .trainings_table tr:hover {
+.venues_table tr:hover, .users_table tr:hover, .trainings_table tr:hover, .default-table tr:hover {
 	background: aliceblue;
 }
 

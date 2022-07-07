@@ -49,13 +49,60 @@ Vue.component("user-profile", {
 				<td>Sportski objekat</td>
 				<td><input type = "text" v-model = "user.sportsVenue" readonly></td>
 			</tr>
-			<tr v-if="user.role === 'Kupac'">
-				<td>Članstvo</td>
-				<td><input type = "text" v-model="user.membership" readonly></td>
+			<tr v-if="user.role === 'Kupac' && user.membership">
+				<th>Članarina</th>
 			</tr>
-			<tr v-if="user.role === 'Kupac'">
-				<td>Posećeni objekti</td>
-				<td><input type = "text" v-model = "user.visitedVenues" readonly></td>
+			<tr v-if="user.role === 'Kupac' && user.membership">
+				<td colspan=2>
+					<table style="background:lightgray">
+						<tr>
+							<td>Tip</td>
+							<td><input type="text" v-model="user.membership.type" readonly></td>
+						</tr>
+						<tr>
+							<td>Datum plaćanja</td>
+							<td><input type="text" v-model="user.membership.dateOfPaying" readonly></td>
+						</tr>
+						<tr>
+							<td>Datum isteka</td>
+							<td><input type="text" v-model="user.membership.expirationDate" readonly></td>
+						</tr>
+						<tr>
+							<td>Cena</td>
+							<td><input type="text" v-model="user.membership.price" readonly></td>
+						</tr>
+						<tr>
+							<td>Broj termina</td>
+							<td v-if="user.membership.numberOfAppointments !== 0"><input type="text" v-model="user.membership.numberOfAppointments" readonly></td>
+							<td v-if="user.membership.numberOfAppointments === 0"><input type="text" value="Neograničeno" readonly></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr v-if="user.role === 'Kupac' && user.visitedVenues">
+				<th>Posećeni objekti</th>
+			</tr>
+			<tr v-if="user.role === 'Kupac' && user.visitedVenues">
+				<td colspan=2>
+					<table class="default-table">
+						<tr>
+							<th>Logo</th>
+							<th>Naziv</th>
+							<th>Tip</th>
+							<th>Lokacija</th>
+							<th>Prosečna ocena</th>
+							<th>Radno vreme</th>
+						</tr>
+						<tr v-for="(v, index) in user.visitedVenues">
+							<td style="text-align:center"><img v-bind:src=v.logoPath width="75%"></img></td>
+			    			<td>{{v.name}}</td>
+			    			<td>{{v.venueType}}</td>
+			    			<td>{{v.location.address.street}} {{v.location.address.number}}, {{v.location.address.city}}, {{v.location.address.postalCode}} ({{v.location.latitude}}, {{v.location.longitude}})</td>
+			    			<td style="text-align:center">{{v.averageGrade}}</td>
+			    			<td style="text-align:center">{{v.workingHours}}</td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 			<tr v-if="user.role === 'Kupac'">
 				<td>Tip kupca</td>

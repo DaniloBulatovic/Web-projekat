@@ -98,6 +98,6 @@
     },
     "description": "Opis treninga",
     "image": "./images/trainings/training.png",
-    "price": 1000.0
+    "price": 0
   }
 }
