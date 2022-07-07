@@ -60,7 +60,7 @@ body, html {
 	float: right;
 }
 
-#menu a, #userMenu a, #userMenu input, input.submit, #create-venue-table .button, .menu-bar button, .edit-training, #training .button, .edit-content, #content .button, .button { 
+.button { 
     background: powderblue;
     border:1px solid steelblue;
     -moz-border-radius:3px;
@@ -75,7 +75,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.confirm, #create-venue, #edit-training-confirm, #add-training, #add-content, #edit-content-confirm, .confirm { 
+.confirm { 
     background: lightgreen;
     border:1px solid forestgreen;
     -moz-border-radius:3px;
@@ -89,7 +89,7 @@ body, html {
     font-weight: bold;
 }
 
-#profile_table input.cancel, #delete-venue, #edit-training-cancel, #edit-content-cancel, .cancel{
+.cancel{
     background: lightcoral;
     border:1px solid indianred;
     -moz-border-radius:3px;
@@ -103,43 +103,77 @@ body, html {
     font-weight: bold;
 }
 
-#userMenu label {
-	display: inline-block;
-	font-weight: bold;
-	margin: .5em .5em;
-	max-width: 140px;
-	word-wrap: break-word;
-	background: powderblue;
-    border:1px solid steelblue;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    -khtml-border-radius:3px;
-    border-radius:3px;
-    color:#333;
-    padding:.3em .5em;
-    cursor: pointer;
-}
-
-#create-venue-table {
+.menu-logo {
+	display:flex;
+	justify-content:center;
+	align-content: center;
+	flex-direction: column;
+	text-align:center;
 	width:100%;
-	background:aliceblue;
-	table-layout: fixed;
+	height:100%;
+	background: steelblue;
+	cursor: pointer;
+	border: 1px solid gray;
+	font-weight: bold;
+	color: white
 }
 
-table.venues_table, table.users_table, .trainings_table, .venue_trainings, .venue_content, .default-table {
+.menu-button1 {
+	display:flex;
+	justify-content:center;
+	align-content: center;
+	flex-direction: column;
+	text-align:center;
+	width:100%;
+	height:100%;
+	background: lightskyblue;
+	cursor: pointer;
+	border: 1px solid gray;
+	font-weight: bold
+}
+
+.menu-button2 {
+	display:flex;
+	justify-content:center;
+	align-content: center;
+	flex-direction: column;
+	text-align:center;
+	width:100%;
+	height:100%;
+	background: powderblue;
+	cursor: pointer;
+	border: 1px solid gray;
+	font-weight: bold
+}
+
+.menu-login {
+	flex: none;
+	justify-content:center;
+	align-content: center;
+	flex-direction: column;
+	text-align:center;
+	width:100%;
+	height:100%;
+	background: lightskyblue;
+	cursor: pointer;
+	border: 1px solid gray;
+	font-weight: bold
+}
+
+.default-table {
 	border-collapse: collapse;
 }
 
-.venues_table th, .users_table th, .trainings_table th, .venue_trainings th, .venue_content th, .default-table th {
+.default-table th {
 	background: powderblue;
 }
 
-.venues_table th, .venues_table td, .users_table th, .users_table td, .venue_trainings th, .venue_trainings td, .venue_content th, .venue_content td, .trainings_table th, .trainings_table td, .default-table th, .default-table td {
+.default-table th, .default-table td {
 	border: 1px solid;
 	padding: 5px;
 }
 
-.venues_table tr:hover, .users_table tr:hover, .trainings_table tr:hover, .default-table tr:hover {
+.default-table tr:hover {
 	background: aliceblue;
 }
 

@@ -43,8 +43,8 @@ Vue.component("venues", {
 					<input type="text" v-model="searchLocation" placeholder="Lokacija..">
 					<input type="text" v-model="searchGrade" placeholder="Prosečna ocena..">
 	    		</p>
-				<button id="create-venue" v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
-	    		<table id="venues_table" class="venues_table">
+				<button class="confirm" v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
+	    		<table class="default-table">
 		    		<tr>
 		    			<th>Logo</th>
 		    			<th v-on:click="sortTable(1, false)" style="cursor:pointer">Naziv</th>
@@ -52,7 +52,6 @@ Vue.component("venues", {
 		    			<th v-on:click="sortTable(3, false)" style="cursor:pointer">Lokacija</th>
 		    			<th v-on:click="sortTable(4, true)" style="cursor:pointer">Prosečna ocena</th>
 		    			<th>Radno vreme</th>
-		    			<!--<th>Akcija</th>-->
 		    		</tr>
 		    		<tr v-for="(v, index) in filteredVenues" v-on:click="selectedVenue(v.id)">
 		    			<td style="text-align:center"><img v-bind:src=v.logoPath width="75%"></img></td>
@@ -61,10 +60,6 @@ Vue.component("venues", {
 		    			<td>{{v.location.address.street}} {{v.location.address.number}}, {{v.location.address.city}}, {{v.location.address.postalCode}} ({{v.location.latitude}}, {{v.location.longitude}})</td>
 		    			<td style="text-align:center">{{v.averageGrade}}</td>
 		    			<td style="text-align:center">{{v.workingHours}}</td>
-		    			<!--<td>
-		    				<button v-on:click="editVenue(v.id)">Izmeni</button>
-		    				<button v-on:click="deleteVenue(v.id, index)">Obriši</button>
-		    			</td>-->
 		    		</tr>
 		    	</table>
 			</div>
@@ -87,9 +82,6 @@ Vue.component("venues", {
     		this.selectedId = -1;
 			this.reloadVenue = !this.reloadVenue;
 			this.reloadNewVenue += this.reloadNewVenue;
-    	},
-    	editVenue : function(id) {
-    		router.push(`/venues/${id}`);
     	},
     	sortTable(n, isNumber) {
 			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

@@ -73,11 +73,11 @@ Vue.component("manager-venue", {
 					<td></td>
 				</tr>
 				<tr>
-					<td><button id="add-content" @click="addContent">Dodaj sadržaj</button></td>
+					<td><button class="confirm" @click="addContent">Dodaj sadržaj</button></td>
 				</tr>
 				<tr v-if=venue.content>
 					<td colspan=2>
-						<table class="venue_content" style="margin:auto; width:100%; text-align:center">
+						<table class="default-table" style="margin:auto; width:100%; text-align:center">
 							<tr>
 								<th>Slika</th>
 								<th>Naziv</th>
@@ -92,7 +92,7 @@ Vue.component("manager-venue", {
 								<td>{{c.type}}</td>
 								<td>{{c.description}}</td>
 								<td>{{c.duration}}</td>
-								<td><button class="edit-content" v-on:click="editContent(c.id)">Izmeni</button></td>
+								<td><button class="button" v-on:click="editContent(c.id)">Izmeni</button></td>
 							</tr>
 						</table>
 					</td>
@@ -101,11 +101,11 @@ Vue.component("manager-venue", {
 					<td>Treninzi</td>
 				<tr>
 				<tr>
-					<td><button id="add-training" @click="addTraining">Dodaj trening</button></td>
+					<td><button class="confirm" @click="addTraining">Dodaj trening</button></td>
 				</tr>
 				<tr v-if=trainings.length>
 					<td colspan=2>
-						<table class="venue_trainings" style="margin:auto; width:100%; text-align:center">
+						<table class="default-table" style="margin:auto; width:100%; text-align:center">
 							<tr>
 								<th>Slika</th>
 								<th>Naziv</th>
@@ -124,7 +124,7 @@ Vue.component("manager-venue", {
 								<td>{{t.trainer.name}} {{t.trainer.surname}}</td>
 								<td>{{t.duration}}</td>
 								<td style="text-align:center">{{t.price}}</td>
-								<td><button class="edit-training" v-on:click="editTraining(t.id)">Izmeni</button></td>
+								<td><button class="button" v-on:click="editTraining(t.id)">Izmeni</button></td>
 							</tr>
 						</table>
 					</td>
@@ -135,7 +135,7 @@ Vue.component("manager-venue", {
 				</tr>
 				<tr v-if=comments.length>
 					<td colspan=2>
-						<table class="venue_trainings">
+						<table class="default-table">
 							<tr>
 								<th>Kupac</th>
 								<th>Komentar</th>
@@ -155,7 +155,7 @@ Vue.component("manager-venue", {
 	</div>
 	<div style="width:25%; display: inline-block; float:right; margin: 0 -25%">
 		<h3>Treneri</h3>
-		<table class="venue_trainings">
+		<table class="default-table">
 			<tr>
 				<th>Ime</th>
 				<th>Prezime</th>
@@ -168,7 +168,7 @@ Vue.component("manager-venue", {
 			</tr>
 		</table>
 		<h3>Korisnici koji su posetili objekat</h3>
-		<table class="venue_trainings">
+		<table class="default-table">
 			<tr>
 				<th>Ime</th>
 				<th>Prezime</th>

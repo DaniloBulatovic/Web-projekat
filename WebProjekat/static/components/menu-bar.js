@@ -5,33 +5,45 @@ Vue.component("menu-bar", {
 		    }
 	},
 	template: ` 
-<div class="menu-bar" style="display: table; margin:auto; width:50%; height:100%">
-	<div class="first" style="width:25%; height:100%; display: table-cell">
-		<div class="center">
-			<button @click="showVenuesTable">Sportski objekti</button>
+<div class="menu-bar" style="display: table; width:70%; height:100%">
+	<div style="width:16%; height:100%; display: table-cell">
+		<div class="menu-logo" @click="showVenuesTable">
+			FitPass
 		</div>
 	</div>
-	<div class="second" style="width:25%; height:100%; display: table-cell">
-		<div class="center">
-			<button v-if="user.role === 'Administrator'" @click="showUsersTable">Korisnici</button>
-			<button v-if="user.role === 'Menadžer'" @click="showManagersVenue">Moj sportski objekat</button>
+	<div style="width:16%; height:100%; display: table-cell">
+		<div class="menu-button1" @click="showVenuesTable">
+			Sportski objekti
+		</div>
+	</div>
+	<div style="width:16%; height:100%; display: table-cell">
+		<div class="menu-button2" v-if="user.role === 'Administrator'" @click="showUsersTable">
+			Korisnici
+		</div>
+		<div class="menu-button2" v-if="user.role === 'Menadžer'" @click="showManagersVenue">
+			Moj sportski objekat
 			<button v-if="user.role === 'Trener' || user.role === 'Kupac'" @click="showTrainings">Moji treninzi</button>
 		</div>
-	</div>
-	<div class="third" style="width:25%; height:100%; display: table-cell">
-		<div class="center">
-			<button v-if="user.role === 'Menadžer' || user.role === 'Administrator'" @click="showTrainings">Treninzi</button>
-			<button v-if="user.role === 'Kupac'" @click="showMemberships">Članarine</button>
+		<div class="menu-button2" v-if="user.role === 'Trener' || user.role === 'Kupac'" @click="showTrainings">
+			Moji treninzi
 		</div>
 	</div>
-	<div class="fourth" style="width:25%; height:100%; display: table-cell">
-		<div class="center">
-			<button v-if="user.role === 'Administrator'" @click="showMemberships">Članarine</button>
+	<div style="width:16%; height:100%; display: table-cell">
+		<div class="menu-button1" v-if="user.role === 'Menadžer' || user.role === 'Administrator'" @click="showTrainings">
+			Treninzi
+		</div>
+		<div class="menu-button1" v-if="user.role === 'Kupac'" @click="showMemberships">
+			Članarine
 		</div>
 	</div>
-	<div class="fifth" style="width:25%; height:100%; display: table-cell">
-		<div class="center">
-			<button v-if="user.role === 'Administrator'" @click="showPromoCodes">Promo kodovi</button>
+	<div style="width:16%; height:100%; display: table-cell">
+		<div class="menu-button2" v-if="user.role === 'Administrator'" @click="showMemberships">
+			Članarine
+		</div>
+	</div>
+	<div style="width:16%; height:100%; display: table-cell">
+		<div class="menu-button1" v-if="user.role === 'Administrator'" @click="showPromoCodes">
+			Promo kodovi
 		</div>
 	</div>
 </div>		  

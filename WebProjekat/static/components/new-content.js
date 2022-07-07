@@ -60,7 +60,7 @@ Vue.component("new-content", {
 				<td><input type = "number" v-model = "content.duration"></td>
 			</tr>
 			<tr>
-				<th colspan=2><button v-on:click="addContent" id="add-content">Kreiraj sadržaj</button></th>
+				<th colspan=2><button v-on:click="addContent" class="confirm">Kreiraj sadržaj</button></th>
 			</tr>
 		</table>
 	</form>

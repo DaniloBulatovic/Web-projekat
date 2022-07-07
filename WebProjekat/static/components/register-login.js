@@ -14,18 +14,22 @@ Vue.component("register-login", {
 		    }
 	},
 	template: ` 
-<div>
-	<div id="menu" v-if=!loggedIn>
-		<a href="#/users/login" @click="displayTable = !displayTable" style="float:right">Prijava</a>
-		<a href="#/users/register" @click="displayTable = !displayTable" style="float:right">Registracija</a>
+<div style="display: flex; flex-direction: column;width:70%; float:right">
+	<div v-if=!loggedIn style="display: table; height:100%; width:100%">
+		<div class="menu-login" @click="showRegister" style="width:50%; height:100%; display: table-cell"><p>Registracija</p></div>
+		<div class="menu-login" @click="showLogin" style="width:50%; height:100%; display: table-cell"><p>Prijava</p></div>
 	</div>
-	<div id="userMenu" v-if=loggedIn>
-		<input type="submit" v-on:click="logout" value="Odjavi se" style="float:right">
-		<label v-on:click="profile">{{user.username}}</label>
-		<input v-if="this.user.role === 'Administrator'" type="submit" @click="displayAdminTable = !displayAdminTable" value="Kreiraj menadžera / trenera" style="display:block">
+	<div v-if=loggedIn style="display: table; height:100%; width:100%">
+		<div @click="profile" class="menu-login" style="width:50%; height:100%; display: table-cell"><p>{{user.username}} ({{user.role}})</p></div>
+		<div @click="logout" class="menu-login" style="width:50%; height:100%; display: table-cell"><p>Odjavi se</p></div>
+	</div>
+	<div v-if=loggedIn>
+		<button v-if="this.user.role === 'Administrator'" class="button" @click="displayAdminTable = !displayAdminTable" style="display:block;float:right">
+			Kreiraj novog menadžera / trenera
+		</button>
 	</div>
 	<form v-if=!loggedIn>
-		<table v-if=displayTable>
+		<table v-if=displayTable style="margin:auto; width:100%">
 			<tr>
 				<th colspan="2">{{title}}</th>
 			</tr>
@@ -43,7 +47,7 @@ Vue.component("register-login", {
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input class="submit" type="submit" v-on:click="register" v-bind:value="this.value" style="float:right">
+					<input class="button" type="submit" v-on:click="register" v-bind:value="this.value" style="float:right">
 				</th>
 			</tr>
 			<tr>
@@ -54,7 +58,7 @@ Vue.component("register-login", {
 		</table>
 	</form>
 	<form v-if=displayAdminTable>
-		<table>
+		<table style="margin:auto; width:100%">
 			<tr>
 				<th colspan="2">Kreiraj menadžera / trenera</th>
 			</tr>
@@ -76,7 +80,7 @@ Vue.component("register-login", {
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input class="submit" type="submit" v-on:click="adminRegister" value="Kreiraj" style="float:right">
+					<input class="button" type="submit" v-on:click="adminRegister" value="Kreiraj" style="float:right">
 				</th>
 			</tr>
 			<tr>
@@ -160,6 +164,14 @@ Vue.component("register-login", {
 		},
 		profile : function(){
 			router.push('/profile');
+		},
+		showLogin : function(){
+			this.displayTable = !this.displayTable;
+			router.push('/users/login');
+		},
+		showRegister : function(){
+			this.displayTable = !this.displayTable;
+			router.push('/users/register');
 		}
 	},
 	mounted () {

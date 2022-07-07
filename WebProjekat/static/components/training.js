@@ -17,7 +17,7 @@ Vue.component("training", {
 <div>
 	<form v-if=visible>
 	<h3>Izmena treninga</h3>
-		<table id="training" style="width:100%; background:aliceblue; table-layout: fixed; border: 1px solid gray">
+		<table style="width:100%; background:aliceblue; table-layout: fixed; border: 1px solid gray">
 			<tr>
 				<td><img v-bind:src=training.image width="75%"></img></td>
 				<td></td>
@@ -77,8 +77,8 @@ Vue.component("training", {
 				<td><input type = "number" v-model = "training.price"></td>
 			</tr>
 			<tr>
-				<td><button v-on:click="editTraining" id="edit-training-confirm">Sačuvaj izmene</button></td>
-				<td><button v-on:click="cancelTrainingEdit" id="edit-training-cancel">Otkaži</button></td>
+				<td><button v-on:click="editTraining" class="confirm">Sačuvaj izmene</button></td>
+				<td><button v-on:click="cancelTrainingEdit" class="cancel">Otkaži</button></td>
 			</tr>
 		</table>
 	</form>

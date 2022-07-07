@@ -11,7 +11,7 @@ Vue.component("memberships", {
 	    template: ` 
     	<div class="middlepane" style="float:right">
 			<h2 v-if="user.role !== 'Administrator'">Aktivna članarina</h2>
-    		<table v-if="activeMembership && user.role !== 'Administrator'" class="trainings_table" style="width:100%; text-align:center">
+    		<table v-if="activeMembership && user.role !== 'Administrator'" class="default-table" style="width:100%; text-align:center">
 	    		<tr>
 	    			<th>Tip</th>
 					<th>Datum plaćanja</th>
@@ -29,7 +29,7 @@ Vue.component("memberships", {
 	    	</table>
 			<label v-if="!activeMembership && user.role !== 'Administrator'" style="color:red">Nemate aktivnu članarinu</label>
     		<h2>Članarine</h2>
-    		<table class="trainings_table" style="width:100%; text-align:center">
+    		<table class="default-table" style="width:100%; text-align:center">
 	    		<tr>
 	    			<th>Tip</th>
 					<th>Cena</th>

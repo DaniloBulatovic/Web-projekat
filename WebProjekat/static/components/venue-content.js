@@ -62,8 +62,8 @@ Vue.component("venue-content", {
 				<td><input type = "number" v-model = "content.duration"></td>
 			</tr>
 			<tr>
-				<td><button v-on:click="editContent" id="edit-content-confirm">Sačuvaj izmene</button></td>
-				<td><button v-on:click="cancelContentEdit" id="edit-content-cancel">Otkaži</button></td>
+				<td><button v-on:click="editContent" class="confirm">Sačuvaj izmene</button></td>
+				<td><button v-on:click="cancelContentEdit" class="cancel">Otkaži</button></td>
 			</tr>
 		</table>
 	</form>

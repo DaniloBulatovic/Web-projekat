@@ -20,7 +20,7 @@ Vue.component("new-venue", {
 <div>
 	<form v-if=visible>
 	<h3>Dodavanje novog sportskog objekta</h3>
-		<table id="create-venue-table">
+		<table style="width:100%; background:aliceblue; table-layout: fixed">
 			<tr>
 				<td><img v-bind:src=venue.logoPath width="75%"></img></td>
 			</tr>
@@ -84,7 +84,7 @@ Vue.component("new-venue", {
 			</tr>
 			<tr>
 				<td></td>
-				<td> <label v-if="selectedManager === null" style="color:red">{{error}}</label></td>
+				<td><label v-if="selectedManager === null" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr v-if="managers.length == 0">
 				<th colspan=2>Nema slobodnog menadžera. Kreirajte novog:</th>
@@ -104,7 +104,7 @@ Vue.component("new-venue", {
 				<th colspan=2 style="color:red">{{managerError}}</th>
 			</tr>
 			<tr>
-				<th colspan=2><input type="submit" id="create-venue" v-on:click="addVenue" value="Kreiraj sportski objekat"></th>
+				<th colspan=2><input type="submit" class="confirm" v-on:click="addVenue" value="Kreiraj sportski objekat"></th>
 			</tr>
 		</table>
 	</form>

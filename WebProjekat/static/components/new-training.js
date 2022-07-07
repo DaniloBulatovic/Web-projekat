@@ -16,7 +16,7 @@ Vue.component("new-training", {
 <div>
 	<form v-if=visible>
 	<h3>Dodaj novi trening</h3>
-		<table id="training" style="width:100%; background:aliceblue; table-layout: fixed; border: 1px solid gray">
+		<table style="width:100%; background:aliceblue; table-layout: fixed; border: 1px solid gray">
 			<tr>
 				<td><img v-bind:src=training.image width="75%"></img></td>
 				<td></td>
@@ -76,7 +76,7 @@ Vue.component("new-training", {
 				<td><input type = "number" v-model = "training.price"></td>
 			</tr>
 			<tr>
-				<th colspan=2><button v-on:click="addTraining" id="add-training">Kreiraj trening</button></th>
+				<th colspan=2><button v-on:click="addTraining" class="confirm">Kreiraj trening</button></th>
 			</tr>
 		</table>
 	</form>

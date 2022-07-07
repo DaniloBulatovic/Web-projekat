@@ -43,7 +43,7 @@ Vue.component("trainings", {
 				<label> Do:</label>
 				<input type="date" v-model="searchDateMax">
 			</p>
-    		<table id="trainings_table" class="trainings_table" style="width:100%">
+    		<table class="default-table" style="width:100%">
 	    		<tr>
 	    			<th>Trening</th>
 					<th>Tip treninga</th>

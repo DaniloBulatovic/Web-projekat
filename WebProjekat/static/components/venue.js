@@ -66,7 +66,7 @@ Vue.component("venue", {
 			</tr>
 			<tr v-if=venue.content>
 				<td colspan=2>
-					<table class="venue_content" style="width:100%">
+					<table class="default-table" style="width:100%">
 						<tr>
 							<th>Slika</th>
 							<th>Naziv</th>
@@ -90,7 +90,7 @@ Vue.component("venue", {
 			</tr>
 			<tr v-if=trainings.length>
 				<td colspan=2>
-					<table class="venue_trainings" style="width:100%">
+					<table class="default-table" style="width:100%">
 						<tr>
 							<th>Slika</th>
 							<th>Naziv</th>
@@ -130,7 +130,7 @@ Vue.component("venue", {
 			</tr>
 			<tr v-if=comments.length>
 				<td colspan=2>
-					<table class="venue_trainings" style="width:100%">
+					<table class="default-table" style="width:100%">
 						<tr>
 							<th>Kupac</th>
 							<th>Komentar</th>
@@ -150,7 +150,7 @@ Vue.component("venue", {
 				</td>
 			</tr>
 			<tr v-if="user.role === 'Administrator'">
-				<th colspan=2><button v-on:click="deleteVenue" id="delete-venue">Obriši objekat</button></th>
+				<th colspan=2><button v-on:click="deleteVenue" class="cancel">Obriši objekat</button></th>
 			</tr>
 			<tr v-if="user.role === 'Kupac' && isCommentVisible">
 				<td colspan=2>
@@ -195,17 +195,6 @@ Vue.component("venue", {
 `
 	, 
 	methods : {
-		editVenue : function () {
-			event.preventDefault();
-			if (this.id != -1){
-				axios.put('rest/venues/edit/' + this.venue.id, this.venue).
-				then(response => (router.push(`/`)));
-			}
-			else{
-				axios.post('rest/venues/add', this.venue).
-				then(response => (router.push(`/`)));
-			}
-		},
 		deleteVenue : function() {
     		r = confirm("Da li ste sigurni?")
     		if (r){

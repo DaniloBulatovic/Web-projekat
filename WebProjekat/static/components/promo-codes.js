@@ -12,7 +12,7 @@ Vue.component("promo-codes", {
     	<div class="middlepane" style="float:right">
     		<h2>Promo kodovi</h2>
 			<button class="confirm" @click="showAddTable">Dodaj promo kod</button>
-    		<table class="trainings_table" style="width:100%; text-align:center">
+    		<table class="default-table" style="width:100%; text-align:center">
 	    		<tr>
 	    			<th>Kod</th>
 					<th>Popust</th>
