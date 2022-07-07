@@ -72,6 +72,10 @@ Vue.component("membership", {
 			else if (this.user.membership.type === 'Mesečno')
 				this.user.membership.expirationDate = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().slice(0, -5);
 
+			if(this.user.customerType){
+				this.user.membership.price -= this.user.membership.price * this.user.customerType.discount / 100;
+			}
+
 			if (this.validPromoCode){
 				this.validPromoCode.amount -= 1;
 				axios.put('rest/promoCodes/edit/' + this.validPromoCode.id, this.validPromoCode).then(response =>{

@@ -6,6 +6,7 @@ public class TrainingHistory {
 
 	private String id;
 	private LocalDateTime dateTimeOfRegistration;
+	private LocalDateTime dateTimeOfTraining;
 	private Training training;
 	private User customer;
 	private User trainer;
@@ -29,6 +30,14 @@ public class TrainingHistory {
 
 	public void setDateTimeOfRegistration(LocalDateTime dateTimeOfRegistration) {
 		this.dateTimeOfRegistration = dateTimeOfRegistration;
+	}
+	
+	public LocalDateTime getDateTimeOfTraining() {
+		return dateTimeOfTraining;
+	}
+
+	public void setDateTimeOfTraining(LocalDateTime dateTimeOfTraining) {
+		this.dateTimeOfTraining = dateTimeOfTraining;
 	}
 
 	public Training getTraining() {

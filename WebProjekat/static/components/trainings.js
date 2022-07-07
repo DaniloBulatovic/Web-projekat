@@ -60,12 +60,12 @@ Vue.component("trainings", {
 					<td>{{t.training.trainingType}}</td>
 	    			<td v-if="user.role !== 'Menadžer'">{{t.training.sportsVenue.name}}</td>
 					<td v-if="user.role !== 'Menadžer'">{{t.training.sportsVenue.venueType}}</td>
-	    			<td>{{formatDateTime(t.dateTimeOfRegistration)}}</td>
+	    			<td>{{formatDateTime(t.dateTimeOfTraining)}}</td>
 					<td style="text-align:right">{{t.training.price}}</td>
 					<td v-if="user.role === 'Administrator'">{{t.trainer.name}} {{t.trainer.surname}}</td>
 					<td v-if="user.role === 'Administrator'">{{t.customer.name}} {{t.customer.surname}}</td> 
-					<td v-if="user.role === 'Administrator'"><button class="cancel" @click="deleteTraining(t.id, index)">Obriši</button></td>
-					<td v-if="user.role === 'Trener'"><button class="cancel" @click="cancelTraining(t, index)">Otkaži</button></td>
+					<td v-if="user.role === 'Administrator'" style="text-align:center"><button class="cancel" @click="deleteTraining(t.id, index)">Obriši</button></td>
+					<td v-if="user.role === 'Trener'" style="text-align:center"><button class="cancel" @click="cancelTraining(t, index)">Otkaži</button></td>
 				</tr>
 	    	</table>
     	</div>		  
@@ -92,9 +92,15 @@ Vue.component("trainings", {
     methods: {
 		cancelTraining : function(training, index) {
 			let todaysDate = new Date();
-			if (new Date(training.dateTimeOfRegistration) > todaysDate.setDate(todaysDate.getDate() + 2)){
+			if (new Date(training.dateTimeOfTraining) > todaysDate.setDate(todaysDate.getDate() + 2)){
 	    		r = confirm("Da li ste sigurni?")
 	    		if (r){
+					if(training.training.price === 0){
+						if(training.customer.membership){
+							training.customer.membership.numberOfAppointments += 1;
+							axios.put('rest/users/edit/' + training.customer.id, training.customer);
+						}
+					}
 		    		axios
 		            .delete('rest/trainingsHistory/delete/' + training.id).then(response => (this.trainings.splice(index, 1)));
 	    		}
@@ -249,8 +255,8 @@ Vue.component("trainings", {
 							return (training.training.sportsVenue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
 								&& ((this.searchPriceMin !== '') ? training.training.price >= Number(this.searchPriceMin) : true)
 								&& ((this.searchPriceMax !== '') ? training.training.price <= Number(this.searchPriceMax) : true)
-								&& ((this.searchDateMin !== '') ? this.formatDate(training.dateTimeOfRegistration) >= this.formatDate(this.searchDateMin) : true)
-								&& ((this.searchDateMax !== '') ? this.formatDate(training.dateTimeOfRegistration) <= this.formatDate(this.searchDateMax) : true)
+								&& ((this.searchDateMin !== '') ? this.formatDate(training.dateTimeOfTraining) >= this.formatDate(this.searchDateMin) : true)
+								&& ((this.searchDateMax !== '') ? this.formatDate(training.dateTimeOfTraining) <= this.formatDate(this.searchDateMax) : true)
 					});
 			}
 		}

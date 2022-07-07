@@ -6,7 +6,15 @@ Vue.component("venue", {
 			  visible : false,
 		      venue: {id: '', name:null, venueType:0, content:[], isWorking:true, location:{ latitude:null, longitude:null, address:{ street:null, number:null, city:null, country:null, postalCode:null}}, logoPath:'./images/icons/no-image.png', averageGrade:null, workingHours:null},
 			  trainings: [],
-			  comments: []
+			  comments: [],
+			  isCommentVisible: false,
+		      newCommentText: '',
+			  newCommentGrade: '',
+			  error: '',
+			  isScheduling: false,
+			  trainingDate: null,
+			  training: null,
+			  scheduledTraining: {id : '', dateTimeOfRegistration: null, dateTimeOfTraining: null, training: null, customer: null, trainer: null}
 		    }
 	},
 	template: ` 
@@ -90,6 +98,7 @@ Vue.component("venue", {
 							<th>Opis</th>
 							<th>Trener</th>
 							<th>Cena</th>
+							<th v-if="user.role === 'Kupac'">Akcija</th>
 						</tr>
 						<tr v-for="(t, index) in trainings">
 							<td style="text-align:center"><img v-bind:src=t.image width="50%"></img></td>
@@ -98,9 +107,22 @@ Vue.component("venue", {
 							<td>{{t.description}}</td>
 							<td>{{t.trainer.name}} {{t.trainer.surname}}</td>
 							<td style="text-align:center">{{t.price}}</td>
+							<td v-if="user.role === 'Kupac'"><button class="confirm" @click="showScheduling(t)">Prijavi se</button></td>
 						</tr>
 					</table>
 				</td>
+			</tr>
+			<tr v-if="isScheduling">
+				<td>Izaberite datum treninga</td>
+				<td><input type="date" v-model="trainingDate"></input></td>
+			</tr>
+			<tr v-if="isScheduling">
+				<td></td>
+				<td v-if="trainingDate === null || this.trainingDate === ''" style="color:red">Obavezno!</td>
+			</tr>
+			<tr v-if="isScheduling">
+				<td></td>
+				<td><button class="confirm" @click="scheduleTraining">Zakaži</button></td>
 			</tr>
 			<tr v-if=comments.length>
 				<td>Komentari</td>
@@ -108,7 +130,7 @@ Vue.component("venue", {
 			</tr>
 			<tr v-if=comments.length>
 				<td colspan=2>
-					<table class="venue_trainings">
+					<table class="venue_trainings" style="width:100%">
 						<tr>
 							<th>Kupac</th>
 							<th>Komentar</th>
@@ -129,6 +151,43 @@ Vue.component("venue", {
 			</tr>
 			<tr v-if="user.role === 'Administrator'">
 				<th colspan=2><button v-on:click="deleteVenue" id="delete-venue">Obriši objekat</button></th>
+			</tr>
+			<tr v-if="user.role === 'Kupac' && isCommentVisible">
+				<td colspan=2>
+					<table style="margin:auto">
+						<tr>
+							<th colspan=2>Ostavite vaš komentar</th>
+						</tr>
+						<tr>
+							<td>Komentar</td>
+							<td><input type="text" v-model="newCommentText"></input></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td v-if="newCommentText === ''" style="color:red">{{error}}</td>
+						</tr>
+						<tr>
+							<td>Ocena</td>
+							<td>
+								<select v-model="newCommentGrade">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td v-if="newCommentGrade === ''" style="color:red">{{error}}</td>
+						</tr>
+						<tr style="text-align:center">
+							<td><button class="confirm" @click="postComment">Pošalji</button></td>
+							<td><button class="cancel" @click="cancelComment">Odustani</button></td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -164,6 +223,58 @@ Vue.component("venue", {
 	    		axios
 	            .delete('rest/comments/delete/' + id).then(response => (this.comments.splice(index, 1)));
     		}
+		},
+		showScheduling : function(training){
+			this.isScheduling = true;
+			this.training = training;
+		},
+		scheduleTraining : function(){
+			if (this.trainingDate !== null && this.trainingDate !== ''){
+				this.scheduledTraining.dateTimeOfRegistration = new Date().toISOString().slice(0, -5);
+				this.scheduledTraining.dateTimeOfTraining = new Date(this.trainingDate).toISOString().slice(0, -5);
+				this.scheduledTraining.training = this.training;
+				this.scheduledTraining.trainer = this.training.trainer;
+				this.scheduledTraining.customer = this.user;
+				if(this.user.membership){
+					if(this.user.membership.numberOfAppointments > 0 && this.training.price === 0){
+						this.user.membership.numberOfAppointments -= 1;
+						axios.put('rest/users/edit/' + this.user.id, this.user);
+					}
+				}
+				axios.post('rest/trainingsHistory/add', this.scheduledTraining).then(response => {
+					alert("Uspešno ste zakazali trening!");
+					if (this.user.visitedVenues){
+						if (this.user.visitedVenues.filter(v => v.id === this.venue.id).length == 0) {
+							this.isCommentVisible = true;
+							this.addVisitedVenue();
+						}
+					}else{
+						this.isCommentVisible = true;
+						this.user.visitedVenues = [];
+						this.addVisitedVenue();
+					}
+				});
+			}
+		},
+		postComment : function(){
+			if (this.newCommentText !== '' && this.newCommentGrade !== ''){
+				let comment = {};
+				comment.id = '';
+				comment.customer = this.user;
+				comment.sportsVenue = this.venue;
+				comment.text = this.newCommentText;
+				comment.grade = Number(this.newCommentGrade);
+				axios.post('rest/comments/add', comment);
+			}else{
+				this.error = "Obavezno!";
+			}
+		},
+		cancelComment : function(){
+			this.isCommentVisible = false;
+		},
+		addVisitedVenue : function(){
+			this.user.visitedVenues.push(this.venue);
+			axios.put('rest/users/edit/' + this.user.id, this.user);
 		}
 	},
 	mounted () {

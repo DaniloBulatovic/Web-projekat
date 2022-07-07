@@ -12,7 +12,7 @@
     "code": "POPUST10",
     "expirationDate": "2022-07-15T12:00:00",
     "discount": 10.0,
-    "amount": 50,
+    "amount": 49,
     "isDeleted": false
   },
   "3": {

@@ -2,6 +2,11 @@ Vue.component("venues", {
 	data: function () {
 	    return {
 		  search: "",
+		  multiSearch: false,
+		  searchName: "",
+		  searchType: "",
+		  searchLocation: "",
+		  searchGrade: "",
 		  selectedId: 0,
 		  reloadVenue: false,
 		  reloadNewVenue: 1,
@@ -26,8 +31,17 @@ Vue.component("venues", {
 	    			 	<option>Sve</option>
 					    <option v-for="(v, index) in filteredVenues">{{v.venueType}}</option>
 					</select>
-					<input type="checkbox" v-model="filterWorking">Prikaži samo otvorene
-	    			<input type="text" v-model="search" placeholder="Pretraga objekata..">
+					<input type="checkbox" v-model="filterWorking">Prikaži samo otvorene</input>
+	    			<input type="text" v-model="search" v-if="!multiSearch" placeholder="Pretraga objekata.."></input>
+	    		</p>
+				<p id="searchParagraph">
+					<input type="checkbox" v-model="multiSearch">Višestruka pretraga</input>
+				</p>
+				<p id="searchParagraph" v-if=multiSearch>
+	    			<input type="text" v-model="searchName" placeholder="Naziv..">
+					<input type="text" v-model="searchType" placeholder="Tip..">
+					<input type="text" v-model="searchLocation" placeholder="Lokacija..">
+					<input type="text" v-model="searchGrade" placeholder="Prosečna ocena..">
 	    		</p>
 				<button id="create-venue" v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
 	    		<table id="venues_table" class="venues_table">
@@ -159,27 +173,53 @@ Vue.component("venues", {
 				axios.get('rest/venues/').then(response => (this.venues = response.data));
 				return this.venues;
 			}
-			else if (this.filterWorking == true){
-				return this.venues.filter(venue => {
-    	     			return (venue.isWorking == true) && ((venue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.venueType.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.street.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.number.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.city.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.postalCode.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.country.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.averageGrade.toString().indexOf(this.search) > -1))})
-			}
-			else{
-				return this.venues.filter(venue => {
-    	     			return (venue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.venueType.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.street.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.number.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.city.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.postalCode.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.location.address.country.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
-    	     			 || (venue.averageGrade.toString().indexOf(this.search) > -1)})
+			else if(!this.multiSearch){
+				if (this.filterWorking == true){
+					return this.venues.filter(venue => {
+	    	     			return (venue.isWorking == true) && (venue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.venueType.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.street.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.number.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.city.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.postalCode.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.country.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.averageGrade.toString().indexOf(this.search) > -1)})
+				}
+				else{
+					return this.venues.filter(venue => {
+	    	     			return (venue.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.venueType.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.street.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.number.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.city.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.postalCode.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.location.address.country.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+	    	     			 || (venue.averageGrade.toString().indexOf(this.search) > -1)})
+				}
+			}else{
+				if(this.filterWorking == true){
+					return this.venues.filter(venue => {
+						return (venue.isWorking == true) && (venue.name.toLowerCase().indexOf(this.searchName.toLowerCase()) > -1)
+						 && (venue.venueType.toLowerCase().indexOf(this.searchType.toLowerCase()) > -1)
+						 && ((venue.location.address.street.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.number.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.city.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.postalCode.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.country.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1))
+						 && (venue.averageGrade.toString().indexOf(this.searchGrade) > -1)
+					});
+				}else{
+					return this.venues.filter(venue => {
+						return (venue.name.toLowerCase().indexOf(this.searchName.toLowerCase()) > -1)
+						 && (venue.venueType.toLowerCase().indexOf(this.searchType.toLowerCase()) > -1)
+						 && ((venue.location.address.street.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.number.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.city.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.postalCode.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1)
+						 || (venue.location.address.country.toLowerCase().indexOf(this.searchLocation.toLowerCase()) > -1))
+						 && (venue.averageGrade.toString().indexOf(this.searchGrade) > -1)
+					});
+				}
 			}
 		}
 	}

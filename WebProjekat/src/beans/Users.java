@@ -59,6 +59,14 @@ public class Users {
 		writer.flush();
 		writer.close();
     }
+	
+	public void writeUsers() throws Exception
+    {
+		FileWriter writer = new FileWriter("./static/data/users.json");
+		g.toJson(users, writer);
+		writer.flush();
+		writer.close();
+    }
 
 	public Collection<User> getValues() {
 		HashMap<String, User> filtered = new HashMap<String, User>(users);
