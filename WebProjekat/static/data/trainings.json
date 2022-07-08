@@ -49,37 +49,40 @@
         "typeName": "",
         "discount": 0.0,
         "requiredPoints": 0
-      }
+      },
+      "isDeleted": false
     },
     "description": "Opis treninga",
     "image": "./images/trainings/training.png",
-    "price": 1200.0
+    "price": 1200.0,
+    "isDeleted": false
   },
   "2": {
     "id": "2",
-    "name": "Treninig 1",
-    "trainingType": "Personalni",
+    "name": "Trening 1",
+    "trainingType": "Grupni",
     "sportsVenue": {
-      "id": "4",
-      "name": "Test",
+      "id": "5",
+      "name": "Hattrick",
       "venueType": "Sportski centar",
       "isWorking": true,
       "location": {
-        "latitude": 45.244807,
-        "longitude": 19.839894,
+        "latitude": 45.239951,
+        "longitude": 19.828593,
         "address": {
-          "street": "Владимира Николића",
-          "number": "1",
-          "city": "Град Нови Сад",
+          "street": "Banović Strahinje",
+          "number": "BB",
+          "city": "Grad Novi Sad",
           "postalCode": "21102",
-          "country": "Србија"
+          "country": "Srbija"
         }
       },
-      "logoPath": "./images/icons/no-image.png",
+      "logoPath": "./images/venues/hattrick.png",
       "averageGrade": 0.0,
+      "workingHours": "8-23",
       "isDeleted": false
     },
-    "duration": 120,
+    "duration": 90,
     "trainer": {
       "id": "3",
       "username": "Nikola",
@@ -94,10 +97,12 @@
         "typeName": "",
         "discount": 0.0,
         "requiredPoints": 0
-      }
+      },
+      "isDeleted": false
     },
     "description": "Opis treninga",
-    "image": "./images/trainings/training.png",
-    "price": 0
+    "image": "./images/trainings/training1.png",
+    "price": 0.0,
+    "isDeleted": false
   }
 }

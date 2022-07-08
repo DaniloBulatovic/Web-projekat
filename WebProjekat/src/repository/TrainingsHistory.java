@@ -69,6 +69,8 @@ public class TrainingsHistory {
 	}
 
 	public TrainingHistory getTrainingHistory(String id) {
+		if (trainingsHistory.get(id).isDeleted())
+			return null;
 		return trainingsHistory.get(id);
 	}
 

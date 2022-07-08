@@ -105,6 +105,8 @@ public class SportsVenues {
 	}
 
 	public SportsVenue getSportsVenue(String id) {
+		if (sportsVenues.get(id).isDeleted())
+			return null;
 		return sportsVenues.get(id);
 	}
 

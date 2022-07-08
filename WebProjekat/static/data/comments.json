@@ -53,5 +53,83 @@
     "grade": 5,
     "isApproved": true,
     "isDeleted": false
+  },
+  "2": {
+    "id": "2",
+    "customer": {
+      "id": "4",
+      "username": "Jovana",
+      "password": "jovana",
+      "name": "Jovana",
+      "surname": "Jovanović",
+      "gender": "Žensko",
+      "dateOfBirth": "2001-09-12T12:00:00",
+      "role": "Kupac",
+      "membership": {
+        "id": "izldo54hpb",
+        "type": "Mesečno",
+        "dateOfPaying": "2022-07-08T22:21:12",
+        "expirationDate": "2022-08-08T22:21:12",
+        "price": 873.0,
+        "isActive": true,
+        "numberOfAppointments": 99,
+        "isDeleted": false
+      },
+      "visitedVenues": [
+        {
+          "id": "5",
+          "name": "Hattrick",
+          "venueType": "Sportski centar",
+          "isWorking": true,
+          "location": {
+            "latitude": 45.239951,
+            "longitude": 19.828593,
+            "address": {
+              "street": "Banović Strahinje",
+              "number": "BB",
+              "city": "Grad Novi Sad",
+              "postalCode": "21102",
+              "country": "Srbija"
+            }
+          },
+          "logoPath": "./images/venues/hattrick.png",
+          "averageGrade": 0.0,
+          "workingHours": "8-23",
+          "isDeleted": false
+        }
+      ],
+      "points": 65,
+      "customerType": {
+        "typeName": "Srebrni",
+        "discount": 3.0,
+        "requiredPoints": 4000
+      },
+      "isDeleted": false
+    },
+    "sportsVenue": {
+      "id": "5",
+      "name": "Hattrick",
+      "venueType": "Sportski centar",
+      "isWorking": true,
+      "location": {
+        "latitude": 45.239951,
+        "longitude": 19.828593,
+        "address": {
+          "street": "Banović Strahinje",
+          "number": "BB",
+          "city": "Grad Novi Sad",
+          "postalCode": "21102",
+          "country": "Srbija"
+        }
+      },
+      "logoPath": "./images/venues/hattrick.png",
+      "averageGrade": 0.0,
+      "workingHours": "8-23",
+      "isDeleted": false
+    },
+    "text": "Ok je.",
+    "grade": 4,
+    "isApproved": false,
+    "isDeleted": false
   }
 }

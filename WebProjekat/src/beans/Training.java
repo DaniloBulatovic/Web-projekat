@@ -13,6 +13,7 @@ public class Training {
 	private String description;
 	private String image;
 	private double price;
+	private boolean isDeleted;
 	
 	public Training() {
 	
@@ -88,5 +89,13 @@ public class Training {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

@@ -242,7 +242,7 @@ Vue.component("venue", {
 				this.scheduledTraining.training = this.training;
 				this.scheduledTraining.trainer = this.training.trainer;
 				this.scheduledTraining.customer = this.user;
-				if(this.user.membership){
+				if(this.user.membership != null && this.user.membership != ''){
 					if(this.user.membership.numberOfAppointments > 0 && this.training.price === 0){
 						this.user.membership.numberOfAppointments -= 1;
 						axios.put('rest/users/edit/' + this.user.id, this.user);
@@ -271,7 +271,10 @@ Vue.component("venue", {
 				comment.sportsVenue = this.venue;
 				comment.text = this.newCommentText;
 				comment.grade = Number(this.newCommentGrade);
-				axios.post('rest/comments/add', comment);
+				axios.post('rest/comments/add', comment).then(response => {
+					this.visible = false;
+					alert("Uspešno ste poslali komentar!");
+				});
 			}else{
 				this.error = "Obavezno!";
 			}

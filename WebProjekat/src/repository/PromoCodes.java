@@ -69,6 +69,8 @@ public class PromoCodes {
 	}
 
 	public PromoCode getPromoCode(String id) {
+		if(promoCodes.get(id).isDeleted())
+			return null;
 		return promoCodes.get(id);
 	}
 

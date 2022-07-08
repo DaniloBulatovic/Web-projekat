@@ -70,6 +70,8 @@ public class Memberships {
 	}
 
 	public Membership getMembership(String id) {
+		if (memberships.get(id).isDeleted())
+			return null;
 		return memberships.get(id);
 	}
 

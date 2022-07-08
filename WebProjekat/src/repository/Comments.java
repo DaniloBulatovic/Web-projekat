@@ -69,6 +69,8 @@ public class Comments {
 	}
 
 	public Comment getComment(String id) {
+		if (comments.get(id).isDeleted())
+			return null;
 		return comments.get(id);
 	}
 

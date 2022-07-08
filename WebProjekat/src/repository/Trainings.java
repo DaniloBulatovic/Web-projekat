@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -62,7 +63,9 @@ public class Trainings {
     }
 
 	public Collection<Training> getValues() {
-		return trainings.values();
+		HashMap<String, Training> filtered = new HashMap<String, Training>(trainings);
+		filtered.keySet().removeAll(trainings.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+		return filtered.values();
 	}
 
 	public Training getTraining(String id) {

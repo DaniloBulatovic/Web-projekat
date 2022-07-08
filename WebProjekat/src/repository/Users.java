@@ -77,6 +77,8 @@ public class Users {
 	}
 
 	public User getUser(String id) {
+		if (users.get(id).isDeleted())
+			return null;
 		return users.get(id);
 	}
 

@@ -58,7 +58,8 @@
       },
       "description": "Opis treninga",
       "image": "./images/trainings/training.png",
-      "price": 1200.0
+      "price": 1200.0,
+      "isDeleted": false
     },
     "customer": {
       "id": "1",
@@ -98,33 +99,34 @@
   },
   "2": {
     "id": "2",
-    "dateTimeOfRegistration": "2022-06-02T12:00:00",
-    "dateTimeOfTraining": "2022-06-09T10:15:00",
+    "dateTimeOfRegistration": "2022-07-08T22:24:00",
+    "dateTimeOfTraining": "2022-07-22T00:00:00",
     "training": {
       "id": "2",
-      "name": "Treninig 1",
-      "trainingType": "Personalni",
+      "name": "Trening 1",
+      "trainingType": "Grupni",
       "sportsVenue": {
-        "id": "4",
-        "name": "Test",
+        "id": "5",
+        "name": "Hattrick",
         "venueType": "Sportski centar",
         "isWorking": true,
         "location": {
-          "latitude": 45.244807,
-          "longitude": 19.839894,
+          "latitude": 45.239951,
+          "longitude": 19.828593,
           "address": {
-            "street": "Владимира Николића",
-            "number": "1",
-            "city": "Град Нови Сад",
+            "street": "Banović Strahinje",
+            "number": "BB",
+            "city": "Grad Novi Sad",
             "postalCode": "21102",
-            "country": "Србија"
+            "country": "Srbija"
           }
         },
-        "logoPath": "./images/icons/no-image.png",
+        "logoPath": "./images/venues/hattrick.png",
         "averageGrade": 0.0,
+        "workingHours": "8-23",
         "isDeleted": false
       },
-      "duration": 120,
+      "duration": 90,
       "trainer": {
         "id": "3",
         "username": "Nikola",
@@ -143,8 +145,9 @@
         "isDeleted": false
       },
       "description": "Opis treninga",
-      "image": "./images/trainings/training.png",
-      "price": 500.0
+      "image": "./images/trainings/training1.png",
+      "price": 0.0,
+      "isDeleted": false
     },
     "customer": {
       "id": "4",
@@ -155,97 +158,21 @@
       "gender": "Žensko",
       "dateOfBirth": "2001-09-12T12:00:00",
       "role": "Kupac",
+      "membership": {
+        "id": "izldo54hpb",
+        "type": "Mesečno",
+        "dateOfPaying": "2022-07-08T22:21:12",
+        "expirationDate": "2022-08-08T22:21:12",
+        "price": 873.0,
+        "isActive": true,
+        "numberOfAppointments": 99,
+        "isDeleted": false
+      },
       "points": 65,
       "customerType": {
         "typeName": "Srebrni",
-        "discount": 15.0,
-        "requiredPoints": 50
-      },
-      "isDeleted": false
-    },
-    "trainer": {
-      "id": "3",
-      "username": "Nikola",
-      "password": "nikola",
-      "name": "Nikola",
-      "surname": "Nikolić",
-      "gender": "Muško",
-      "dateOfBirth": "1997-10-20T12:00:00",
-      "role": "Trener",
-      "points": 0,
-      "customerType": {
-        "typeName": "",
-        "discount": 0.0,
-        "requiredPoints": 0
-      },
-      "isDeleted": false
-    },
-    "isDeleted": false
-  },
-  "3": {
-    "id": "3",
-    "dateTimeOfRegistration": "2022-07-10T12:30:00",
-    "dateTimeOfTraining": "2022-07-14T12:30:00",
-    "training": {
-      "id": "2",
-      "name": "Treninig 1",
-      "trainingType": "Personalni",
-      "sportsVenue": {
-        "id": "4",
-        "name": "Test",
-        "venueType": "Sportski centar",
-        "isWorking": true,
-        "location": {
-          "latitude": 45.244807,
-          "longitude": 19.839894,
-          "address": {
-            "street": "Владимира Николића",
-            "number": "1",
-            "city": "Град Нови Сад",
-            "postalCode": "21102",
-            "country": "Србија"
-          }
-        },
-        "logoPath": "./images/icons/no-image.png",
-        "averageGrade": 0.0,
-        "isDeleted": false
-      },
-      "duration": 120,
-      "trainer": {
-        "id": "3",
-        "username": "Nikola",
-        "password": "nikola",
-        "name": "Nikola",
-        "surname": "Nikolić",
-        "gender": "Muško",
-        "dateOfBirth": "1997-10-20T12:00:00",
-        "role": "Trener",
-        "points": 0,
-        "customerType": {
-          "typeName": "",
-          "discount": 0.0,
-          "requiredPoints": 0
-        },
-        "isDeleted": false
-      },
-      "description": "Opis treninga",
-      "image": "./images/trainings/training.png",
-      "price": 500.0
-    },
-    "customer": {
-      "id": "1",
-      "username": "Petar",
-      "password": "petar",
-      "name": "Petar",
-      "surname": "Petrović",
-      "gender": "Muško",
-      "dateOfBirth": "2000-06-02T12:00:00",
-      "role": "Kupac",
-      "points": 15,
-      "customerType": {
-        "typeName": "Bronzani",
-        "discount": 5.0,
-        "requiredPoints": 0
+        "discount": 3.0,
+        "requiredPoints": 4000
       },
       "isDeleted": false
     },

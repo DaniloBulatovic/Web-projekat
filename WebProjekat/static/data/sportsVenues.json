@@ -79,6 +79,27 @@
     },
     "logoPath": "./images/icons/no-image.png",
     "averageGrade": 0.0,
+    "isDeleted": true
+  },
+  "5": {
+    "id": "5",
+    "name": "Hattrick",
+    "venueType": "Sportski centar",
+    "isWorking": true,
+    "location": {
+      "latitude": 45.239951,
+      "longitude": 19.828593,
+      "address": {
+        "street": "Banović Strahinje",
+        "number": "BB",
+        "city": "Grad Novi Sad",
+        "postalCode": "21102",
+        "country": "Srbija"
+      }
+    },
+    "logoPath": "./images/venues/hattrick.png",
+    "averageGrade": 0.0,
+    "workingHours": "8-23",
     "isDeleted": false
   },
   "2": {

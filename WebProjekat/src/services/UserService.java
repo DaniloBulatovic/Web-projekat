@@ -49,6 +49,7 @@ public class UserService {
 	
 	public User getUser(String id) {
 		User user = users.getUser(id);
+		if (user == null) return null;
 		if (user.getMembership() != null) {
 			if (user.getMembership().getExpirationDate().isBefore(LocalDateTime.now())) {
 				String membershipId = user.getMembership().getId();

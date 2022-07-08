@@ -39,6 +39,7 @@ public class SportsVenueService {
 	
 	public SportsVenue getSportsVenue(String id) {
 		SportsVenue venue = sportsVenues.getSportsVenue(id);
+		if (venue == null) return null;
 		Comments comments = new Comments();
 		double totalGrades = 0;
 		double numberOfComments = 0;

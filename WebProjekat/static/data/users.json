@@ -91,35 +91,36 @@
     "gender": "Žensko",
     "dateOfBirth": "2001-09-12T12:00:00",
     "role": "Kupac",
+    "membership": {
+      "id": "izldo54hpb",
+      "type": "Mesečno",
+      "dateOfPaying": "2022-07-08T22:21:12",
+      "expirationDate": "2022-08-08T22:21:12",
+      "price": 873.0,
+      "isActive": true,
+      "numberOfAppointments": 99,
+      "isDeleted": false
+    },
     "visitedVenues": [
       {
-        "id": "4",
-        "name": "Test",
+        "id": "5",
+        "name": "Hattrick",
         "venueType": "Sportski centar",
-        "content": [
-          {
-            "id": "1",
-            "name": "Bazen",
-            "type": "Bazen",
-            "description": "Opis 1",
-            "duration": 0,
-            "image": "./images/icons/no-image.png"
-          }
-        ],
         "isWorking": true,
         "location": {
-          "latitude": 45.244807,
-          "longitude": 19.839894,
+          "latitude": 45.239951,
+          "longitude": 19.828593,
           "address": {
-            "street": "Владимира Николића",
-            "number": "1",
-            "city": "Град Нови Сад",
+            "street": "Banović Strahinje",
+            "number": "BB",
+            "city": "Grad Novi Sad",
             "postalCode": "21102",
-            "country": "Србија"
+            "country": "Srbija"
           }
         },
-        "logoPath": "./images/icons/no-image.png",
+        "logoPath": "./images/venues/hattrick.png",
         "averageGrade": 0.0,
+        "workingHours": "8-23",
         "isDeleted": false
       }
     ],
@@ -156,6 +157,37 @@
       },
       "logoPath": "./images/icons/no-image.png",
       "averageGrade": 0.0,
+      "isDeleted": false
+    },
+    "points": 0,
+    "isDeleted": false
+  },
+  "6": {
+    "id": "6",
+    "username": "Igor",
+    "password": "igor",
+    "name": "Igor",
+    "surname": "Igor",
+    "role": "Menadžer",
+    "sportsVenue": {
+      "id": "5",
+      "name": "Hattrick",
+      "venueType": "Sportski centar",
+      "isWorking": true,
+      "location": {
+        "latitude": 45.239951,
+        "longitude": 19.828593,
+        "address": {
+          "street": "Banović Strahinje",
+          "number": "BB",
+          "city": "Grad Novi Sad",
+          "postalCode": "21102",
+          "country": "Srbija"
+        }
+      },
+      "logoPath": "./images/venues/hattrick1.png",
+      "averageGrade": 0.0,
+      "workingHours": "8-23",
       "isDeleted": false
     },
     "points": 0,

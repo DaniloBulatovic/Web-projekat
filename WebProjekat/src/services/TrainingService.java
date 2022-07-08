@@ -16,7 +16,7 @@ public class TrainingService {
 	}
 	
 	public Collection<Training> getTrainingsByVenue(String id){
-		return trainings.getValues().stream().filter(training -> training.getSportsVenue().getId().equals(id)).collect(Collectors.toCollection(HashSet::new));
+		return trainings.getValues().stream().filter(training -> training.getSportsVenue().getId().equals(id) && !training.getSportsVenue().isDeleted()).collect(Collectors.toCollection(HashSet::new));
 	}
 	
 	public Training getTraining(String id) {
