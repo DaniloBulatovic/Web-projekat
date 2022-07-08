@@ -21,7 +21,7 @@ Vue.component("manager-venue", {
 <div>
 	<div style="display:inline-block; width:75%">
 		<div style="width:40%; height:100%; display: inline-block">
-			<training :value = this.trainingId :key="this.reloadTraining"></training>
+			<training :value = this.trainingId :venue = this.venue :key="this.reloadTraining"></training>
 			<new-training :value = this.trainingId :venue = this.venue :key="this.reloadNewTraining"></new-training>
 			<venue-content :contentId = this.contentId :venueId = this.venue.id :key="this.reloadContent"></venue-content>
 			<new-content :contentId = this.contentId :venueId = this.venue.id :key="this.reloadNewContent"></new-content>
@@ -164,7 +164,7 @@ Vue.component("manager-venue", {
 			<tr v-for="(t, index) in trainers">
 				<td>{{t.trainer.name}}</td>
 				<td>{{t.trainer.surname}}</td>
-				<td>{{t.trainer.dateOfBirth}}</td>
+				<td>{{formatDate(t.trainer.dateOfBirth)}}</td>
 			</tr>
 		</table>
 		<h3>Korisnici koji su posetili objekat</h3>
@@ -179,7 +179,7 @@ Vue.component("manager-venue", {
 			<tr v-for="(u, index) in users">
 				<td>{{u.name}}</td>
 				<td>{{u.surname}}</td>
-				<td>{{u.dateOfBirth}}</td>
+				<td>{{formatDate(u.dateOfBirth)}}</td>
 				<td v-if="u.customerType != null">{{u.customerType.typeName}}</td>
 				<td v-if="u.customerType == null"> </td>
 	    		<td style="text-align:center">{{u.points}}</td>
@@ -217,7 +217,11 @@ Vue.component("manager-venue", {
 			this.reloadNewTraining += this.reloadNewTraining;
 			this.reloadContent += this.reloadContent;
 			this.reloadNewContent += this.reloadNewContent;
-		}
+		},
+		formatDate(date) {
+			if (date)
+    		return new Intl.DateTimeFormat('rs-SR', { dateStyle: 'medium'}).format(new Date(date))
+  		}
 	},
 	mounted () {
 		axios.post('rest/users/getlogged', this.user, {withCredentials: true}).

@@ -36,7 +36,7 @@ Vue.component("new-content", {
 			</tr>
 			<tr>
 				<td></td>
-				<td><label v-if="content.name === ''" style="color:red">{{error}}</label></td>
+				<td><label v-if="content.name === '' || this.venue.content.filter(c => c.name === this.content.name).length > 0" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Tip</td>
@@ -93,7 +93,7 @@ Vue.component("new-content", {
 			if (this.error === ''){
 				this.content.id = this.venue.content.length + 1;
 				this.venue.content.push(this.content);
-				
+			
 				axios.put('rest/venues/edit/' + this.venue.id, this.venue).
 				then(response => {
 					this.visible = false;
@@ -106,6 +106,8 @@ Vue.component("new-content", {
 				|| this.content.name === ''
 				|| this.content.type === '')
 				this.error = "Obavezno!";
+			else if(this.venue.content.filter(c => c.name === this.content.name).length > 0)
+				this.error = "Naziv je zauzet!";
 			else
 				this.error = "";
 		}

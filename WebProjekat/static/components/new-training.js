@@ -39,7 +39,7 @@ Vue.component("new-training", {
 			</tr>
 			<tr>
 				<td></td>
-				<td><label v-if="training.name === ''" style="color:red">{{error}}</label></td>
+				<td><label v-if="training.name === '' || this.trainings.filter(t => t.name === this.training.name).length > 0" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Tip</td>
@@ -125,6 +125,8 @@ Vue.component("new-training", {
 				|| this.training.trainer.name === ' '
 				|| this.training.trainer.surname === ' ')
 				this.error = "Obavezno!";
+			else if(this.trainings.filter(t => t.name === this.training.name).length > 0)
+				this.error = "Naziv je zauzet!";
 			else
 				this.error = "";
 		}
@@ -135,6 +137,10 @@ Vue.component("new-training", {
 			this.visible = true;
 			axios.get('rest/trainers/').then(response => {
 				this.trainers = response.data;
+			});
+			axios.get('rest/trainings/venue/' + this.venue.id)
+			.then(response => {
+				this.trainings = response.data;
 			});
 		}else{
 			this.visible = false;

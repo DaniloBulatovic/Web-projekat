@@ -61,11 +61,11 @@ Vue.component("venue", {
 				<td><input type = "text" v-model = "venue.workingHours" readonly></td>
 			</tr>
 			<tr v-if=venue.content>
-				<td>Sadržaj</td>
-				<td></td>
+				<td v-if=venue.content.length>Sadržaj</td>
+				<td v-if=venue.content.length></td>
 			</tr>
 			<tr v-if=venue.content>
-				<td colspan=2>
+				<td v-if=venue.content.length colspan=2>
 					<table class="default-table" style="width:100%">
 						<tr>
 							<th>Slika</th>
@@ -73,6 +73,7 @@ Vue.component("venue", {
 							<th>Tip</th>
 							<th>Opis</th>
 							<th>Trajanje</th>
+							<th v-if="user.role === 'Administrator'">Akcija</th>
 						</tr>
 						<tr v-for="(c, index) in venue.content">
 							<td style="text-align:center"><img v-bind:src=c.image width="50%"></img></td>
@@ -80,6 +81,7 @@ Vue.component("venue", {
 							<td>{{c.type}}</td>
 							<td>{{c.description}}</td>
 							<td style="text-align:center">{{c.duration}}</td>
+							<td style="text-align:center" v-if="user.role === 'Administrator'"><button class="cancel" @click="deleteVenueContent(index)">Obriši</button></td>
 						</tr>
 					</table>
 				</td>
@@ -98,7 +100,7 @@ Vue.component("venue", {
 							<th>Opis</th>
 							<th>Trener</th>
 							<th>Cena</th>
-							<th v-if="user.role === 'Kupac'">Akcija</th>
+							<th v-if="user.role === 'Kupac' || user.role === 'Administrator'">Akcija</th>
 						</tr>
 						<tr v-for="(t, index) in trainings">
 							<td style="text-align:center"><img v-bind:src=t.image width="50%"></img></td>
@@ -108,6 +110,7 @@ Vue.component("venue", {
 							<td>{{t.trainer.name}} {{t.trainer.surname}}</td>
 							<td style="text-align:center">{{t.price}}</td>
 							<td v-if="user.role === 'Kupac'"><button class="confirm" @click="showScheduling(t)">Prijavi se</button></td>
+							<td v-if="user.role === 'Administrator'"><button class="cancel" @click="deleteVenueTraining(t.id)">Obriši</button></td>
 						</tr>
 					</table>
 				</td>
@@ -202,9 +205,24 @@ Vue.component("venue", {
 	            .delete('rest/venues/delete/' + this.id).then(response => (this.$router.go()));
     		}
     	},
+		deleteVenueContent : function(index){
+			r = confirm("Da li ste sigurni?")
+    		if (r){
+				this.venue.content.splice(index, 1);
+	    		axios.put('rest/venues/edit/' + this.venue.id, this.venue)
+				.then(response => (this.$router.go()));
+    		}
+		},
+		deleteVenueTraining : function(id){
+			r = confirm("Da li ste sigurni?")
+    		if (r){
+	    		axios
+	            .delete('rest/trainings/delete/' + id).then(response => (this.$router.go()));
+    		}
+		},
 		approveComment : function(id, comment){
 			comment.isApproved = true;
-			axios.put('rest/comments/edit/' + id, comment);
+			axios.put('rest/comments/edit/' + id, comment).then(response => (this.$router.go()));
 		},
 		deleteComment : function(id, index){
 			r = confirm("Da li ste sigurni?")

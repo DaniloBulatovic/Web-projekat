@@ -87,6 +87,14 @@ public class SportsVenues {
 		writer.close();
     }
 	
+	public void writeSportVenues() throws Exception
+    {
+		FileWriter writer = new FileWriter("./static/data/sportsVenues.json");
+		g.toJson(sportsVenues, writer);
+		writer.flush();
+		writer.close();
+    }
+	
 	public Collection<SportsVenue> getValues() {
 		HashMap<String, SportsVenue> filtered = new HashMap<String, SportsVenue>(sportsVenues);
 		filtered.keySet().removeAll(sportsVenues.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));

@@ -4,7 +4,7 @@ Vue.component("venue-content", {
 		    return {
 		      id : 0,
 			  visible : false,
-			  venue: null,
+	 	      venue: { content: []},
 		      content: {id: '', name:null, type:0, description:null, duration:0, image:'./images/icons/no-image.png'},
 			  oldContent: null,
 			  isImageSelected: false,
@@ -38,7 +38,7 @@ Vue.component("venue-content", {
 			</tr>
 			<tr>
 				<td></td>
-				<td><label v-if="content.name === ''" style="color:red">{{error}}</label></td>
+				<td><label v-if="content.name === '' || this.venue.content.filter(c => c.name === this.content.name).length > 1" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Tip</td>
@@ -108,6 +108,8 @@ Vue.component("venue-content", {
 				|| this.content.name === ''
 				|| this.content.type === '')
 				this.error = "Obavezno!";
+			else if(this.venue.content.filter(c => c.name === this.content.name).length > 1)
+				this.error = "Naziv je zauzet!";
 			else
 				this.error = "";
 		},

@@ -5,6 +5,8 @@ Vue.component("new-venue", {
 		      id : 0,
 			  visible : false,
 		      venue: {id: ' ', name:'', venueType:'', content:null, isWorking:true, location: { latitude:0, longitude:0, address:{ street:'', number:'', city:'', country:'', postalCode:''}}, logoPath:'./images/icons/no-image.png', averageGrade:null, workingHours:null},
+			  hoursFrom: 0,
+			  hoursTo: 0,
 			  selectedFile: null,
 			  managers: [],
 			  selectedIndex: null,
@@ -78,13 +80,29 @@ Vue.component("new-venue", {
 			<tr>
 				<th colspan=2><div ref="map-root" id="map" class="map" style="height:300px"></div></th>
 			</tr>
-			<tr v-if="managers.length > 0">
-				<td>Menadžer</td>
-				<td><select v-model="selectedIndex" @change="switchView($event, $event.target.selectedIndex)"><option v-for="(m, index) in managers">{{m.name}} {{m.surname}}</option></select></td>
+			<tr>
+				<td>Radno vreme</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><label v-if="selectedManager === null" style="color:red">{{error}}</label></td>
+				<td><input type = "number" min="0" max="23" v-model = "hoursFrom" placeholder="Od..."></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td v-if="(Number(this.hoursFrom) < 0 || Number(this.hoursFrom) > 23)" style="color:red">Mora biti između 0 i 23!</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type = "number" min="0" max="23" v-model = "hoursTo" placeholder="Do..."></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td v-if="(Number(this.hoursTo) < 0 && Number(this.hoursTo) > 23)" style="color:red">Mora biti između 0 i 23!</td>
+			</tr>
+			<tr v-if="managers.length > 0">
+				<td>Menadžer</td>
+				<td><select v-model="selectedIndex" @change="switchView($event, $event.target.selectedIndex)"><option v-for="(m, index) in managers">{{m.name}} {{m.surname}}</option></select></td>
 			</tr>
 			<tr v-if="managers.length == 0">
 				<th colspan=2>Nema slobodnog menadžera. Kreirajte novog:</th>
@@ -102,6 +120,10 @@ Vue.component("new-venue", {
 			</tr>
 			<tr v-if="managers.length == 0">
 				<th colspan=2 style="color:red">{{managerError}}</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td><label v-if="selectedManager === null" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<th colspan=2><input type="submit" class="confirm" v-on:click="addVenue" value="Kreiraj sportski objekat"></th>
@@ -147,6 +169,7 @@ Vue.component("new-venue", {
 						.then(response => {
 							this.managers = response.data;
 							this.selectedIndex = this.managers[0].name + " " + this.managers[0].surname;
+							this.selectedManager = this.managers[0];
 						});
 					}
 				});
@@ -155,13 +178,13 @@ Vue.component("new-venue", {
 			event.preventDefault();
 			this.validateFields();
 			if (this.error === ''){
+				this.venue.workingHours = this.hoursFrom + "-" + this.hoursTo;
 				axios.post('rest/venues/add', this.venue)
 				.then(response => {
 					this.selectedManager.sportsVenue = response.data;
-					axios.put('rest/users/edit/' + this.selectedManager.id, this.selectedManager).then(function(){
-						this.visible = false;
-						this.$router.go();
-					});
+					axios.put('rest/users/edit/' + this.selectedManager.id, this.selectedManager);
+					this.visible = false;
+					this.$router.go();
 				});
 			}
 		},
@@ -174,7 +197,9 @@ Vue.component("new-venue", {
 				|| this.venue.location.address.number === ''
 				|| this.venue.location.address.city === ''
 				|| this.venue.location.address.postalCode === ''
-				|| this.selectedManager === null)
+				|| this.selectedManager === null
+				|| (Number(this.hoursFrom) < 0 || Number(this.hoursFrom) > 23)
+				|| (Number(this.hoursTo) < 0 || Number(this.hoursTo) > 23))
 				this.error = "Obavezno!";
 			else
 				this.error = "";

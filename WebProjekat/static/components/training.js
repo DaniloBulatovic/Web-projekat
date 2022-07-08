@@ -1,5 +1,5 @@
 Vue.component("training", {
-	props: ['value'],
+	props: ['value', 'venue'],
 	data: function () {
 		    return {
 		      id : 0,
@@ -10,6 +10,7 @@ Vue.component("training", {
 			  selectedIndex: null,
 			  selectedTrainer: null,
 			  isImageSelected: false,
+			  trainings: [],
 			  error: ''
 		    }
 	},
@@ -40,7 +41,7 @@ Vue.component("training", {
 			</tr>
 			<tr>
 				<td></td>
-				<td><label v-if="training.name === ''" style="color:red">{{error}}</label></td>
+				<td><label v-if="training.name === '' || this.trainings.filter(t => t.name === this.training.name).length > 0" style="color:red">{{error}}</label></td>
 			</tr>
 			<tr>
 				<td>Tip</td>
@@ -126,6 +127,8 @@ Vue.component("training", {
 				|| this.training.trainer.name === ' '
 				|| this.training.trainer.surname === ' ')
 				this.error = "Obavezno!";
+			else if(this.trainings.filter(t => t.name === this.training.name).length > 0)
+				this.error = "Naziv je zauzet!";
 			else
 				this.error = "";
 		},
@@ -154,6 +157,10 @@ Vue.component("training", {
 						this.selectedIndex = this.trainers.findIndex(t => t.id === this.training.trainer.id);
 					});
 				});
+			axios.get('rest/trainings/venue/' + this.venue.id)
+			.then(response => {
+				this.trainings = response.data;
+			});
 		}else{
 			this.visible = false;
 		}

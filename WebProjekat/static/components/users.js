@@ -27,7 +27,7 @@ Vue.component("users", {
 				</select>
     			<input type="text" v-model="search" placeholder="Pretraga korisnika..">
     		</p>
-    		<table class="default-table">
+    		<table id="users_table" class="default-table">
 	    		<tr>
 	    			<th v-on:click="sortTable(0, false)" style="cursor:pointer">Ime</th>
 	    			<th v-on:click="sortTable(1, false)" style="cursor:pointer">Prezime</th>

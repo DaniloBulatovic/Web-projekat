@@ -46,9 +46,17 @@ public class CustomerType {
 			return new CustomerType("Srebrni", 3, 4000);
 		return new CustomerType("Zlatni", 5, 0);
 	}
-	public CustomerType downgradeType(String currentType) {
-		if (currentType.equals("Zlatni"))
+	public CustomerType downgradeType(String currentType, int currentPoints) {
+		if (currentType.equals("Zlatni")) {
+			if (currentPoints < 4000)
+				return new CustomerType("Srebrni", 3, 4000);
+			return new CustomerType("Zlatni", 5, 0);
+		}
+		if(currentType.equals("Srebrni")) {
+			if (currentPoints < 3000)
+				return new CustomerType("Bronzani", 0, 3000);
 			return new CustomerType("Srebrni", 3, 4000);
+		}
 		return new CustomerType("Bronzani", 0, 3000);
 	}
 }

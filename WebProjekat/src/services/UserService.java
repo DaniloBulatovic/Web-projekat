@@ -26,11 +26,14 @@ public class UserService {
 					
 					if(user.getMembership().getNumberOfAppointments() > (memberships.getMembership(membershipId).getNumberOfAppointments() * 2 / 3)) {
 						user.setPoints((int) (currentPoints - (user.getMembership().getPrice()/1000 * 532)));
+						if(user.getPoints() < 0)
+							user.setPoints(0);
 					}else {
 						user.setPoints((int) (currentPoints + (user.getMembership().getPrice()/1000 * (usedAppointments))));
 						if (user.getPoints() > user.getCustomerType().getRequiredPoints()) {
 							user.setCustomerType(user.getCustomerType().upgradeType(user.getCustomerType().getTypeName()));
 						}
+						user.setCustomerType(user.getCustomerType().downgradeType(user.getCustomerType().getTypeName(), user.getPoints()));
 					}
 					user.setMembership(null);
 					try {
@@ -54,11 +57,14 @@ public class UserService {
 				
 				if(user.getMembership().getNumberOfAppointments() > (memberships.getMembership(membershipId).getNumberOfAppointments() * 2 / 3)) {
 					user.setPoints((int) (currentPoints - (user.getMembership().getPrice()/1000 * 532)));
+					if(user.getPoints() < 0)
+						user.setPoints(0);
 				}else {
 					user.setPoints((int) (currentPoints + (user.getMembership().getPrice()/1000 * (usedAppointments))));
 					if (user.getPoints() > user.getCustomerType().getRequiredPoints()) {
 						user.setCustomerType(user.getCustomerType().upgradeType(user.getCustomerType().getTypeName()));
 					}
+					user.setCustomerType(user.getCustomerType().downgradeType(user.getCustomerType().getTypeName(), user.getPoints()));
 				}
 				user.setMembership(null);
 				try {

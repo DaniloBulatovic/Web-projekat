@@ -26,7 +26,7 @@
       }
     },
     "logoPath": "./images/venues/spens.jpg",
-    "averageGrade": 4.1,
+    "averageGrade": 5.0,
     "workingHours": "06-22",
     "isDeleted": false
   },
@@ -47,7 +47,7 @@
       }
     },
     "logoPath": "./images/venues/fiesta.jpg",
-    "averageGrade": 4.8,
+    "averageGrade": 0.0,
     "workingHours": "17-22",
     "isDeleted": false
   },
@@ -98,7 +98,7 @@
       }
     },
     "logoPath": "./images/venues/megagym.jpg",
-    "averageGrade": 4.1,
+    "averageGrade": 0.0,
     "workingHours": "06-00",
     "isDeleted": false
   }

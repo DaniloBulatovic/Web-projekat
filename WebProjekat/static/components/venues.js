@@ -43,8 +43,8 @@ Vue.component("venues", {
 					<input type="text" v-model="searchLocation" placeholder="Lokacija..">
 					<input type="text" v-model="searchGrade" placeholder="Prosečna ocena..">
 	    		</p>
-				<button class="confirm" v-on:click = "addVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
-	    		<table class="default-table">
+				<button class="confirm" v-on:click = "showAddVenue" v-if="this.user.role === 'Administrator'">Dodaj novi objekat</button>
+	    		<table id="venues_table" class="default-table">
 		    		<tr>
 		    			<th>Logo</th>
 		    			<th v-on:click="sortTable(1, false)" style="cursor:pointer">Naziv</th>
@@ -78,7 +78,7 @@ Vue.component("venues", {
 			});
     },
     methods: {
-    	addVenue : function() {
+    	showAddVenue : function() {
     		this.selectedId = -1;
 			this.reloadVenue = !this.reloadVenue;
 			this.reloadNewVenue += this.reloadNewVenue;
