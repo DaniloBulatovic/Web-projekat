@@ -250,8 +250,7 @@ Vue.component("new-venue", {
             return await response.json();
 		},
 		transliterate : function(word){
-		    let answer = ""
-		      , a = {};
+		    let answer = "", a = {};
 		
 		   	a["А"]="A";a["Б"]="B";a["В"]="V";a["Г"]="G";a["Д"]="D";a["Ђ"]="Đ";a["Е"]="E";a["Ж"]="Ž";a["З"]="Z";a["И"]="I";a["Ј"]="J";a["К"]="K";a["Л"]="L";a["Љ"]="LJ";
 		   	a["М"]="M";a["Н"]="N";a["Њ"]="NJ";a["О"]="O";a["П"]="P";a["Р"]="R";a["С"]="S";a["Т"]="T";a["Ћ"]="Ć";a["У"]="U";a["Ф"]="F";a["Х"]="H";a["Ц"]="C";

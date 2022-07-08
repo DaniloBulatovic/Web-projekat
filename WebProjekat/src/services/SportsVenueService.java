@@ -3,9 +3,9 @@ package services;
 import java.util.Collection;
 
 import beans.Comment;
-import beans.Comments;
 import beans.SportsVenue;
-import beans.SportsVenues;
+import repository.Comments;
+import repository.SportsVenues;
 
 public class SportsVenueService {
 	

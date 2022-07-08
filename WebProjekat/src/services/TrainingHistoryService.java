@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import beans.TrainingHistory;
-import beans.TrainingsHistory;
+import repository.TrainingsHistory;
 
 public class TrainingHistoryService {
 	

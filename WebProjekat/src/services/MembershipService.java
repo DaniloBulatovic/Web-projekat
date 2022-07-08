@@ -3,7 +3,7 @@ package services;
 import java.util.Collection;
 
 import beans.Membership;
-import beans.Memberships;
+import repository.Memberships;
 
 public class MembershipService {
 	

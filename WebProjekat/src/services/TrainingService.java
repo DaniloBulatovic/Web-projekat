@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import beans.Training;
-import beans.Trainings;
+import repository.Trainings;
 
 public class TrainingService {
 	

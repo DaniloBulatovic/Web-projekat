@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import beans.PromoCode;
-import beans.PromoCodes;
+import repository.PromoCodes;
 
 public class PromoCodeService {
 	

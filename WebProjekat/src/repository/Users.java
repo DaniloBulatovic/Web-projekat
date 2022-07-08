@@ -1,4 +1,4 @@
-package beans;
+package repository;
 
 import java.io.FileWriter;
 import java.lang.reflect.Type;
@@ -21,9 +21,11 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
-public class TrainingsHistory {
+import beans.User;
+
+public class Users {
 	
-	private HashMap<String, TrainingHistory> trainingsHistory = new HashMap<String, TrainingHistory>();
+	private HashMap<String, User> users = new HashMap<String, User>();
 	
 	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -37,70 +39,78 @@ public class TrainingsHistory {
 	    }
     }).setPrettyPrinting().create();
 	
-	public TrainingsHistory(){
+	public Users(){
 		try {
-			readTrainingsHistory();
+			readUsers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void readTrainingsHistory() throws Exception
+	public void readUsers() throws Exception
     {
-		String json = new String(Files.readAllBytes(Paths.get("./static/data/trainingsHistory.json")));
-		Type type = new TypeToken<HashMap<String, TrainingHistory>>(){}.getType();
-		trainingsHistory = g.fromJson(json, type);
+		String json = new String(Files.readAllBytes(Paths.get("./static/data/users.json")));
+		Type type = new TypeToken<HashMap<String, User>>(){}.getType();
+		users = g.fromJson(json, type);
     }
 	
-	public void writeTrainingsHistory(HashMap<String, TrainingHistory> trainingsHistory) throws Exception
+	public void writeUsers(HashMap<String, User> users) throws Exception
     {
-		FileWriter writer = new FileWriter("./static/data/trainingsHistory.json");
-		g.toJson(trainingsHistory, writer);
+		FileWriter writer = new FileWriter("./static/data/users.json");
+		g.toJson(users, writer);
+		writer.flush();
+		writer.close();
+    }
+	
+	public void writeUsers() throws Exception
+    {
+		FileWriter writer = new FileWriter("./static/data/users.json");
+		g.toJson(users, writer);
 		writer.flush();
 		writer.close();
     }
 
-	public Collection<TrainingHistory> getValues() {
-		HashMap<String, TrainingHistory> filtered = new HashMap<String, TrainingHistory>(trainingsHistory);
-		filtered.keySet().removeAll(trainingsHistory.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+	public Collection<User> getValues() {
+		HashMap<String, User> filtered = new HashMap<String, User>(users);
+		filtered.keySet().removeAll(users.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
 		return filtered.values();
 	}
 
-	public TrainingHistory getTrainingHistory(String id) {
-		return trainingsHistory.get(id);
+	public User getUser(String id) {
+		return users.get(id);
 	}
 
-	public void addTrainingHistory(TrainingHistory trainingHistory) {
+	public void addUser(User user) {
 		Integer maxId = -1;
-		for (String id : trainingsHistory.keySet()) {
+		for (String id : users.keySet()) {
 			int idNum = Integer.parseInt(id);
 			if (idNum > maxId) {
 				maxId = idNum;
 			}
 		}
 		maxId++;
-		trainingHistory.setId(maxId.toString());
-		trainingsHistory.put(trainingHistory.getId(), trainingHistory);
+		user.setId(maxId.toString());
+		users.put(user.getId(), user);
 		try {
-			writeTrainingsHistory(trainingsHistory);
+			writeUsers(users);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void edit(String id, TrainingHistory trainingHistory) {
-		trainingsHistory.put(id, trainingHistory);
+	public void edit(String id, User user) {
+		users.put(id, user);
 		try {
-			writeTrainingsHistory(trainingsHistory);
+			writeUsers(users);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void delete(String id) {
-		trainingsHistory.get(id).setDeleted(true);
+		users.get(id).setDeleted(true);
 		try {
-			writeTrainingsHistory(trainingsHistory);
+			writeUsers(users);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

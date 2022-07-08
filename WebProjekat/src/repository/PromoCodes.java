@@ -1,4 +1,4 @@
-package beans;
+package repository;
 
 import java.io.FileWriter;
 import java.lang.reflect.Type;
@@ -21,9 +21,11 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
-public class Users {
+import beans.PromoCode;
+
+public class PromoCodes {
 	
-	private HashMap<String, User> users = new HashMap<String, User>();
+	private HashMap<String, PromoCode> promoCodes = new HashMap<String, PromoCode>();
 	
 	private static Gson g = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -37,78 +39,70 @@ public class Users {
 	    }
     }).setPrettyPrinting().create();
 	
-	public Users(){
+	public PromoCodes(){
 		try {
-			readUsers();
+			readPromoCodes();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void readUsers() throws Exception
+	public void readPromoCodes() throws Exception
     {
-		String json = new String(Files.readAllBytes(Paths.get("./static/data/users.json")));
-		Type type = new TypeToken<HashMap<String, User>>(){}.getType();
-		users = g.fromJson(json, type);
+		String json = new String(Files.readAllBytes(Paths.get("./static/data/promoCodes.json")));
+		Type type = new TypeToken<HashMap<String, PromoCode>>(){}.getType();
+		promoCodes = g.fromJson(json, type);
     }
 	
-	public void writeUsers(HashMap<String, User> users) throws Exception
+	public void writePromoCodes(HashMap<String, PromoCode> promoCodes) throws Exception
     {
-		FileWriter writer = new FileWriter("./static/data/users.json");
-		g.toJson(users, writer);
-		writer.flush();
-		writer.close();
-    }
-	
-	public void writeUsers() throws Exception
-    {
-		FileWriter writer = new FileWriter("./static/data/users.json");
-		g.toJson(users, writer);
+		FileWriter writer = new FileWriter("./static/data/promoCodes.json");
+		g.toJson(promoCodes, writer);
 		writer.flush();
 		writer.close();
     }
 
-	public Collection<User> getValues() {
-		HashMap<String, User> filtered = new HashMap<String, User>(users);
-		filtered.keySet().removeAll(users.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
+	public Collection<PromoCode> getValues() {
+		HashMap<String, PromoCode> filtered = new HashMap<String, PromoCode>(promoCodes);
+		filtered.keySet().removeAll(promoCodes.entrySet().stream().filter(a->a.getValue().isDeleted()).map(e -> e.getKey()).collect(Collectors.toList()));
 		return filtered.values();
 	}
 
-	public User getUser(String id) {
-		return users.get(id);
+	public PromoCode getPromoCode(String id) {
+		return promoCodes.get(id);
 	}
 
-	public void addUser(User user) {
+	public void addPromoCode(PromoCode promoCode) {
 		Integer maxId = -1;
-		for (String id : users.keySet()) {
+		for (String id : promoCodes.keySet()) {
 			int idNum = Integer.parseInt(id);
 			if (idNum > maxId) {
 				maxId = idNum;
 			}
 		}
 		maxId++;
-		user.setId(maxId.toString());
-		users.put(user.getId(), user);
+		promoCode.setId(maxId.toString());
+		promoCodes.put(promoCode.getId(), promoCode);
 		try {
-			writeUsers(users);
+			writePromoCodes(promoCodes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void edit(String id, User user) {
-		users.put(id, user);
+	public void edit(String id, PromoCode promoCode) {
+		promoCodes.put(id, promoCode);
 		try {
-			writeUsers(users);
+			writePromoCodes(promoCodes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void delete(String id) {
-		users.get(id).setDeleted(true);
+		promoCodes.get(id).setDeleted(true);
 		try {
-			writeUsers(users);
+			writePromoCodes(promoCodes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import beans.Comment;
-import beans.Comments;
 import beans.User;
 import beans.enums.Role;
+import repository.Comments;
 
 public class CommentService {
 	

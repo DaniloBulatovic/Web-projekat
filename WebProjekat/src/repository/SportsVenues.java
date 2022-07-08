@@ -1,4 +1,4 @@
-package beans;
+package repository;
 
 import java.io.FileWriter;
 import java.lang.reflect.Type;
@@ -28,6 +28,8 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
+
+import beans.SportsVenue;
 
 public class SportsVenues {
 	

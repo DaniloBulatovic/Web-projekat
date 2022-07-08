@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
-import beans.Memberships;
 import beans.User;
-import beans.Users;
 import beans.enums.Role;
+import repository.Memberships;
+import repository.Users;
 
 public class UserService {
 	
