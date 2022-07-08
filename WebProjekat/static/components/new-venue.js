@@ -209,11 +209,11 @@ Vue.component("new-venue", {
 			this.venue.location.latitude = coord[1].toFixed(6);
 			this.venue.location.longitude = coord[0].toFixed(6);
 			this.reverseGeocode(coord).then(response => {
-				this.venue.location.address.street = response.address.road;
-				this.venue.location.address.number = response.address.house_number != undefined ? response.address.house_number : 'ББ';
-				this.venue.location.address.city = response.address.city;
-				this.venue.location.address.country = response.address.country;
-				this.venue.location.address.postalCode = response.address.postcode;
+				this.venue.location.address.street = this.transliterate(response.address.road);
+				this.venue.location.address.number = response.address.house_number != undefined ? this.transliterate(response.address.house_number) : 'BB';
+				this.venue.location.address.city = this.transliterate(response.address.city);
+				this.venue.location.address.country = this.transliterate(response.address.country);
+				this.venue.location.address.postalCode = this.transliterate(response.address.postcode);
 				
 				const iconFeature = new ol.Feature({
 				  geometry: new ol.geom.Point(ol.proj.fromLonLat([this.venue.location.longitude, this.venue.location.latitude])),
@@ -248,6 +248,28 @@ Vue.component("new-venue", {
 		reverseGeocode : async function(coords) {
 		  const response = await fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + coords[0] + '&lat=' + coords[1]);
             return await response.json();
+		},
+		transliterate : function(word){
+		    let answer = ""
+		      , a = {};
+		
+		   	a["А"]="A";a["Б"]="B";a["В"]="V";a["Г"]="G";a["Д"]="D";a["Ђ"]="Đ";a["Е"]="E";a["Ж"]="Ž";a["З"]="Z";a["И"]="I";a["Ј"]="J";a["К"]="K";a["Л"]="L";a["Љ"]="LJ";
+		   	a["М"]="M";a["Н"]="N";a["Њ"]="NJ";a["О"]="O";a["П"]="P";a["Р"]="R";a["С"]="S";a["Т"]="T";a["Ћ"]="Ć";a["У"]="U";a["Ф"]="F";a["Х"]="H";a["Ц"]="C";
+		   	a["Ч"]="Č";a["Џ"]="DŽ";a["Ш"]="Š";
+		   	a["а"]="a";a["б"]="b";a["в"]="v";a["г"]="g";a["д"]="d";a["ђ"]="đ";a["е"]="e";a["ж"]="ž";a["з"]="z";a["и"]="i";a["ј"]="j";a["к"]="k";a["л"]="l";a["љ"]="lj";
+		   	a["м"]="m";a["н"]="n";a["њ"]="nj";a["о"]="o";a["п"]="p";a["р"]="r";a["с"]="s";a["т"]="t";a["ћ"]="ć";a["у"]="u";a["ф"]="f";a["х"]="h";a["ц"]="c";
+		   	a["ч"]="č";a["џ"]="dž";a["ш"]="š";
+		
+		   for (i in word){
+		     if (word.hasOwnProperty(i)) {
+		       if (a[word[i]] === undefined){
+		         answer += word[i];
+		       } else {
+		         answer += a[word[i]];
+		       }
+		     }
+		   }
+		   return answer;
 		}
 	},
 	mounted () {
