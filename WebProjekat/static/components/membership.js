@@ -43,7 +43,7 @@ Vue.component("membership", {
 			</tr>
 			<tr>
 				<td></td>
-				<td v-if="promoCode === ''" style="color:red">{{error}}</td>
+				<td v-if="promoCode === '' || validPromoCode === null" style="color:red">{{error}}</td>
 				<td></td>
 			</tr>
 			<tr>
@@ -102,7 +102,9 @@ Vue.component("membership", {
 			if (this.promoCode !== ''){
 				axios.get('rest/promoCodes/code/' + this.promoCode).then(response =>{
 					this.validPromoCode = response.data;
-					
+					if(this.validPromoCode === null){
+						this.error = "Nevalidan promo kod!";
+					}
 				});
 			}else{
 				this.error = "Niste uneli promo kod!";

@@ -21,7 +21,10 @@ public class PromoCodeService {
 	}
 	
 	public PromoCode getPromoCodeByCode(String code) {
-		return (PromoCode) promoCodes.getValues().stream().filter(promoCode -> promoCode.getCode().equals(code) && promoCode.getAmount() > 0 && promoCode.getExpirationDate().plusDays(1).isAfter(LocalDateTime.now())).collect(Collectors.toCollection(HashSet::new)).toArray()[0];
+		Collection<PromoCode> codes = promoCodes.getValues().stream().filter(promoCode -> promoCode.getCode().equals(code) && promoCode.getAmount() > 0 && promoCode.getExpirationDate().plusDays(1).isAfter(LocalDateTime.now())).collect(Collectors.toCollection(HashSet::new));
+		if(codes.isEmpty()) return null;
+		else
+			return (PromoCode) codes.toArray()[0];
 	}
 	
 	public void addPromoCode(PromoCode promoCode) {
